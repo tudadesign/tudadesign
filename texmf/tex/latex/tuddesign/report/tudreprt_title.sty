@@ -139,6 +139,8 @@
       \fi%
       \addtolength{\textwidth}{\marginparwidth + \marginparsep}%
       \setlength{\linewidth}{\textwidth}%
+      \newlength{\@TUD@tmp@parwidth}
+      \setlength{\@TUD@tmp@parwidth}{\marginparwidth + \marginparsep}
       \setlength{\marginparwidth}{0pt}\setlength{\marginparsep}{0pt}%
       %\@parskipfalse\@parskip@indent%
       \parskip=0pt%
@@ -413,20 +415,20 @@
       \setlength{\TUD@colorbackheight}{\textheight-\TUD@colorbacktitleheight+\headsep+\footskip-\TUD@sponsorheight}
       \ifTUD@colorbacktitle%
         \AddToShipoutPicture*{%
-          \AtTextUpperLeft{\put(0,\LenToUnit{\headsep}){%
+          \AtTextUpperLeft{\put(\LenToUnit{\@TUD@tmp@parwidth},\LenToUnit{\headsep}){%
             \TUD@accentcolor{\rule[-\TUD@colorbacktitleheight]{\textwidth}{\TUD@colorbacktitleheight}}%
           }}%
         }%
       \fi%
       \ifTUD@titlepicture%
         \AddToShipoutPicture*{%
-          \AtTextLowerLeft{\put(0,\LenToUnit{-\footskip}){\put(0,\LenToUnit{\TUD@sponsorheight}){%
+          \AtTextLowerLeft{\put(\LenToUnit{\@TUD@tmp@parwidth},\LenToUnit{-\footskip}){\put(0,\LenToUnit{\TUD@sponsorheight}){%
             \resizebox*{\textwidth}{\TUD@colorbackheight}{\@TUD@includetitlepicture}%
           }}}%
         }%
       \else\ifTUD@colorback%
         \AddToShipoutPicture*{%
-          \AtTextLowerLeft{\put(0,\LenToUnit{-\footskip}){\put(0,\LenToUnit{\TUD@sponsorheight}){%
+          \AtTextLowerLeft{\put(\LenToUnit{\@TUD@tmp@parwidth},\LenToUnit{-\footskip}){\put(0,\LenToUnit{\TUD@sponsorheight}){%
             \TUD@accentcolor{\rule{\textwidth}{\TUD@colorbackheight}}%
           }}}%
         }%
@@ -438,7 +440,7 @@
       \fi%
       \ifx\@sponsor\@empty\else%
         \AddToShipoutPicture*{%
-          \AtTextLowerLeft{\put(0,\LenToUnit{-\footskip}){%
+          \AtTextLowerLeft{\put(\LenToUnit{\@TUD@tmp@parwidth},\LenToUnit{-\footskip}){%
               \usebox{\TUD@sponsorbox}%
           }}%
         }%
