@@ -1,0 +1,312 @@
+% tudreport is the report-class as described in the TUD-Design-Manual
+% It is based on (makes heavy use of) the KOMA-Class scrreprt
+% This class is provided "as is", the authors take no responsibility
+% for any effects the style file has on the user, the user's life, family,
+% pets, scientific or other career etc.
+% 
+% When making changes to this style file or the accompanying package files
+% please notify the authors:
+% tud-design@pro-kevin.de
+% Good luck!
+
+\def\fileversion{0.99}
+\def\filedate{2010/03/22}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudthess_title}
+ [\filedate\space\fileversion\space 
+   Joe Werner's TUD-Design-Manual package]
+
+\newif\ifTUD@thesis@phd \TUD@thesis@phdfalse
+\newif\ifTUD@thesis@accepted \TUD@thesis@acceptedfalse
+\newif\if@TUD@thesis@restoneside \@TUD@thesis@restonesidefalse
+\newif\ifTUD@thesis@birthplace \TUD@thesis@birthplacefalse
+
+\newif\ifTUD@thesis@gender@female \TUD@thesis@gender@femalefalse
+\newif\ifTUD@thesis@gender@neuter \TUD@thesis@gender@neuterfalse
+\newif\ifTUD@thesis@gender@masculine \TUD@thesis@gender@masculinefalse
+\newcommand{\TUD@thesis@setgender@female}{%
+  \TUD@thesis@gender@neuterfalse%
+  \TUD@thesis@gender@masculinefalse%
+  \TUD@thesis@gender@femaletrue%
+}
+\newcommand{\TUD@thesis@setgender@neuter}{%
+  \TUD@thesis@gender@neutertrue%
+  \TUD@thesis@gender@masculinefalse%
+  \TUD@thesis@gender@femalefalse%
+}
+\newcommand{\TUD@thesis@setgender@masculine}{%
+  \TUD@thesis@gender@neuterfalse%
+  \TUD@thesis@gender@masculinetrue%
+  \TUD@thesis@gender@femalefalse%
+}
+
+\RequirePackage{xkeyval}
+\RequirePackage{ifthen}
+\RequirePackage{tudreprt_title}
+%\RequirePackage{ngerman}
+
+\newcommand\drtext[1]{\gdef\TUD@thesis@titletype{#1\\\expandafter\TUD@thesis@thesisstate}}
+
+% Verarbeitung der Optionen
+ \DeclareOptionX<\@currname>{type}{%
+  \ifthenelse{\equal{#1}{sta}}{%
+    \TUD@thesis@phdfalse%
+    \TUD@thesis@acceptedfalse%
+    \TUD@thesis@setgender@female%
+    \def\TUD@thesis@thesistype{Studienarbeit }
+    \gdef\TUD@thesis@thesisstate{}
+    \gdef\TUD@thesis@titletype{}}{%
+  \ifthenelse{\equal{#1}{diplom}}{%
+    \TUD@thesis@phdfalse%
+    \TUD@thesis@acceptedfalse%
+    \TUD@thesis@setgender@female%
+    \def\TUD@thesis@thesistype{Diplomarbeit }
+    \gdef\TUD@thesis@thesisstate{}
+    \gdef\TUD@thesis@titletype{}}{%
+  \ifthenelse{\equal{#1}{bsc}}{%
+    \TUD@thesis@phdfalse%
+    \TUD@thesis@acceptedfalse%
+    \TUD@thesis@setgender@female%
+    \gdef\TUD@thesis@thesistype{Bachelor-Thesis }
+    \gdef\TUD@thesis@thesisstate{}
+    \gdef\TUD@thesis@titletype{}}{%
+  \ifthenelse{\equal{#1}{pp}}{%
+    \TUD@thesis@phdfalse%
+    \TUD@thesis@acceptedfalse%
+    \TUD@thesis@setgender@neuter%
+    \gdef\TUD@thesis@thesistype{Project-Proposal }
+    \gdef\TUD@thesis@thesisstate{}
+    \gdef\TUD@thesis@titletype{}}{%
+  \ifthenelse{\equal{#1}{msc}}{%
+    \TUD@thesis@setgender@female%
+    \TUD@thesis@phdfalse%
+    \TUD@thesis@acceptedfalse%
+    \gdef\TUD@thesis@thesistype{Master-Thesis }
+    \gdef\TUD@thesis@thesisstate{}
+    \gdef\TUD@thesis@titletype{}}{%
+  \ifthenelse{\equal{#1}{dr}}{%
+    \TUD@thesis@phdtrue%
+    \TUD@thesis@acceptedfalse%
+    \TUD@thesis@setgender@female%
+    \gdef\TUD@thesis@thesistype{Dissertation }
+    \gdef\TUD@thesis@thesisstate{vorgelegte }}{%
+  \ifthenelse{\equal{#1}{drfinal}}{%
+    \TUD@thesis@phdtrue%
+    \TUD@thesis@acceptedtrue%
+    \TUD@thesis@setgender@female%
+    \gdef\TUD@thesis@thesistype{Dissertation }
+    \gdef\TUD@thesis@thesisstate{genehmigte }}{%
+  \PackageError{\@currname}{Wrong option 'type=<thesis type>` !}\@ehc}}}}}}}
+ }
+
+ \DeclareOptionX<\@currname>{dr}{%
+   \ifthenelse{\equal{#1}{rernat}}{%
+     \drtext{Zur Erlangung des Grades eines Doktors der Naturwissenschaften (Dr.\ rer.\ nat.)}}{%
+   \ifthenelse{\equal{#1}{ing}}{%
+     \drtext{Zur Erlangung des akademischen Grades Doktor-Ingenieur (Dr.-Ing.)}}{%
+   \ifthenelse{\equal{#1}{phil}}{%
+     \drtext{Zur Erlangung des Grades eines Doktor der Philosophie (Dr. phil.)}}{%
+   \PackageError{\@currname}{Wrong option 'dr=<phd type>` !}\@ehc}}}
+ }
+
+ \DeclareOptionX*{%
+  \PackageInfo{\@currname}{Unknown option '\CurrentOption` ignored!}
+ }
+
+\ExecuteOptionsX<\@currname>{dr=rernat}
+\ProcessOptionsX<\@currname>
+
+% redefine some commands to avoid misuse
+\let\TUD@thesis@title\title
+  \gdef\title{\PackageError{\@currname}{Do not use '\noexpand\title` directly!\MessageBreak See documentation for details.}\@ehc}
+\let\TUD@thesis@subtitle\subtitle
+  \gdef\subtitle{\PackageError{\@currname}{Do not use '\noexpand\subtitle` directly!\MessageBreak See documentation for details.}\@ehc}
+\let\TUD@thesis@subsubtitle\subsubtitle
+  \gdef\subsubtitle{\PackageError{\@currname}{Do not use '\noexpand\subsubtitle` directly!\MessageBreak See documentation for details.}\@ehc}
+\let\TUD@thesis@institution\institution
+  \gdef\institution{\PackageError{\@currname}{Do not use '\noexpand\institution` directly!\MessageBreak See documentation for details.}\@ehc}
+\let\TUD@thesis@uppertitleback\uppertitleback
+  \gdef\uppertitleback{\PackageError{\@currname}{Do not use '\noexpand\uppertitleback` directly!\MessageBreak See documentation for details.}\@ehc}
+\let\TUD@thesis@maketitle\maketitle
+  \gdef\maketitle{\PackageError{\@currname}{Do not use ''\noexpand\maketitle` directly!\MessageBreak See documentation for details.}\@ehc}
+
+
+% define new commands
+\newcommand{\thesistitle}[2]{%
+  \TUD@thesis@title{#1}
+  \TUD@thesis@subtitle{#2}
+}
+
+\gdef\TUD@thesis@department{\PackageError{\@currname}{No '\noexpand\department` given!\MessageBreak See documentation for details.}\@ehc}
+\newcommand{\department}[1]{%
+  \gdef\TUD@thesis@department{#1}
+}
+
+\gdef\TUD@thesis@group{\PackageError{\@currname}{No '\noexpand\group` given!\MessageBreak See documentation for details.}\@ehc}
+\newcommand{\group}[1]{%
+  \gdef\TUD@thesis@group{#1}
+}
+
+\gdef\TUD@thesis@birthplace{}
+\newcommand{\birthplace}[1]{%
+  \gdef\TUD@thesis@birthplace{#1}
+  \TUD@thesis@birthplacetrue
+}
+
+\gdef\TUD@thesis@referee{\PackageError{\@currname}{No '\noexpand\referee` given!\MessageBreak See documentation for details.}\@ehc}
+\def\referee#1#2{\@ifnextchar[{\TUD@thesis@referee@three{#1}{#2}}{\TUD@thesis@referee@two{#1}{#2}}}
+\def\TUD@thesis@referee@two#1#2{
+  \gdef\TUD@thesis@referee{1. Gutachten: #1\\2. Gutachten: #2}
+}
+\def\TUD@thesis@referee@three#1#2[#3]{
+  \gdef\TUD@thesis@referee{1. Gutachten: #1\\2. Gutachten: #2\\3. Gutachten: #3}
+}
+\newcommand{\gutachter}[2]{%
+  \referee{#1}{#2}
+  \PackageError{\@currname}{Command '\noexpand\gutachter` deprecated! Use '\noexpand\referee` instead.}\@ehc%
+}
+
+\gdef\TUD@thesis@dateofexam{\PackageError{\@currname}{No '\noexpand\dateofexam` given!\MessageBreak See documentation for details.}\@ehc}
+\newcommand{\dateofexam}[2]{%
+  \ifTUD@thesis@accepted\else
+    \PackageWarning{\@currname}{Command `\noexpand\dateofexam' ignored!\MessageBreak See documentation for details.}
+  \fi
+  \gdef\TUD@thesis@dateofexam{#1}
+  \gdef\TUD@thesis@dateofsubmit{#2}
+%  \gdef\TUD@thesis@dateofexam{Tag der Einreichung: #1\\%
+%    Tag der Pr\char252 fung: #2}
+}
+
+\newcommand{\tuprints}[2]{%
+  \lowertitleback{Bitte zitieren Sie dieses Dokument als:\\
+    \textaccent{URN: urn:nbn:de:tuda-tuprints-#1}\\
+    \textaccent{URL: http://tuprints.ulb.tu-darmstadt.de/#2}\\[\baselineskip]
+    Dieses Dokument wird bereitgestellt von tuprints,\\
+    E-Publishing-Service der TU Darmstadt\\
+    \textaccent{http://tuprints.ulb.tu-darmstadt.de}\\
+    \textaccent{tuprints@ulb.tu-darmstadt.de}\\[2\baselineskip]
+    \includegraphics{by-nc-nd}\\[\baselineskip]
+    Die Ver\char246 ffentlichung steht unter folgender Creative Commons Lizenz:\\
+    Namensnennung -- Keine kommerzielle Nutzung -- Keine Bearbeitung\ \ 2.0
+    Deutschland\\
+    \textaccent{http://creativecommons.org/licenses/by-nc-nd/2.0/de/}
+  }%
+}
+
+
+\newcommand{\makethesistitle}{%
+  \TUD@thesis@subsubtitle{\ifTUD@thesis@phd\TUD@thesis@titletype\fi%
+    \TUD@thesis@thesistype von \@author\ifTUD@thesis@birthplace\ aus\ %
+    \TUD@thesis@birthplace\else\ifTUD@thesis@phd\PackageError{\@currname}{No '\noexpand\birthplace` given!\MessageBreak See documentation for details.}\@ehc\fi\fi\\%
+    %\@date%
+    \ifTUD@thesis@phd{%
+      \ifTUD@thesis@accepted{%
+        Tag der Einreichung: \TUD@thesis@dateofsubmit, %
+	Tag der Pr\char252 fung: \TUD@thesis@dateofexam\\
+	Darmstadt --- D 17\\[\baselineskip]}%
+      \else%
+        {Tag der Einreichung:\\[\baselineskip]}%
+      \fi%
+    }
+    \else%
+      {Tag der Einreichung:}\\[\baselineskip]%
+    \fi%
+    %\\[\baselineskip]%
+    \TUD@thesis@referee%
+  }
+  \TUD@thesis@institution{\TUD@thesis@department\\%
+    \TUD@thesis@group}%
+
+  \TUD@thesis@uppertitleback{%
+    \@title\\%
+    \@subtitle\\[\baselineskip]%
+    \ifTUD@thesis@accepted%
+      {\ifTUD@thesis@gender@female%
+        {Genehmigte }%
+       \else\ifTUD@thesis@gender@neuter%
+        {Genehmigtes }%
+       \else%
+        {Genehmigter }%
+       \fi\fi%
+      }%
+    \else%
+      {\ifTUD@thesis@gender@female%
+        {Vorgelegte }%
+       \else\ifTUD@thesis@gender@neuter%
+        {Vorgelegtes }%
+       \else%
+        {Vorgelegter }%
+       \fi\fi%
+      }%
+    \fi%
+    \TUD@thesis@thesistype von \@author\ifTUD@thesis@birthplace\ aus\ %
+    \TUD@thesis@birthplace\else\ifTUD@thesis@phd\PackageError{\@currname}{No '\noexpand\birthplace` given!\MessageBreak See documentation for details.}\@ehc\fi\fi\\[\baselineskip]%
+    \TUD@thesis@referee\\[\baselineskip]%
+    \ifTUD@thesis@phd{%
+      \ifTUD@thesis@accepted{%
+        Tag der Einreichung: \TUD@thesis@dateofsubmit\\%
+	Tag der Pr\char252 fung: \TUD@thesis@dateofexam\\[\baselineskip]}%
+      \else%
+        {Tag der Einreichung:\\[\baselineskip]}%
+      \fi%
+      Darmstadt --- D 17}
+    \else%
+      {Tag der Einreichung:}\\[\baselineskip]%
+    \fi%
+  }%
+  \if@twoside\else
+    \@TUD@thesis@restonesidetrue
+    \@twosidetrue \@mparswitchtrue
+  \fi
+  \TUD@thesis@maketitle%
+  \if@TUD@thesis@restoneside
+    \@twosidefalse \@mparswitchfalse
+  \fi
+}
+
+\newcommand{\affidavit}[2][\today]{
+  \if@twocolumn%
+    \@TUD@resttwocoltrue\onecolumn%
+  \else%
+    \@TUD@resttwocolfalse%
+  \fi%
+  \if@openright%
+    \cleardoublepage%
+  \else%
+    \clearpage%
+  \fi%
+  \thispagestyle{empty}
+  \begingroup
+    \language=2
+    \@ifundefined{chapter}{
+      \TUD@setbigtitlestyle{\section}{\sectfont\chapterlinesize}{\thesection}{\TUD@secind}{0}
+      \section*{Er\-kl\char228\-rung \ifTUD@thesis@gender@female zur\else zum\fi\  \TUD@thesis@thesistype}
+    }{
+      \TUD@setbigtitlestyle{\section}{\sectfont\chapterlinesize}{\thechapter}{\TUD@chapind}{-1}
+      \chapter*{Er\-kl\char228\-rung \ifTUD@thesis@gender@female zur\else zum\fi\  \TUD@thesis@thesistype}
+    }
+    \accentfont\large
+    \parindent0em
+    \vskip4ex
+      Hiermit versichere ich,
+      \ifTUD@thesis@gender@female
+        die vorliegende 
+      \else\ifTUD@thesis@gender@neuter
+        das vorliegende 
+      \else
+        den vorliegenden 
+      \fi\fi
+      \TUD@thesis@thesistype ohne Hilfe Dritter nur mit den an\-ge\-ge\-benen Quellen und 
+      Hilfsmitteln angefertigt zu haben. Alle Stellen, die aus Quellen 
+      entnommen wurden, sind als solche kenntlich gemacht. Diese Arbeit hat in
+      gleicher oder \char228 hn\-lich\-er Form noch keiner
+      Pr\char252\-fungs\-be\-h\char246 r\-de vorgelegen.
+    \vskip5ex
+      Darmstadt, den #1
+    \vskip6ex
+    \tudrule[0.5\textwidth]\\
+      {\normalsize(#2)}
+  \endgroup
+  \if@TUD@resttwocol\twocolumn\fi%
+  \clearpage
+}
