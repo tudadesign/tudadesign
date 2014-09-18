@@ -1,0 +1,123 @@
+\ProvidesFile{tudheading.def}[2009/07/14]
+
+\RequirePackage{tudrules}
+\AtBeginDocument{%
+  \newlength{\TUD@part@topskip}%
+  \setlength{\TUD@part@topskip}{\TUD@titlepos}%
+  \addtolength{\TUD@part@topskip}{-1in -\topmargin}%
+  \addtolength{\TUD@part@topskip}{-\@TUD@largeruleheight}%
+  \addtolength{\TUD@part@topskip}{-\headsep}%
+  \providecommand{\@maybeautodot}{}%
+}
+
+\newlength{\TUD@part@tmp@height}%
+\newlength{\TUD@part@tmp@depth}%
+\newsavebox{\@TUD@partbox}%
+\newif\if@TUD@tempswa%
+
+\renewcommand\part{%
+  \if@openright\cleardoublepage\else\clearpage\fi%
+  \if@twocolumn%
+    \onecolumn% 
+    \@TUD@tempswatrue%
+  \else%
+    \@TUD@tempswafalse%
+  \fi%
+  \secdef\@part\@spart}%
+\def\@part[#1]#2{%
+  \ifnum \c@secnumdepth >-2\relax%
+    \refstepcounter{part}% 
+    \@maybeautodot\thepart%
+    \addcontentsline{toc}{part}{\protect\numberline{\thepart}#1}%
+  \else%
+    \addcontentsline{toc}{part}{#1}%
+  \fi%
+  \partmark{#1}%
+  \begingroup%
+    \@TUD@fixpartmargin%
+    \savebox{\@TUD@partbox}[\textwidth]{\hfill%
+      \parbox{\textwidth -6mm}{%
+        \parskip=0pt\raggedright%
+        \interlinepenalty \@M%
+        \normalfont\sectfont\normalcolor%
+        \ifnum \c@secnumdepth >-2\relax%
+          \settoheight{\TUD@part@tmp@height}{\size@partnumber\strut}%
+        \else%
+          \settoheight{\TUD@part@tmp@height}{\size@part\strut}%
+        \fi%
+        \settodepth{\TUD@part@tmp@depth}{\size@part\strut}%
+        \size@part\setfontheight%
+        \vspace*{\fontheight}%
+        \vspace*{-\TUD@part@tmp@height}%
+        \ifnum \c@secnumdepth >-2\relax%
+          \size@partnumber\strut\partformat\strut\par%
+          \vskip0.25\baselineskip%
+        \fi%
+        \size@part\strut #2\strut\par%
+        \vspace{-\TUD@part@tmp@depth}%
+      }%
+      \hspace*{2mm}
+    }%
+    \@endpart%
+}%
+\def\@spart#1{%
+  \@mkboth{}{}%
+  \begingroup%
+    \@TUD@fixpartmargin%
+    \savebox{\@TUD@partbox}[\textwidth]{\hfill%
+      \parbox{\textwidth -6mm}{%
+        \parskip=0pt\raggedright%
+        \interlinepenalty \@M%
+        \normalfont\sectfont\normalcolor%
+        \settoheight{\TUD@part@tmp@height}{\size@part\strut}%
+        \settodepth{\TUD@part@tmp@depth}{\size@part\strut}%
+        \size@part\setfontheight%
+        \vspace*{\fontheight}%
+        \vspace*{-\TUD@part@tmp@height}%
+        \size@part\strut #1\strut\par%
+        \vspace{-\TUD@part@tmp@depth}%
+      }%
+      \hspace*{2mm}
+    }%
+    \@endpart%
+}%
+\def\@endpart{%
+    \thispagestyle{\partpagestyle}%
+    \vfilneg\raggedright%
+    \vspace*{\TUD@part@topskip}\vspace{-1pt}%
+    \vspace{-15pt}\vspace{-1pt}% nur Gott wei"s woher diese 15pt kommen!
+    \usebox{\@TUD@partbox}\par%
+    \addvspace{8mm}\vspace{-1pt}\par%
+    \tudrule%
+    \ifTUD@nopartpage%
+      \vskip\headsep%
+      \ifTUD@noheadingspace\else%
+        \strut\vskip1\baselineskip%
+      \fi%
+    \else%
+      \vfil\newpage%
+      \if@twoside\if@openright%
+          \null%
+          \thispagestyle{empty}%
+          \newpage%
+       \fi\fi%
+    \fi%
+    \if@TUD@tempswa%
+      \twocolumn%
+    \fi%
+  \endgroup%
+  \ifTUD@nopartpage\ifTUD@firstlineindent\else%
+    \strut\\[-\baselineskip]\noindent%
+  \fi\fi%
+}%
+\def\@TUD@fixpartmargin{%
+      \parskip=0pt\raggedright%
+      \if@reversemargin%
+        \addtolength{\oddsidemargin}{-\marginparwidth - \marginparsep}%
+      \else%
+        \addtolength{\evensidemargin}{-\marginparwidth - \marginparsep}%
+      \fi%
+      \addtolength{\textwidth}{\marginparwidth + \marginparsep}%
+      \setlength{\linewidth}{\textwidth}%
+      \setlength{\marginparwidth}{0pt}\setlength{\marginparsep}{0pt}%
+}%

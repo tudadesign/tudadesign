@@ -1,0 +1,58 @@
+% tud_report is the report-class as described in the TUD-Design-Manual
+% It is based on (makes heavy use of) the KOMA-Class scrreprt
+\def\fileversion{1.2}
+\def\filedate{2010/04/10}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudredef}
+ [\filedate\space\fileversion\space 
+   Clemens von Loewenich's and Joe Werner's TUD-Design package]
+
+\newcount\TUD@abstract@count
+\@ifundefined{abstract}{\newenvironment{abstract}{\null}{\null}}{}
+\renewenvironment{abstract}[1][0]{%
+  \if@twocolumn%
+    \@TUD@resttwocoltrue\onecolumn%
+  \else%
+    \@TUD@resttwocolfalse%
+  \fi%
+  \global\TUD@abstract@count=#1
+  \ifnum \TUD@abstract@count<2
+    \begingroup%
+      \pagestyle{empty}%
+      \if@twoside\if@openright%
+	\cleardoublepage%
+      \else%
+	\clearpage%
+      \fi\fi%
+    \endgroup%
+    \thispagestyle{empty}%
+  \fi
+  \@ifundefined{chapter}{%
+    \section*{\abstractname}%
+  }{%
+    \def\clearpage{}\chapter*{\abstractname}%
+  }%
+  \normalfont%
+}{
+  \strut\@ifundefined{chapter}{}%
+  {%
+    \ifnum \TUD@abstract@count=1 \else
+      \clearpage%
+      \begingroup%
+	\pagestyle{empty}%
+	\if@openright%
+	  \cleardoublepage%
+	\fi%
+      \endgroup%
+    \fi
+  }%
+  \if@TUD@resttwocol\twocolumn\fi%
+}%
+
+\renewenvironment{quote}{%
+  \list{}{\rightmargin\leftmargin}%
+  \itshape%
+  \item\relax%
+}{%
+  \endlist%
+}

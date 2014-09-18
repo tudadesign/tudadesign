@@ -1,0 +1,316 @@
+% Erzeuge Identitaetsleiste und Fussleiste
+\def\fileversion{1.9}
+\def\filedate{2009/08/11}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudlettr_page}
+ [\filedate\space\fileversion\space
+   Clemens von Loewenich's and Joe Werner's TUD-Design package]
+
+% load needed packages
+\RequirePackage{calc}
+\RequirePackage{xkeyval}
+\RequirePackage{afterpage}
+
+\newlength{\TUD@sep@head}
+\newlength{\TUD@sep@head@first}
+  \setlength{\TUD@sep@head@first}{108mm}% ehemals {106mm}
+\newlength{\TUD@tmp@height}
+
+\newif\if@TUD@nologo\@TUD@nologofalse
+\newif\if@TUD@linebreak\@TUD@linebreakfalse
+\newif\if@TUD@error\@TUD@errorfalse
+\newif\if@TUD@firstpage\@TUD@firstpagefalse
+
+
+\DeclareOptionX<\@currname>{logo}{%
+  \@TUD@nologofalse
+  \setlength{\TUD@sep@head}{64mm}}
+
+\DeclareOptionX<\@currname>{nologo}{%
+  \@TUD@nologotrue
+  \setlength{\TUD@sep@head}{30mm}}
+
+\DeclareOptionX*{%
+  \PassOptionsToPackage{\CurrentOption}{tudpage}}
+
+\ExecuteOptionsX<\@currname>{logo}
+\ProcessOptionsX<\@currname>
+
+\PassOptionsToPackage{paper=a4letter}{tudpage}
+\RequirePackage{tudpage}
+\newlength{\TUD@marginparwidth}\setlength{\TUD@marginparwidth}{43mm}
+\newlength{\TUD@marginparsep}\setlength{\TUD@marginparsep}{\TUD@cols@sep}
+\newlength{\TUD@marginpartotal}\setlength{\TUD@marginpartotal}{\TUD@marginparwidth}\addtolength{\TUD@marginpartotal}{\TUD@marginparsep}
+
+\newcounter{TUD@letter}\setcounter{TUD@letter}{0}
+  \renewcommand\theTUD@letter{\arabic{TUD@letter}}
+
+\RequirePackage{fancyhdr}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  %%% empty %%%
+  \fancypagestyle{empty}{%
+    \fancyhf{}
+  }
+  %%% letter %%%
+  \fancypagestyle{letter}{%
+    \fancyhf{}
+    \if@reversemargin
+      \fancyhfoffset[LO]{\marginparwidth + \marginparsep + \TUD@sep@left - \TUD@sep@right}%
+      \fancyhfoffset[RO]{0pt}%
+    \else
+      \fancyhfoffset[LO]{\TUD@sep@left - \TUD@sep@right}%
+      \fancyhfoffset[RO]{\marginparwidth + \marginparsep}%
+    \fi
+    \if@twoside
+      \if@reversemargin
+        \fancyhfoffset[LE]{0pt}%
+        \fancyhfoffset[RE]{\marginparwidth + \marginparsep + \TUD@sep@left - \TUD@sep@right}%
+      \else
+        \fancyhfoffset[LE]{\marginparwidth + \marginparsep}%
+        \fancyhfoffset[RE]{\TUD@sep@left - \TUD@sep@right}%
+      \fi
+    \fi
+    \fancyhead[C]{\TUD@indentbar[\headwidth]}
+    \fancyfoot[C]{\tudrule[\headwidth]}
+    \if@twoside
+      \fancyfoot[LE,RO]{%
+        \ifnum\thepage=1%
+          \@ifundefined{c@lastpage\theTUD@letter}{}{%
+            \ifnum\value{lastpage\theTUD@letter}>1%
+              \footerfont\strut\\Seite\thepage/\pageref{LastPage.\theTUD@letter}%
+            \fi%
+          }%
+        \else%
+          \footerfont\strut\\Seite \thepage/\pageref{LastPage.\theTUD@letter}%
+        \fi%
+      }
+    \else
+      \fancyfoot[R]{%
+        \ifnum\thepage=1%
+          \@ifundefined{c@lastpage\theTUD@letter}{}{%
+            \ifnum\value{lastpage\theTUD@letter}>1%
+              \footerfont\strut\\Seite\thepage/\pageref{LastPage.\theTUD@letter}%
+            \fi%
+          }%
+        \else%
+          \footerfont\strut\\Seite \thepage/\pageref{LastPage.\theTUD@letter}%
+        \fi%
+      }
+    \fi
+  }
+
+\RequirePackage{geometry}
+\newlength{\TUD@headsep}
+\setlength{\TUD@headsep}{\TUD@sep@head - \TUD@sep@top - \TUD@indentbarheight}
+  \geometry{headsep=\TUD@headsep}
+\newlength{\TUD@textheight}
+  \setlength{\TUD@textheight}{\textheight}
+
+\newlength{\TUD@headsep@first}
+  \setlength{\TUD@headsep@first}{\TUD@sep@head@first - \TUD@sep@top - \TUD@indentbarheight -0.8ex}
+\newlength{\TUD@textheight@first}
+   \setlength{\TUD@textheight@first}{\TUD@textheight -\TUD@headsep@first +\TUD@headsep}
+\newlength{\TUD@textwidth@first}
+  \setlength{\TUD@textwidth@first}{\TUD@textwidth - \TUD@marginpartotal}
+
+\newlength{\TUD@page@free}
+\newlength{\TUD@page@free@indent}
+\newcounter{TUD@page@free@lines}
+\TUD@page@free@indent=\TUD@textwidth@first
+\advance\TUD@page@free@indent-\TUD@textwidth
+
+\newsavebox{\@TUD@logobox}
+\savebox{\@TUD@logobox}{%
+  \TUD@includelogo%
+}%
+\newlength{\@TUD@logobox@height}\settoheight{\@TUD@logobox@height}{\usebox{\@TUD@logobox}}
+\newlength{\@TUD@logobox@width}\settowidth{\@TUD@logobox@width}{\usebox{\@TUD@logobox}}
+
+\RequirePackage{eso-pic}
+\newlength{\@TUD@logobox@posx}
+  \setlength{\@TUD@logobox@posx}{\paperwidth -\TUD@sep@right - \@TUD@logobox@width}
+\newlength{\@TUD@logobox@posy}
+  \setlength{\@TUD@logobox@posy}{1in + \topmargin + \headheight + 1.5\@TUD@logobox@height}
+
+\newcommand{\TUD@foldmarks}{%
+  \AddToShipoutPicture*{\AtPageUpperLeft{\put(\LenToUnit{3.5mm},\LenToUnit{-105mm}){\tudrule[2mm]}}}% ehemals -99mm
+  \AddToShipoutPicture*{\AtPageUpperLeft{\put(\LenToUnit{3.5mm},\LenToUnit{-148.5mm}){\tudrule[4mm]}}}%
+  \AddToShipoutPicture*{\AtPageUpperLeft{\put(\LenToUnit{3.5mm},\LenToUnit{-210mm}){\tudrule[2mm]}}}%
+}
+\newcommand{\TUD@addrfield}{%
+  \AddToShipoutPicture*{\AtPageUpperLeft{\put(\LenToUnit{24mm},\LenToUnit{-50mm}){%
+    \marginalfont\color{tudaccent}%
+    \parbox[t]{8cm}{\strut\\[-0.3\baselineskip]%
+      \ifkomavarempty{backaddress}{%
+        \@TUD@errortrue%
+      }{%
+        \usekomavar{backaddress}%
+      }%
+      \if@TUD@error\PackageError{\@currname}{No `backaddress' defined}\fi%
+  }}}}%
+  \AddToShipoutPicture*{\AtPageUpperLeft{\put(\LenToUnit{24mm},\LenToUnit{-54mm}){%
+    \normalfont\normalcolor%
+    \parbox[t]{8cm}{\strut\\[-0.4\baselineskip]%
+      \ifkomavarempty{toname}{}{\usekomavar{toname}\\}%
+      \ifkomavarempty{toaddress}{}{\usekomavar{toaddress}}%
+  }}}}%
+}
+\newcommand{\TUD@locfield}{%
+  \AddToShipoutPicture*{\AtPageUpperLeft{\put(\LenToUnit{154.5mm},\LenToUnit{-\TUD@sep@head@first}){%
+    \infofont\normalcolor%
+    \parbox[t][166mm][t]{43mm}{%
+      \settoheight{\TUD@tmp@height}{\strut}%
+      \setfontheight%
+      \vspace*{\fontheight}
+      \vspace*{-\TUD@tmp@height}\strut%
+      \ifkomavarempty{frominstitution}{}{{\usekomavar[\color{tudtextaccent}]{frominstitution}}\\[\baselineskip]}%
+      \ifkomavarempty{fromlogo}{}{\usekomavar{fromlogo}\\[\baselineskip]}%
+      \ifkomavarempty{fromname}{}{\usekomavar{fromname}\\[\baselineskip]}%
+      \ifkomavarempty{fromaddress}{}{\usekomavar{fromaddress}\\[\baselineskip]}%
+      \ifkomavarempty{fromphone}{}{\@TUD@linebreaktrue%
+        \ifkomavarempty*{fromphone}{}{\usekomavar*{fromphone}}\usekomavar{fromphone}\\}%
+      \ifkomavarempty{fromfax}{}{\@TUD@linebreaktrue%
+        \ifkomavarempty*{fromfax}{}{\usekomavar*{fromfax}}\usekomavar{fromfax}\\}%
+      \ifkomavarempty{fromemail}{}{\@TUD@linebreaktrue%
+        \usekomavar{fromemail}\\}%
+      \ifkomavarempty{fromurl}{}{\@TUD@linebreaktrue%
+        \usekomavar{fromurl}\\}%
+      \if@TUD@linebreak\@TUD@linebreakfalse\\\fi%
+      \ifkomavarempty{date}{}{\\%
+        \ifkomavarempty*{date}{Datum}{\usekomavar*{date}}\\\usekomavar{date}\\[2\baselineskip]}%
+      \ifkomavarempty{myref}{}{\@TUD@linebreaktrue%
+        \usekomavar*{myref}\ \usekomavar{myref}\\}%
+      \ifkomavarempty{invoice}{}{\@TUD@linebreaktrue%
+        \usekomavar*{invoice}\ \usekomavar{invoice}\\}%
+      \if@TUD@linebreak\@TUD@linebreakfalse\\\fi%
+      \ifkomavarempty{yourmail}{}{\@TUD@linebreaktrue%%
+        \usekomavar*{yourmail}\ \usekomavar{yourmail}\\}%
+      \ifkomavarempty{yourref}{}{\@TUD@linebreaktrue%
+        \usekomavar*{yourref}\ \usekomavar{yourref}\\}%
+      \if@TUD@linebreak\@TUD@linebreakfalse\\\fi%
+      \ifkomavarempty{location}{}{%
+        \usekomavar{location}\\}%
+      \ifkomavarempty{frombank}{}{\vfill%
+        \ifkomavarempty*{frombank}{Bankverbindung}{\usekomavar*{frombank}}\\\usekomavar{frombank}}%
+    }%
+  }}}%
+}
+\renewcommand{\opening}[1]{%
+  \TUD@setheight@first%
+  \TUD@setwidth@first%
+  \AddToShipoutPicture{%
+    \if@TUD@nologo\ifnum\thepage = 1%
+      \AtPageUpperLeft{\put(\LenToUnit{\@TUD@logobox@posx},\LenToUnit{-\@TUD@logobox@posy}){\usebox{\@TUD@logobox}}}%
+    \fi\else%
+      \AtPageUpperLeft{\put(\LenToUnit{\@TUD@logobox@posx},\LenToUnit{-\@TUD@logobox@posy}){\usebox{\@TUD@logobox}}}%
+    \fi%
+  }%
+  \TUD@foldmarks\TUD@addrfield\TUD@locfield%
+  \stepcounter{TUD@letter}%
+  \setcounter{equation}{0}%
+  \vfilneg%
+  \noindent%
+  \if@subjafter\else\TUD@subjfield\fi%
+  {\noindent#1\par}%
+%  {\@parskipfalse\@parskip@indent\noindent#1\par}%
+  {\setlength{\@tempdima}{\baselineskip}%
+    \addtolength{\@tempdima}{-\parskip}%
+    \ifdim \@tempdima>\z@\vskip\@tempdima\fi}%
+  \if@subjafter\TUD@subjfield\fi%
+  \@afterindentfalse\@afterheading%
+  \TUD@setwidth%
+  \afterpage{\TUD@setheight}%
+  \everypar{%
+    \ifnum\thepage=1%
+      \TUD@page@free=-\pagegoal%
+      \advance\TUD@page@free\pagetotal%
+      \divide\TUD@page@free\baselineskip%
+      \c@TUD@page@free@lines=\TUD@page@free%
+      \ifnum\value{TUD@page@free@lines}<0%
+        \hangafter=\value{TUD@page@free@lines}\hangindent=\TUD@page@free@indent%
+      \fi
+    \fi%
+  }%
+%  \everydisplay{\ifnum\thepage=1\PackageError{}{Do not write equations on the first page!}\@ehc}%
+}
+\g@addto@macro\endletter{%
+  \addtocounter{page}{-1}%
+    \immediate\write\@auxout{%
+      \string\newlabel{LastPage.\theTUD@letter}{{\theTUD@letter}{\thepage}}%
+    }%
+    \immediate\write\@auxout{%
+      \string\@ifundefined{c@lastpage\theTUD@letter}{\string\newcounter{lastpage\theTUD@letter}}{}%
+      \string\setcounter{lastpage\theTUD@letter}{\thepage}%
+    }%
+  \addtocounter{page}{1}%
+  %
+  \ClearShipoutPicture%
+}%
+
+\DeclareRobustCommand{\TUD@setwidth@first}{%
+  \evensidemargin\TUD@sep@right%
+    \advance\evensidemargin-1in%
+    \advance\evensidemargin\TUD@marginpartotal%
+  \oddsidemargin\TUD@sep@left%
+    \advance\oddsidemargin-1in%
+  \textwidth\textwidth%
+    \columnwidth\TUD@textwidth@first%
+    \if@twocolumn%
+      \advance\columnwidth-\columnsep%
+      \divide\columnwidth\tw@%
+      \@firstcolumntrue%
+    \fi%
+    \hsize\columnwidth%
+    \linewidth\hsize%
+}
+\DeclareRobustCommand{\TUD@setheight@first}{%
+  \global\headsep\TUD@headsep@first%
+  \global\textheight\TUD@textheight@first%
+    \global\vsize\textheight%
+    \global\@colht\textheight%
+    \global\@colroom\textheight%
+}
+
+\DeclareRobustCommand{\TUD@setwidth}{%
+  \evensidemargin\TUD@sep@right%
+    \advance\evensidemargin-1in%
+  \oddsidemargin\TUD@sep@left%
+    \advance\oddsidemargin-1in%
+  \textwidth\TUD@textwidth%
+    \columnwidth\textwidth%
+    \if@twocolumn%
+      \advance\columnwidth-\columnsep%
+      \divide\columnwidth\tw@%
+      \@firstcolumntrue%
+    \fi%
+    \hsize\columnwidth%
+    \linewidth\hsize%
+}
+\DeclareRobustCommand{\TUD@setheight}{%
+  \global\headsep\TUD@headsep%
+  \global\textheight\TUD@textheight%
+    \global\vsize\textheight%
+    \global\@colht\textheight%
+    \global\@colroom\textheight%
+}
+
+
+%\setlength{\parskip}{0pt}%
+\newcommand{\TUD@subjfield}{\ifkomavarempty{subject}{}{\textbf{\usekomavar*{subject}}\usekomavar{subject}\\[1.5\baselineskip]}}
+\newkomavar{frominstitution}
+\newkomavar{shortfromname}
+\setkomavar{backaddressseparator}{ | }
+\setkomavar{backaddress}{%
+  \def\\{\usekomavar{backaddressseparator}}
+  \ifkomavarempty{shortfromname}%
+    {\usekomavar{fromname}\usekomavar{backaddressseparator}}%
+    {\usekomavar{shortfromname}\usekomavar{backaddressseparator}}%
+  \ifkomavarempty{frominstitution}{}{\usekomavar{frominstitution}\usekomavar{backaddressseparator}}%
+  \ifkomavarempty{fromaddress}{}{\usekomavar{fromaddress}}%
+}
+
+\AtBeginDocument{%
+  \pagestyle{letter}%
+  \raggedbottom%
+}

@@ -1,0 +1,215 @@
+% tud_rprt is the report-class as described in the TUD-Design-Manual
+% It is based on (makes heavy use of) the KOMA-Class scrreprt
+\def\fileversion{1.17}
+\def\filedate{2009/12/31}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudheading}
+ [\filedate\space\fileversion\space 
+   Clemens von Loewenich's and Joe Werner's TUD-Design package]
+
+\RequirePackage{xkeyval}
+\RequirePackage[calcwidth]{titlesec}
+
+%% zur Unterscheidung von Kapitel"uberschriften mit und ohne *
+\newif\ifTUD@star@\TUD@star@false
+\@ifclassloaded{scrartcl}{}{%
+  \let\TUD@chapter\chapter
+  \def\chapter{\@ifstar{\TUD@star@true\TUD@chapter*}{\TUD@star@false\TUD@chapter}}
+}
+\let\TUD@section\section
+  \def\section{\@ifstar{\TUD@star@true\TUD@section*}{\TUD@star@false\TUD@section}}
+\let\TUD@subsection\subsection
+  \def\subsection{\@ifstar{\TUD@star@true\TUD@subsection*}{\TUD@star@false\TUD@subsection}}
+\let\TUD@subsubsection\subsubsection
+  \def\subsubsection{\@ifstar{\TUD@star@true\TUD@subsubsection*}{\TUD@star@false\TUD@subsubsection}}
+
+% Setzt f"ur \chapter* die \rightmark und \leftmark richtig
+\@ifclassloaded{scrartcl}{}{%
+  \AtBeginDocument{%
+    \let\@TUD@chapter\chapter
+    \gdef\chapter{\@ifstar\@TUD@schapter\@TUD@chapter}
+    \gdef\@TUD@schapter#1{\@TUD@chapter*{\@ifundefined{phantomsection}{}{\phantomsection}#1}\markboth{#1}{}}
+  }
+}
+
+% definiere Abfrage und setzte Standardwert
+  \newif\ifTUD@nopartpage
+    \TUD@nopartpagefalse
+  \newif\ifTUD@bigchapter
+    \TUD@bigchapterfalse
+  \newif\ifTUD@firstlineindent
+    \TUD@firstlineindentfalse
+  \newif\ifTUD@noheadingspace
+    \TUD@noheadingspacefalse
+  \newif\ifTUD@linedtoc
+    \TUD@linedtocfalse
+  \newcounter{seclinedepth}
+    \setcounter{seclinedepth}{3}
+
+% Verarbeitung der Optionen
+  \DeclareOptionX<\@currname>{nopartpage}{\TUD@nopartpagetrue}
+  \DeclareOptionX<\@currname>{bigchapter}{\TUD@bigchaptertrue}
+  \DeclareOptionX<\@currname>{firstlineindent}{\TUD@firstlineindenttrue}
+  \DeclareOptionX<\@currname>{noheadingspace}{\TUD@noheadingspacetrue}
+  \DeclareOptionX<\@currname>{numbersubsubsec}{\setcounter{secnumdepth}{3}\setcounter{tocdepth}{3}}
+  \DeclareOptionX<\@currname>{linedtoc}{\TUD@linedtoctrue}
+\ProcessOptionsX<\@currname>
+
+% Waehlen der Schriftgroessen fuer UEberschriften
+  \@ifundefined{subsectfont}{\let\subsectfont\sectfont}{}
+  \let\size@part\titlesize
+  \let\size@partnumber\titlesize
+  \ifTUD@bigchapter
+    \let\size@chapter\chapterlinesize
+  \else
+    \let\size@chapter\subheadlinesize
+  \fi
+  \let\size@section\subheadlinesize
+  \let\size@subsection\subheadlinesize
+  \let\size@subsubsection\subheadlinesize
+  \let\size@paragraph\normalsize
+  \let\size@subparagraph\normalsize
+
+% Ein paar Definitionrn
+\newlength{\TUD@chapter@diff@height}
+\size@chapter\setfontheight\normalsize
+\settoheight{\TUD@chapter@diff@height}{\size@chapter\strut}
+\addtolength{\TUD@chapter@diff@height}{-\fontheight}
+
+\newlength{\@TUD@above@headskip}
+\newlength{\@TUD@below@headskip}
+\ifTUD@noheadingspace
+  \setlength{\@TUD@above@headskip}{1.1\baselineskip}
+  \setlength{\@TUD@below@headskip}{0.2\baselineskip}
+\else
+  \setlength{\@TUD@above@headskip}{1.6\baselineskip}
+  \setlength{\@TUD@below@headskip}{0.7\baselineskip}
+\fi  
+\setlength{\beforetitleunit}{\@TUD@above@headskip-\baselineskip}
+\setlength{\aftertitleunit}{\@TUD@below@headskip}
+
+% Befehl zur Formatierung der UEberschriften
+% fuer \chapter \section \subsection
+\newcommand{\TUD@settitlestyle}[5]{
+  \titleformat{#1}[hang]%
+    {\vskip0pt\parskip0pt\flushleft#2\titleline{\ifnum\value{seclinedepth}<#5\mbox{\vspace*{\@TUD@ruleheight}}\else{\tudrule}\fi\nopagebreak\vspace{0.05\baselineskip}\nopagebreak}}%
+    {\strut\ifnum\value{secnumdepth}<#5\else\hspace*{#4}\fi#3\strut}%
+    {0.5em}%
+    {\ifnum\value{secnumdepth}<#5\hspace*{#4}\else\ifTUD@star@\hspace*{#4}\fi\fi}%
+    [\nopagebreak\vspace{-0.7\baselineskip}\nopagebreak\ifnum\value{seclinedepth}<#5\mbox{\vspace*{\@TUD@ruleheight}}\else{\tudrule}\fi\nopagebreak]
+  \ifTUD@firstlineindent
+    \titlespacing{#1}%
+      {0ex}% left
+      {*1}%  before
+      {*1}%  after
+  \else
+    \titlespacing*{#1}%
+      {0ex}% left
+      {*1}%  before
+      {*1}%  after
+  \fi
+}
+\newcommand{\TUD@setbigtitlestyle}[5]{
+  \titleformat{#1}[hang]%
+    {\parskip0pt\flushleft#2\nopagebreak}%
+    {\strut\ifnum\value{secnumdepth}>#5\hspace*{#4}\fi#3\strut}%
+    {0.5em}%
+    {\ifnum\value{secnumdepth}>#5\ifTUD@star@\hspace*{#4}\fi\else\hspace*{#4}\fi}%
+  \ifTUD@firstlineindent
+    \titlespacing{#1}%
+      {0ex}%
+      {\@TUD@above@headskip - \TUD@chapter@diff@height}% - 0.58\baselineskip}%
+      {*1}
+  \else
+    \titlespacing*{#1}%
+      {0ex}%
+      {\@TUD@above@headskip - \TUD@chapter@diff@height}% - 0.58\baselineskip}%
+      {*1}
+  \fi
+}
+
+% L"ad  die Definition von \part
+\input{tudheading.def}
+
+% Setzen den Einzug
+% fuer \chapter \section \subsection und \subsubsection
+\newskip\TUD@parind
+  \TUD@parind \the\parindent 
+\newskip\TUD@chapind
+  \TUD@chapind 0pt
+\newskip\TUD@secind
+  \TUD@secind \TUD@parind
+\newskip\TUD@subsecind
+  \TUD@subsecind \TUD@parind
+\newskip\TUD@subsubsecind
+  \TUD@subsubsecind \TUD@parind
+\@ifclassloaded{scrartcl}{%
+  \TUD@secind 0pt
+  \divide\TUD@subsecind by 2
+}{%
+  \ifTUD@bigchapter
+    \TUD@secind 0pt
+    \divide\TUD@subsecind by 2
+  \else
+    \divide\TUD@secind by 3
+    \multiply\TUD@subsecind by 2
+    \divide\TUD@subsecind by 3
+  \fi
+}
+
+% Setzen der Formatierung
+% fuer \chapter \section \subsection und \subsubsection
+\@ifclassloaded{scrartcl}{}{%
+  \ifTUD@bigchapter
+    \TUD@setbigtitlestyle{\chapter}{\sectfont\size@chapter}{\thechapter}{\TUD@chapind}{0}
+  \else
+    \TUD@settitlestyle{\chapter}{\sectfont\size@chapter}{\thechapter}{\TUD@chapind}{0}
+  \fi
+}
+\TUD@settitlestyle{\section}{\sectfont\size@section}{\thesection}{\TUD@secind}{1}
+\TUD@settitlestyle{\subsection}{\subsectfont\size@subsection}{\thesubsection}{\TUD@subsecind}{2}
+\TUD@settitlestyle{\subsubsection}{\subsectfont\size@subsubsection}{\thesubsubsection}{\TUD@subsubsecind}{3}
+
+  
+
+% Setzen der Formatierung fuer \paragraph
+\titleformat{\paragraph}[block]%
+  {\sectfont\size@paragraph\selectfont}%
+  {\theparagraph}%
+  {0.5em}%
+  {}%
+\titlespacing{\paragraph}%
+  {0em}%
+  {\baselineskip}
+  {0em}
+
+% Setzen der Formatierung fuer \subparagraph
+\titleformat{\subparagraph}[runin]%
+  {\sectfont\size@paragraph\selectfont}%
+  {\thesubparagraph}%
+  {0.5em}%
+  {}%
+  [:]
+\titlespacing{\subparagraph}%
+  {\the\parindent}%
+  {0em}%
+  {0.5em}
+
+% is needed for scrreprt options liststotoc bibtotoc idxtotoc etc.
+\@ifclassloaded{scrartcl}{%
+  \def\@TUD@linedtoc{section}
+}{%
+  \def\@TUD@linedtoc{chapter}
+  \def\addchap{\@ifnextchar[{\@TUD@addchap}{\@TUD@addchap@one}}
+  \def\@TUD@addchap@one#1{\@TUD@addchap[#1]#1}
+  \def\@TUD@addchap[#1]#2{\chapter*{#2}\addcontentsline{toc}{chapter}{#1}}
+}
+
+\ifTUD@linedtoc%
+  \RequirePackage{titletoc}
+  \titlecontents{\@TUD@linedtoc}[0em]%kind of section, left
+    {\addvspace{1em plus 0.2em minus 0.2em}\makebox[0pt][l]{\hspace*{-1.5em}\raisebox{0.8\baselineskip}[1.1\baselineskip]{\tudrule}}\sectfont\normalsize\mbseries}%above
+    {\strut\contentspush{\hspace*{1.5em}}\contentslabel{1.5em}}%before with label
+    {\strut\contentspush{\hspace*{1.5em}}\hspace*{-1.5em}}%before without label
+    {\\*[-0.65\baselineskip]\makebox[0pt][l]{\hspace*{-1.5em}\tudrule}\hspace*{0pt\hfill}\smash{\raisebox{0.3\baselineskip}{\contentspage}}}%filler and page
+\fi%

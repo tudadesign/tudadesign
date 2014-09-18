@@ -1,0 +1,240 @@
+\ProvidesFile{tudpostr_title.def}[2009/01/07]
+
+\renewcommand*\maketitle[1][1]{%
+%
+  \vfilneg%
+  \newlength{\@TUD@tmp@baselineskip}%
+  \setlength{\@TUD@tmp@baselineskip}{\the\baselineskip}%
+  \setlength{\baselineskip}{0.0pt}%
+  \newlength{\TUD@logoheight}%
+  \newlength{\TUD@logoboxheight}%
+  \newlength{\TUD@logoboxwidth}%
+  \settoheight{\TUD@logoheight}{\TUD@includelogo}%
+  \settowidth{\TUD@logoboxwidth}{\TUD@includelogo}%
+  \newsavebox{\TUD@logobox}%
+  \savebox{\TUD@logobox}[\TUD@logoboxwidth]{%
+    \TUD@includelogo%
+  }%
+  \newlength{\TUD@logoboxsep}%
+  \newlength{\TUD@logoboxsep@tmp}%
+  \settoheight{\TUD@logoboxheight}{\usebox{\TUD@logobox}}%
+  \settowidth{\TUD@logoboxwidth}{\usebox{\TUD@logobox}}%
+  \setlength{\TUD@logoboxsep}{\TUD@logoboxheight}%
+    \addtolength{\TUD@logoboxsep}{0.25\TUD@logoheight}%
+  \setlength{\TUD@logoboxsep@tmp}{\TUD@logoboxsep}%
+    \addtolength{\TUD@logoboxsep@tmp}{0.25\TUD@logoheight}%
+    \addtolength{\TUD@logoboxsep@tmp}{-\TUD@subtitlebox@sep}%
+  % newline does not generate vspace with
+  %
+  % check, if ther is a an subtitle or subsubtitle
+  \newif\ifTUD@subhead\TUD@subheadfalse%
+  \ifx\@subtitle\@empty\else\TUD@subheadtrue\fi%
+  \ifx\@subsubtitle\@empty\else\TUD@subheadtrue\fi%
+  %
+  % define some boxes for titlepage
+  \newsavebox{\TUD@titlebox}%
+  \newsavebox{\TUD@subtitlebox}%
+  \newsavebox{\TUD@instbox}%
+  %
+  \newlength{\TUD@tmp@height}%
+  \newlength{\TUD@tmp@depth}%
+  \newlength{\@TUD@titleboxwidth}%
+  \newcount\@TUD@logolines%
+  \newdimen\@TUD@logo@tmp%
+  %
+  \newlength{\TUD@titleskip}%
+  \setlength{\TUD@titleskip}{0.5\TUD@logoheight}%
+  \addtolength{\TUD@titleskip}{-\headsep}%
+  %
+  \setlength{\@TUD@titleboxwidth}{\textwidth}%
+  \addtolength{\@TUD@titleboxwidth}{-\TUD@logoboxwidth}%
+  \savebox{\TUD@titlebox}[\@TUD@titleboxwidth]{%
+    \hspace*{\TUD@titlebox@sep@left}%
+    \parbox{\textwidth -\TUD@titlebox@sep@left -\TUD@titlebox@sep@right}{%
+      \raggedright%
+      \headfont\TUD@titlecolor%
+      \settoheight{\TUD@tmp@height}{\strut}%
+      \settodepth{\TUD@tmp@depth}{\strut}%
+      \setfontheight%
+      \vspace*{\fontheight}
+      \vspace*{-\TUD@tmp@height}
+%      \settowidth{\TUD@logoboxwidth}{\usebox{\TUD@logobox}}%
+%      \settoheight{\TUD@logoboxheight}{\usebox{\TUD@logobox}}%
+      \@TUD@logo@tmp=-\the\TUD@logoboxheight%
+      \advance \@TUD@logo@tmp by 0.125\TUD@logoheight%
+      \advance\@TUD@logo@tmp by \TUD@titleskip%
+%      \advance\@TUD@logo@tmp by -12pt%
+      \advance\@TUD@logo@tmp by -\baselineskip%
+      \divide\@TUD@logo@tmp by \baselineskip%
+      \@TUD@logolines=\@TUD@logo@tmp%
+      \advance\@TUD@logolines by -1% 
+      \hangindent-\the\TUD@logoboxwidth%
+      \hangafter\@TUD@logolines%
+      \strut\@title\strut\par%
+      \vspace{-\TUD@tmp@depth}%
+    }%
+    \hspace*{-\TUD@logoboxwidth}%
+    \hfill%
+  }%
+  \savebox{\TUD@subtitlebox}[\textwidth]{%
+    \hspace*{\TUD@titlebox@sep@left}%
+    \parbox{\textwidth -\TUD@titlebox@sep@left -\TUD@titlebox@sep@right}{%
+      \raggedright%
+      \sublinefont\TUD@subtitlecolor%
+      % because of strut height
+      \ifx\@subtitle\@empty\else%
+        \subheadfont%
+        \settoheight{\TUD@tmp@height}{\strut}%
+        \settodepth{\TUD@tmp@depth}{\strut}%
+        \setfontheight%
+        \vspace*{\fontheight}
+        \vspace*{-\TUD@tmp@height}
+        \strut\@subtitle\strut\par%
+      \fi%
+      \ifx\@subsubtitle\@empty\else%
+        \sublinefont%
+        \ifx\@subtitle\@empty%
+          \settoheight{\TUD@tmp@height}{\strut}%
+          \settodepth{\TUD@tmp@depth}{\strut}%
+          \setfontheight%
+          \vspace{\fontheight}
+          \vspace{-\TUD@tmp@height}
+        \fi
+        \strut\@subsubtitle\strut\par%
+      \fi%
+      \vspace{-\TUD@tmp@depth}%
+    }%
+    \hfill%
+  }%
+  %
+  % define some heights and depths for boxes
+  % needed for package textpos.sty
+  \newlength{\TUD@titleboxheight}%
+  \newlength{\TUD@titleboxdepth}%
+  \newlength{\TUD@subtitleboxheight}%
+  \newlength{\TUD@subtitleboxdepth}%
+  \settoheight{\TUD@titleboxheight}{\usebox{\TUD@titlebox}}%
+  \settodepth{\TUD@titleboxdepth}{\usebox{\TUD@titlebox}}%
+  \addtolength{\TUD@titleboxdepth}{\TUD@titlebox@sep@bottom+0.5\@TUD@ruleheight}%vspace{8mm} + 1/2\smallruleheight
+  \ifTUD@subhead%
+    \settoheight{\TUD@subtitleboxheight}{\usebox{\TUD@subtitlebox}}\addtolength{\TUD@subtitleboxheight}{\TUD@subtitlebox@sep}%vspace{3mm}
+    \settodepth{\TUD@subtitleboxdepth}{\usebox{\TUD@subtitlebox}}\addtolength{\TUD@subtitleboxdepth}{\TUD@subtitlebox@sep+\@TUD@ruleheight}%vspace{3mm} + \smallruleheight
+  \else%
+    \setlength{\TUD@subtitleboxheight}{0pt}%
+    \setlength{\TUD@subtitleboxdepth}{0pt}%
+  \fi%
+  \newlength{\@TUD@titleboxheight}%
+  \setlength{\@TUD@titleboxheight}{\TUD@titleboxheight}\addtolength{\@TUD@titleboxheight}{\TUD@titleboxdepth}%
+  \ifdim\@TUD@titleboxheight < \TUD@logoboxsep@tmp%
+    \addtolength{\TUD@titleboxdepth}{\TUD@logoboxsep}%
+    \addtolength{\TUD@titleboxdepth}{-\@TUD@titleboxheight}%
+  \fi\par%
+  \newlength{\TUD@colorbacktitleheight}%
+  \setlength{\TUD@colorbacktitleheight}{\TUD@titleskip+\TUD@titleboxheight+\TUD@titleboxdepth+\headsep}%
+  \newlength{\TUD@colorbacksubtitleheight}%
+  \setlength{\TUD@colorbacksubtitleheight}{\TUD@subtitleboxheight+\TUD@subtitleboxdepth}%
+  \ifTUD@colorbacktitle%
+    \AddToShipoutPicture*{%
+      \AtTextUpperLeft{\put(0,\LenToUnit{\headsep}){%
+        \TUD@accentcolor{\rule[-\TUD@colorbacktitleheight]{\textwidth}{\TUD@colorbacktitleheight}}%
+      }}%
+    }%
+  \fi%
+  \ifTUD@subhead\ifTUD@colorbacksubtitle%
+    \AddToShipoutPicture*{%
+      \AtTextUpperLeft{\put(0,\LenToUnit{\headsep}){\put(0,\LenToUnit{-\TUD@colorbacktitleheight}){%
+        \TUD@accentcolor{\rule[-\TUD@colorbacksubtitleheight]{\textwidth}{\TUD@colorbacksubtitleheight}}%
+      }}}%
+    }%
+  \fi\fi%
+  %
+  \newlength{\@TUD@logobox@posx}%
+    \setlength{\@TUD@logobox@posx}{\paperwidth -\TUD@sep@right - \TUD@logoboxwidth}%
+  \newlength{\@TUD@logobox@posy}%
+    \setlength{\@TUD@logobox@posy}{1in + \topmargin + \headheight + \TUD@logoboxheight + 0.5\TUD@logoheight}%
+  \AddToShipoutPicture*{\AtPageUpperLeft{\put(\LenToUnit{\@TUD@logobox@posx},\LenToUnit{-\@TUD@logobox@posy}){\usebox{\TUD@logobox}}}}%
+  \begingroup%
+    \vfilneg%
+    \if@reversemargin%
+      \addtolength{\oddsidemargin}{-\marginparwidth - \marginparsep}%
+    \else%
+      \addtolength{\evensidemargin}{-\marginparwidth - \marginparsep}%
+    \fi%
+    \addtolength{\textwidth}{\marginparwidth + \marginparsep}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\marginparwidth}{0pt}\setlength{\marginparsep}{0pt}%
+    %\@parskipfalse\@parskip@indent%
+    \parskip=0pt%
+    \if@twocolumn%
+      \@TUD@resttwocoltrue\onecolumn%
+    \else%
+      \@TUD@resttwocolfalse%
+    \fi%
+    %
+    %
+    % for debugging with frame boxes
+    \setlength{\fboxsep}{0pt}%
+    \setlength{\fboxrule}{0.6pt}%
+    %
+    \setcounter{page}{#1}%
+    %
+    \let\footnotesize\small%
+    \let\footnoterule\relax%
+    \renewcommand*\thefootnote{\@fnsymbol\c@footnote}%
+    \let\@oldmakefnmark\@makefnmark%
+      \renewcommand*{\@makefnmark}{\rlap\@oldmakefnmark}%
+    \noindent%
+    \raggedright%
+    %
+    \vfilneg%
+    \vspace*{\TUD@titleskip}\vspace{-1pt}%
+    \vspace{-10pt}\vspace{-1pt}% nur Gott wei"s woher diese 10pt kommen!
+    \usebox{\TUD@titlebox}\par%\vbox{\raisebox{\TUD@titleboxheight-\TUD@logoboxheight}[\TUD@titleboxheight][\TUD@titleboxdepth]{\usebox{\TUD@logobox}}}\par%
+    \ifdim\@TUD@titleboxheight < \TUD@logoboxsep@tmp%
+      \vspace{\TUD@logoboxsep}\vspace{-\@TUD@titleboxheight}%
+    \fi\par%
+    \vspace{\TUD@titlebox@sep@bottom}\vspace{-1pt}%
+    % execute only if subtitle or subsubtitle exist
+    \ifTUD@subhead%
+        {\TUD@titleseprulecolor\tudrule}\par%
+        \addvspace{\TUD@subtitlebox@sep}\vspace{-1pt}\par%
+        \usebox{\TUD@subtitlebox}\par%
+        \addvspace{\TUD@subtitlebox@sep}\vspace{-1pt}%
+    \fi%
+    {\TUD@titlerulecolor\tudrule}\par%
+    \if@TUD@resttwocol\twocolumn\fi%
+  \endgroup
+  %
+  %
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\@subtitle\@empty
+  \global\let\@subsubtitle\@empty
+  \global\let\@extratitle\@empty
+  \global\let\@titlehead\@empty
+  \global\let\@subject\@empty
+  \global\let\@publishers\@empty
+  \global\let\@uppertitleback\@empty
+  \global\let\@lowertitleback\@empty
+  \global\let\@dedication\@empty
+  \global\let\author\relax
+  \global\let\title\relax
+  \global\let\subtitle\relax
+  \global\let\subsubtitle\relax
+  \global\let\extratitle\relax
+  \global\let\titlehead\relax
+  \global\let\subject\relax
+  \global\let\publishers\relax
+  \global\let\uppertitleback\relax
+  \global\let\lowertitleback\relax
+  \global\let\dedication\relax
+  \global\let\date\relax
+  \global\let\and\relax
+  %
+  \setlength{\baselineskip}{\@TUD@tmp@baselineskip}%
+}

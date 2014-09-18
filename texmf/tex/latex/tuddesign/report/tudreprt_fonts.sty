@@ -1,0 +1,239 @@
+% tudreport is the report-class as described in the TUD-Design-Manual
+% It is based on (makes heavy use of) the KOMA-Class scrreprt
+\def\fileversion{1.11}
+\def\filedate{2009/00/18}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudreprt_fonts}
+ [\filedate\space\fileversion\space 
+   Clemens von Loewenich's and Joe Werner's TUD-Design package]
+
+\RequirePackage{xkeyval}
+\RequirePackage{tudfonts}
+
+% Schriftgrößen berechnen sich nach 
+%
+%   normalsize = 9.5
+%   scale = 1.2;
+%   step = [-3,-2,-1,-0.5,0,1,2,3,4,5];
+%   baselinesscale=12/9.5;
+%   
+%   size=zeros(length(step),2);
+%   for i = 1:length(step)
+%       fontsize(i) = round( 2 * normalsize * scale^step(i) ) / 2;
+%       baselineskip(i) = round( 2 * baselinesscale * size(i,1)) / 2;
+%   end
+%
+
+
+\renewcommand{\defaultscriptratio}{0.70}
+\renewcommand{\defaultscriptscriptratio}{0.60}
+
+\providecommand{\subheadlinesize}{}
+\providecommand{\chapterlinesize}{}
+\providecommand\titlebaselineskip{}
+\providecommand\titlesize{}
+\providecommand\smaltitlebaselineskip{}
+\providecommand\smaltitlesize{}
+\providecommand\subheadsize{}
+\providecommand\sublinesize{}
+\providecommand\instbaselineskip{}
+\providecommand\institutionsize{}
+
+\DeclareOptionX<\@currname>{a4}{%
+    \renewcommand{\titlebaselineskip}{39}
+    \renewcommand{\titlesize}{\fontsize{36}{\titlebaselineskip}\selectfont}
+    \renewcommand{\smaltitlebaselineskip}{32}
+    \renewcommand{\smaltitlesize}{\fontsize{30}{\smaltitlebaselineskip}\selectfont}
+    \renewcommand{\subheadsize}{\fontsize{11.5}{14}\selectfont}
+    \renewcommand{\sublinesize}{\fontsize{11.5}{14}\selectfont}
+    \renewcommand{\instbaselineskip}{8}
+    \renewcommand{\institutionsize}{\fontsize{7}{\instbaselineskip}\selectfont}
+}
+
+\DeclareOptionX<\@currname>{a5}{%
+    \renewcommand{\titlebaselineskip}{30}
+    \renewcommand{\titlesize}{\fontsize{27.4}{\titlebaselineskip}\selectfont}
+    \renewcommand{\smaltitlebaselineskip}{25}
+    \renewcommand{\smaltitlesize}{\fontsize{22.8}{\smaltitlebaselineskip}\selectfont}
+    \renewcommand{\subheadsize}{\fontsize{9.6}{11.7}\selectfont}
+    \renewcommand{\sublinesize}{\fontsize{9.6}{11.7}\selectfont}
+     \renewcommand{\instbaselineskip}{7}
+    \renewcommand{\institutionsize}{\fontsize{6}{\instbaselineskip}\selectfont}
+
+}
+ 
+\DeclareOptionX<\@currname>{8pt}{%
+    \renewcommand{\tiny}{\fontsize{4.6}{5.8}\selectfont}
+    \renewcommand{\scriptsize}{\fontsize{5.6}{7.1}\selectfont}
+    \renewcommand{\footnotesize}{\fontsize{6.7}{8.5}\selectfont}
+    \renewcommand{\small}{\fontsize{7.3}{9.2}\selectfont}
+    \renewcommand{\normalsize}{\fontsize{8.0}{10.1}\selectfont
+         \abovedisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip
+         \abovedisplayshortskip 0.25\baselineskip plus 1\baselineskip
+         \belowdisplayshortskip 0.75\baselineskip plus 0.5\baselineskip minus 0.5\baselineskip
+         \belowdisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip}
+    \renewcommand{\large}{\fontsize{9.6}{12.1}\selectfont}
+    \renewcommand{\Large}{\fontsize{11.5}{14.5}\selectfont}
+    \renewcommand{\LARGE}{\fontsize{13.8}{17.4}\selectfont}
+    \renewcommand{\huge}{\fontsize{16.6}{21.0}\selectfont}
+    \renewcommand{\Huge}{\fontsize{19.9}{25.1}\selectfont}
+    \renewcommand{\subheadlinesize}{\fontsize{8.4}{11.8}\selectfont}
+    \renewcommand{\chapterlinesize}{\fontsize{16.8}{20.2}\selectfont}
+    \DeclareMathSizes{4.6}{4.8}{3.4}{2.9}
+    \DeclareMathSizes{5.6}{5.8}{4.1}{3.5}
+    \DeclareMathSizes{6.7}{7.0}{4.9}{4.2}
+    \DeclareMathSizes{7.3}{7.6}{5.3}{4.6}
+    \DeclareMathSizes{8.0}{8.3}{5.8}{5.0}
+    \DeclareMathSizes{9.6}{10.0}{7.0}{6.0}
+    \DeclareMathSizes{11.5}{12.0}{8.4}{7.2}
+    \DeclareMathSizes{13.8}{14.4}{10.1}{8.6}
+    \DeclareMathSizes{16.6}{17.3}{12.1}{10.4}
+    \DeclareMathSizes{19.9}{20.7}{14.5}{12.4}
+    \DeclareMathSizes{8.4}{8.8}{6.1}{5.3}
+    \DeclareMathSizes{16.8}{17.5}{12.3}{10.5}
+}
+
+\DeclareOptionX<\@currname>{9.5pt}{%
+    \renewcommand{\tiny}{\fontsize{5.5}{6.9}\selectfont}
+    \renewcommand{\scriptsize}{\fontsize{6.6}{8.3}\selectfont}
+    \renewcommand{\footnotesize}{\fontsize{7.9}{10.0}\selectfont}
+    \renewcommand{\small}{\fontsize{8.7}{11.0}\selectfont}
+    \renewcommand{\normalsize}{\fontsize{9.5}{12.0}\selectfont
+         \abovedisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip
+         \abovedisplayshortskip 0.25\baselineskip plus 1\baselineskip
+         \belowdisplayshortskip 0.75\baselineskip plus 0.5\baselineskip minus 0.5\baselineskip
+         \belowdisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip}
+    \renewcommand{\large}{\fontsize{11.4}{14.4}\selectfont}
+    \renewcommand{\Large}{\fontsize{13.7}{17.3}\selectfont}
+    \renewcommand{\LARGE}{\fontsize{16.4}{20.7}\selectfont}
+    \renewcommand{\huge}{\fontsize{19.7}{24.9}\selectfont}
+    \renewcommand{\Huge}{\fontsize{23.6}{29.8}\selectfont}
+    \renewcommand{\subheadlinesize}{\fontsize{10.0}{14.0}\selectfont}
+    \renewcommand{\chapterlinesize}{\fontsize{20.0}{24.0}\selectfont}
+    \DeclareMathSizes{5.5}{5.7}{4.0}{3.4}
+    \DeclareMathSizes{6.6}{6.9}{4.8}{4.1}
+    \DeclareMathSizes{7.9}{8.2}{5.8}{4.9}
+    \DeclareMathSizes{8.7}{9.1}{6.3}{5.4}
+    \DeclareMathSizes{9.5}{9.9}{6.9}{5.9}
+    \DeclareMathSizes{11.4}{11.9}{8.3}{7.1}
+    \DeclareMathSizes{13.7}{14.3}{10.0}{8.6}
+    \DeclareMathSizes{16.4}{17.1}{12.0}{10.3}
+    \DeclareMathSizes{19.7}{20.5}{14.4}{12.3}
+    \DeclareMathSizes{23.6}{24.6}{17.2}{14.8}
+    \DeclareMathSizes{10.0}{10.4}{7.3}{6.3}
+    \DeclareMathSizes{20.0}{20.8}{14.6}{12.5}
+}
+
+\DeclareOptionX<\@currname>{10pt}{%
+    \renewcommand{\tiny}{\fontsize{5.8}{7.3}\selectfont}
+    \renewcommand{\scriptsize}{\fontsize{6.9}{8.7}\selectfont}
+    \renewcommand{\footnotesize}{\fontsize{8.3}{10.5}\selectfont}
+    \renewcommand{\small}{\fontsize{9.1}{11.5}\selectfont}
+    \renewcommand{\normalsize}{\fontsize{10.0}{12.6}\selectfont
+         \abovedisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip
+         \abovedisplayshortskip 0.25\baselineskip plus 1\baselineskip
+         \belowdisplayshortskip 0.75\baselineskip plus 0.5\baselineskip minus 0.5\baselineskip
+         \belowdisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip}
+    \renewcommand{\large}{\fontsize{12.0}{15.2}\selectfont}
+    \renewcommand{\Large}{\fontsize{14.4}{18.2}\selectfont}
+    \renewcommand{\LARGE}{\fontsize{17.3}{21.9}\selectfont}
+    \renewcommand{\huge}{\fontsize{20.7}{26.1}\selectfont}
+    \renewcommand{\Huge}{\fontsize{24.9}{31.5}\selectfont}
+    \renewcommand{\subheadlinesize}{\fontsize{10.5}{14.7}\selectfont}
+    \renewcommand{\chapterlinesize}{\fontsize{21}{25.3}\selectfont}
+    \DeclareMathSizes{5.8}{6.0}{4.2}{3.6}
+    \DeclareMathSizes{6.9}{7.2}{5.0}{4.3}
+    \DeclareMathSizes{8.3}{8.6}{6.1}{5.2}
+    \DeclareMathSizes{9.1}{9.5}{6.6}{5.7}
+    \DeclareMathSizes{10.0}{10.4}{7.3}{6.3}
+    \DeclareMathSizes{12.0}{12.5}{8.8}{7.5}
+    \DeclareMathSizes{14.4}{15.0}{10.5}{9.0}
+    \DeclareMathSizes{17.3}{18.0}{12.6}{10.8}
+    \DeclareMathSizes{20.7}{21.6}{15.1}{12.9}
+    \DeclareMathSizes{24.9}{25.9}{18.2}{15.6}
+    \DeclareMathSizes{10.5}{10.9}{7.7}{6.6}
+    \DeclareMathSizes{21.1}{22.0}{15.4}{13.2}
+}
+
+\DeclareOptionX<\@currname>{11pt}{%
+    \renewcommand{\tiny}{\fontsize{6.4}{8.1}\selectfont}
+    \renewcommand{\scriptsize}{\fontsize{7.6}{9.6}\selectfont}
+    \renewcommand{\footnotesize}{\fontsize{9.2}{11.6}\selectfont}
+    \renewcommand{\small}{\fontsize{10.0}{12.6}\selectfont}
+    \renewcommand{\normalsize}{\fontsize{11.0}{13.9}\selectfont
+         \abovedisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip
+         \abovedisplayshortskip 0.25\baselineskip plus 1\baselineskip
+         \belowdisplayshortskip 0.75\baselineskip plus 0.5\baselineskip minus 0.5\baselineskip
+         \belowdisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip}
+    \renewcommand{\large}{\fontsize{13.2}{16.7}\selectfont}
+    \renewcommand{\Large}{\fontsize{15.8}{20.0}\selectfont}
+    \renewcommand{\LARGE}{\fontsize{19.0}{24.0}\selectfont}
+    \renewcommand{\huge}{\fontsize{22.8}{28.8}\selectfont}
+    \renewcommand{\Huge}{\fontsize{27.4}{34.6}\selectfont}
+    \renewcommand{\subheadlinesize}{\fontsize{11.6}{16.2}\selectfont}
+    \renewcommand{\chapterlinesize}{\fontsize{23.2}{27.8}\selectfont}
+    \DeclareMathSizes{6.4}{6.7}{4.7}{4.0}
+    \DeclareMathSizes{7.6}{7.9}{5.5}{4.8}
+    \DeclareMathSizes{9.2}{9.6}{6.7}{5.8}
+    \DeclareMathSizes{10.0}{10.4}{7.3}{6.3}
+    \DeclareMathSizes{11.0}{11.5}{8.0}{6.9}
+    \DeclareMathSizes{13.2}{13.8}{9.6}{8.3}
+    \DeclareMathSizes{15.8}{16.5}{11.5}{9.9}
+    \DeclareMathSizes{19.0}{19.8}{13.9}{11.9}
+    \DeclareMathSizes{22.8}{23.8}{16.6}{14.3}
+    \DeclareMathSizes{27.4}{28.5}{20.0}{17.1}
+    \DeclareMathSizes{11.6}{12.1}{8.5}{7.3}
+    \DeclareMathSizes{23.2}{24.2}{16.9}{14.5}
+}
+
+\DeclareOptionX<\@currname>{12pt}{%
+    \renewcommand{\tiny}{\fontsize{6.9}{8.7}\selectfont}
+    \renewcommand{\scriptsize}{\fontsize{8.3}{10.5}\selectfont}
+    \renewcommand{\footnotesize}{\fontsize{10.0}{12.6}\selectfont}
+    \renewcommand{\small}{\fontsize{11.0}{13.9}\selectfont}
+    \renewcommand{\normalsize}{\fontsize{12.0}{15.2}\selectfont
+         \abovedisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip
+         \abovedisplayshortskip 0.25\baselineskip plus 1\baselineskip
+         \belowdisplayshortskip 0.75\baselineskip plus 0.5\baselineskip minus 0.5\baselineskip
+         \belowdisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip}
+    \renewcommand{\large}{\fontsize{14.4}{18.2}\selectfont}
+    \renewcommand{\Large}{\fontsize{17.3}{21.9}\selectfont}
+    \renewcommand{\LARGE}{\fontsize{20.7}{26.1}\selectfont}
+    \renewcommand{\huge}{\fontsize{24.9}{31.5}\selectfont}
+    \renewcommand{\Huge}{\fontsize{29.9}{37.8}\selectfont}
+    \renewcommand{\subheadlinesize}{\fontsize{12.6}{17.6}\selectfont}
+    \renewcommand{\chapterlinesize}{\fontsize{25.3}{30.4}\selectfont}
+    \DeclareMathSizes{6.9}{7.2}{5.0}{4.3}
+    \DeclareMathSizes{8.3}{8.6}{6.1}{5.2}
+    \DeclareMathSizes{10.0}{10.4}{7.3}{6.3}
+    \DeclareMathSizes{11.0}{11.5}{8.0}{6.9}
+    \DeclareMathSizes{12.0}{12.5}{8.8}{7.5}
+    \DeclareMathSizes{14.4}{15.0}{10.5}{9.0}
+    \DeclareMathSizes{17.3}{18.0}{12.6}{10.8}
+    \DeclareMathSizes{20.7}{21.6}{15.1}{12.9}
+    \DeclareMathSizes{24.9}{25.9}{18.2}{15.6}
+    \DeclareMathSizes{29.9}{31.1}{21.8}{18.7}
+    \DeclareMathSizes{12.6}{13.1}{9.2}{7.9}
+    \DeclareMathSizes{25.3}{26.4}{18.4}{15.8}
+}
+
+\ExecuteOptionsX<\@currname>{a4,9.5pt}
+\ProcessOptionsX<\@currname>
+
+  \providecommand\headfont{}
+    \renewcommand{\headfont}{\fontfamily{\sfdefault}\fontseries{mb}\titlesize}
+  \providecommand\subheadfont{}
+    \renewcommand{\subheadfont}{\fontfamily{\sfdefault}\fontseries{mb}\fontshape{n}\subheadsize}
+  \providecommand\sublinefont{}
+    \renewcommand{\sublinefont}{\fontfamily{\sfdefault}\fontseries{m}\fontshape{n}\sublinesize}
+  \providecommand\institutionfont{}
+    \renewcommand{\institutionfont}{\fontfamily{\sfdefault}\fontseries{m}\fontshape{n}\institutionsize}
+
+  \providecommand\subheadlinefont{}
+    \renewcommand{\subheadlinefont}{\fontfamily{\sfdefault}\fontseries{mb}\fontshape{n}\subheadlinesize}
+  \providecommand\sectfont{}
+    \renewcommand*\sectfont{\subheadlinefont}
+  \providecommand\subsectfont{}
+    \renewcommand*\subsectfont{\subheadlinefont\fontseries{m}\selectfont}
+
+\normalsize

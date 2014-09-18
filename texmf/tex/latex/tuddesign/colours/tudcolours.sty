@@ -1,0 +1,93 @@
+% define the TUD-colourscheme
+\def\fileversion{1.9}
+\def\filedate{2009/03/12}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudcolours}
+[\filedate\space\fileversion\space
+   Clemens von Loewenich's and Joe Werner's TUD-Design package]
+
+\PassOptionsToPackage{override}{xcolor}
+\RequirePackage{xcolor}
+\RequirePackage{xkeyval}
+
+% load check command for valid colours
+% provides boolean variables
+%    \TUD@validcolor
+%    \TUD@blacktitle
+%    \TUD@whitetitle
+%    \TUD@textaccent
+\input{tudcolours.cfg}
+
+% load colours definition 
+% and set default colour
+\input{tudcolours.def}
+\colorlet{tudaccent}{tud0b}
+\colorlet{tudtextaccent}{tud0b}
+\colorlet{tudidentbar}{tud0b}
+
+% Declare options
+\DeclareOptionX<\@currname>{accentcolor}{%
+  \TUD@chkcolor{#1}
+  \ifTUD@validcolor
+    \colorlet{tudaccent}{#1}
+    \ifTUD@textaccent
+      \colorlet{tudtextaccent}{#1}
+    \else
+      \colorlet{tudtextaccent}{black}
+      \PackageWarning{\@currname}{***********************************************
+          \MessageBreak It is not allowed to use `#1' as accentcolor
+          \MessageBreak for text. `tudtextaccent' is set to `black'!
+          \MessageBreak ***********************************************
+          \MessageBreak}
+    \fi
+    \colorlet{tudidentbar}{#1}
+  \else
+    \PackageError{\@currname}{invalid color `#1'!\MessageBreak Use the TUD color scheme}
+  \fi}
+\ProcessOptionsX<\@currname>
+
+% define internal color command
+\newcommand{\TUD@accentcolor}{\color{tudaccent}}
+\newcommand{\TUD@accenttextcolor}{\color{tudtextaccent}}
+\newcommand{\TUD@identbarcolor}{\color{tudidentbar}}
+\newcommand{\TUD@normalcolor}{\color{black}}
+
+% define depricated \setaccentcolor
+\newcommand{\setaccentcolor}[1]{\PackageError{\@currname}{%
+    Use class option `accentcolor=#1' \MessageBreak
+    instead of `\noexpand\setaccentcolor{#1}'}\@ehc}%
+
+% define environment accentcolor
+\newenvironment{accentcolor}{\bgroup\accentfont\TUD@accenttextcolor}{\egroup}
+
+% define \textaccentcolor
+\newcommand{\textaccentcolor}[1]{%
+  \textcolor{tudtextaccent}{\accentfont #1}}
+
+% make sure hyperref don't break colorscheme
+\PassOptionsToPackage{%
+  %unicode,
+  pdfproducer={Latex TUD-CD (C. v. Loewenich \& J. Werner)},
+  colorlinks=false,
+  linkcolor=tudtextaccent,
+  anchorcolor=tudtextaccent,
+  citecolor=tudtextaccent,
+  filecolor=tudtextaccent,
+  menucolor=tudtextaccent,
+  urlcolor=tudtextaccent,
+  citebordercolor={0 0 0},
+  filebordercolor={0 0 0},
+  linkbordercolor={0 0 0},
+  menubordercolor={0 0 0},
+  urlbordercolor={0 0 0},
+  runbordercolor={0 0 0},
+  pdfborder={0 0 0}
+}{hyperref}
+\AtBeginDocument{%
+  \@ifpackageloaded{hyperref}{%
+    \global\@ifpackagelater{hyperref}{2007/04/09 v6.76a}{%
+    }{%
+      \hypersetup{pagecolor=tudtextaccent,pagebordercolor={0 0 0}}%
+    }%
+  }{}%
+}

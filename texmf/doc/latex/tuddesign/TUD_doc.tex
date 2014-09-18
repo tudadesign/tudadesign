@@ -1,0 +1,780 @@
+\documentclass[twoside,colorback,accentcolor=tud4c,11pt]{tudreport}
+\usepackage{ngerman}
+
+\usepackage[stable]{footmisc}
+\usepackage[ngerman,pdfview=FitH,pdfstartview=FitV]{hyperref}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+
+\newlength{\longtablewidth}
+\setlength{\longtablewidth}{0.675\linewidth}
+
+\title{Die fabelhaften Benner-Boys pr"asentieren
+  stolz das TUD-\\Corporate-Design f"ur {\LaTeX}}
+\subtitle{Clemens v. Loewenich\\Johannes Werner}
+\subsubtitle{email: \textaccent{tud-design@pro-kevin.de}}
+\uppertitleback{(\textaccent{\textbackslash uppertitleback})}
+\lowertitleback{(\textaccent{\textbackslash lowertitleback})\hfill\today}
+\institution{Speerspitze der Elite\\
+    Kompetenzcenter der Leuchtt"urme\\
+    Institut f"ur Angewandte Festkernphysik}
+\dedication{Hier ist gen"ugend Platz\\
+  f"ur eine Widmung (\textaccent{\textbackslash dedication}).\\
+  \strut\\
+  F"ur Annelore Schmidt\\
+  aus dem Referat Kommunikation.\\
+  Sie hat immer ein offenes Ohr\\
+  f"ur unsere Fragen und Anregungen.}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+   Im naturwissenschaftlichen Bereich wird viel mit {\LaTeX} gearbeitet. Wir bilden
+   da keine Ausnahme. Das Referat Kommunikation arbeitet zwar an einer Dokumentvorlage f"ur
+   {\LaTeX}, das hat uns jedoch nicht davon abgehalten, die Sache selbst in die Hand zu nehmen und
+   eine eigene \textaccent{documentclass} zu erstellen.
+   F"ur R"uckfragen stehen wir unter der Adresse \textaccentcolor{tud-design@pro-kevin.de}
+   gerne zur Verf"ugung. \textbf{An diese Adresse bitte auch "Anderungen f"ur das Layout
+   schicken, damit wir diese einpflegen k"onnen.}
+
+   Diese Dokumentation besteht aus zwei gro"sen Abschnitten. Der erste Teil,
+   die Einleitung (Kapitel~\ref{chap:Einleitung}) stellt das {\LaTeX}-Paket kurz vor und
+   erl"autert noch einmal verschiedene Vorgaben des Corporate Designs. Im
+   zweiten Teil (Kapitel~\ref{chap:tudreport}-\ref{chap:tudbeamer}) werden dann die
+   einzelnen Klassen vorgestellt. Hier werden die Klassenoptionen sowie die
+   Befehle und Umgebungen, die eingef"uhrt oder angepasst wurden, beschrieben.
+   
+   Beispiele zu den einzelnen Klassen findet man im Dokumentationsverzeichnis
+   des Paketes.
+
+\end{abstract}  
+
+\tableofcontents
+
+\chapter{\texorpdfstring{Ein paar Worte zur \LaTeX{}-Vorlage\footnote[1]{\glqq Die fabelhaften 
+       Benner-Boys\grqq, sowie \glqq Die Benner-Boys von Stube 111\grqq{} sind ein eingetragenes
+       Warenzeichen der \textaccent{AG Benner}.}}{Ein paar Worte zur
+       \LaTeX{}-Vorlage}}\label{chap:Einleitung}
+  
+  \section{Einf"uhrung}
+   Im naturwissenschaftlichen Bereich wird viel mit {\LaTeX} gearbeitet. Wir bilden 
+   da keine Ausnahme. Das Referat Kommunikation arbeitet zwar an einer Dokumentvorlage f"ur
+   {\LaTeX}, das hat uns jedoch nicht davon abgehalten, die Sache selbst in die Hand zu nehmen und
+   eine eigene \textaccent{documentclass} zu erstellen.
+   F"ur R"uckfragen stehen wir unter der Adresse \textaccentcolor{tud-design@pro-kevin.de}
+   gerne zur Verf"ugung. \textbf{An diese Adresse bitte auch "Anderungen f"ur das Layout
+   schicken, damit wir diese einpflegen k"onnen.}
+
+  \section{Bekannte Fehler}
+ 
+   \begin{itemize}\itemsep-0.5ex
+    \item \textaccent{\textbackslash thanks} bzw.\ Fu"snoten auf der Titelseite funktionieren
+      nicht. Deshalb werden sie, soweit m"oglich, ignoriert.
+      Abgesehen davon sind sie nicht erlaubt.
+    \item Es existiert noch keine ordentliche Vorlage f"ur Texte, wir 
+     wissen also noch nicht, ob das so alles OK ist
+   \end{itemize}
+   Wer Fehler findet sollte sie uns melden (am besten mit dem Text zusammen, der
+   den Fehler erzeugt, zuschicken).
+
+  \section{Ben"otigte Pakete}
+    Es werden folgende Pakete ben"otigt:
+   \begin{itemize}\itemsep-0.5ex
+     \accentfont
+     \item scrreprt   \textnormal{(KOMA-Klasse f"ur die Dokumentenklasse} tudreport\textnormal{)}
+     \item scrbook    \textnormal{(KOMA-Klasse f"ur die Dokumentenklasse} tudreport \textnormal{mit der Option} book\textnormal{)}
+     \item scrartcl   \textnormal{(KOMA-Klasse f"ur die Dokumentenklasse} tudreport \textnormal{mit der Option} article\textnormal{)}
+     \item scrlttr2   \textnormal{(KOMA-Klasse f"ur die Dokumentenklasse} tudletter\textnormal{)}
+     \item beamer     \textnormal{(Klasse f"ur die Dokumentenklasse} tudbeamer\textnormal{)}
+     \item fontenc    \textnormal{mit} OT1 \textnormal{und} T1 \textnormal{Codierung}
+     \item fix-cm     computer modern \textnormal{Schriftart in} T1 \textnormal{Codierung}
+     \item mathdesign \textnormal{(f"ur Formelsatz)}
+     \item utopia     \textnormal{(Schriftart f"ur Formelsatz)}
+     \item textcomp   \textnormal{(f"ur Sonderzeichen)}
+     \item geometry
+     \item titlesec
+     \item titletoc   \textnormal{(f"ur Option} linedtoc\textnormal{)}
+     \item fancyhdr
+     \item graphicx
+     \item xcolor
+     \item xkeyval
+     \item eso-pic
+     \item afterpage   \textnormal{(f"ur die Dokumentenklasse} tudletter \textnormal{und} tudexercise \textnormal{)}
+   \end{itemize}
+  
+  \section{"Ubersicht "uber alle TUD-Klassen}
+
+  \begin{itemize}\itemsep-0.5ex
+    \item \textaccent{tudreport} f"ur Berichte, Studien-, Diplom- und Doktorarbeiten,
+    Kapitel~\ref{chap:tudreport}
+    \item \textaccent{tudexercise} f"ur "Ubungen, Kapitel~\ref{chap:tudexercise}
+    \item \textaccent{tudposter} f"ur Poster und Aush"ange, Kapitel~\ref{chap:tudposter}
+    \item \textaccent{tudletter} f"ur Briefe, Kapitel~\ref{chap:tudletter}
+    \item \textaccent{tudbeamer} f"ur Pr"asentationen, Kapitel~\ref{chap:tudbeamer}
+  \end{itemize}
+
+  Des weiteren existiert auch eine Klasse \textaccent{tudthesis}, die zur
+  Anfertigung von Doktor-, Diplom-, MSc- und  BSc-Arbeiten vorgeschlagen
+  wird. Sie ist eine Erweiterung der nicht mehr weiterentwickelten Klasse
+  \textaccent{tudphysik}. Die Dokumentation ist im Paket selbst enthalten.
+
+  \section{Die Schriftarten an der TU Darmstadt}
+
+    Folgendes ist aus dem \textaccent{Corporate Design Handbuch} (1. Fassung August 2007)
+    entnommen. Es sollen nur noch die hier angesprochenen Schriftarten verwendet
+    werden. Die einzige Ausnahme bilden Pr"asentationen, bei diesen schl"agt
+    das Referat f"ur Kommunikation die Schriftart \textaccent{Arial} vor,
+    vor allem, weil sie auf vielen Systemen standardm"a"sig vorhanden ist.
+ 
+  \subsection{Frontpage}
+    Die Frontpage (bzw.\,Frutiger) wird ausschlie"slich f"ur Headlines, Subheadlines und Bildunterschriften
+    verwendet. In Flie"stexten wird sie nicht verwendet.
+
+    \paragraph{Frontpage Regular}
+      \hfill%
+      \begin{minipage}{\textwidth-\the\parindent}
+        \sublinefont\normalsize
+        \noindent
+        abcdefghijklmnopqrstuvwxyz"a"o"u\\
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ"A"O"U\\
+        1234567890,.;:!?\glqq\grqq{}@\texteuro\%/(\&)--
+      \end{minipage}
+      \begin{itemize}
+        \item Subline
+        \item Bildunterschrift
+        \item Beschriftung von Grafiken
+        \item Fachbereichs-- und Institutsbezeichnungen
+      \end{itemize}
+
+    \paragraph{Frontpage Medium}
+      \hfill%
+      \begin{minipage}{\textwidth-\the\parindent}
+        \headfont\normalsize
+        \noindent
+        abcdefghijklmnopqrstuvwxyz"a"o"u\\
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ"A"O"U\\
+        1234567890,.;:!?\glqq\grqq{}@\texteuro\%/(\&)--
+      \end{minipage}
+      \begin{itemize}
+        \item Headline
+        \item Subheadline
+        \item Paginierung
+      \end{itemize}
+
+  \subsection{Charter}
+    Die Charter wird als Flie"stext-- und Kommunikationsschrift eingesetzt.
+    Briefe und Faxe sowie Flie"stext in Publikationen werden damit geschrieben.
+    Um Inhalte hervorzuheben, kann der Bold-- oder Kursiv--Schnitt der Charter eingesetzt werden.
+    Der Zeilenabstand des Flie"stextes entspricht 121\%\footnote{Stellt sich bei genauerer 
+    Betrachtung als bedingt richtig heraus. Es ist nicht ersichtlich, wie die 121\%
+    renormiert werden m"ussen, um die Vorgaben des \textaccent{Corporate
+    Design Handbuchs} zu
+    erf"ullen.} der Schriftgr"o"se.
+    \paragraph{Charter Regular}
+      \hfill%
+      \begin{minipage}{\textwidth-\the\parindent}
+        \normalfont\normalsize
+        \noindent
+        abcdefghijklmnopqrstuvwxyz"a"o"u\\
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ"A"O"U\\
+        1234567890,.;:!?\glqq\grqq{}@\texteuro\%/(\&)--
+      \end{minipage}
+      \begin{itemize}
+        \item Flie"stext
+      \end{itemize}
+
+    \paragraph{Charter Italic}
+      \hfill%
+      \begin{minipage}{\textwidth-\the\parindent}
+        \it
+        \noindent
+        abcdefghijklmnopqrstuvwxyz"a"o"u\\
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ"A"O"U\\
+        1234567890,.;:!?\glqq\grqq{}@\texteuro\%/(\&)--
+      \end{minipage}
+      \begin{itemize}
+        \item Hervorhebung im Flie"stext
+        \item Zitate
+        \item "Ubersetzungen
+      \end{itemize}
+
+    \paragraph{Charter Bold}
+      \hfill%
+      \begin{minipage}{\textwidth-\the\parindent}
+        \bf
+        \noindent
+        abcdefghijklmnopqrstuvwxyz"a"o"u\\
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ"A"O"U\\
+        1234567890,.;:!?\glqq\grqq{}@\texteuro\%/(\&)--
+      \end{minipage}
+      \begin{itemize}
+        \item Hervorhebung im Flie"stext
+      \end{itemize}
+    
+  \subsection{Stafford}
+    Stafford (bzw.\,Rockwell) wird als Auszeichnungs- und Informationsschrift eingesetzt.
+    Zusatzinformationen werden durch Stafford ausgezeichnet.
+    \paragraph{Stafford}
+      \hfill%
+      \begin{minipage}{\textwidth-\the\parindent}
+        \accentfont
+        \noindent
+        abcdefghijklmnopqrstuvwxyz"a"o"u\\
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ"A"O"U\\
+        1234567890,.;:!?\glqq\grqq{}@ \texteuro\%/(\&)--
+      \end{minipage}
+      \begin{itemize}
+        \item Beschriftung von Grafiken
+        \item Impressum
+        \item Absender
+        \item Marginalien
+        \item Addressinformationen
+      \end{itemize}
+  
+  \section{Die Farben an der TU Darmstadt}
+    
+    An der TU Darmstadt sollen nur noch die im Corporate Design Handbuch\footnote{1.
+    Auflage, 10.08.2007} definierten Farbwerte verwendet werden. Dort hei"st es:
+    \begin{quote}
+     Die Farbwerte sind f"ur alle Produktionsverfahren und Medien g"ultig
+     und bindend. Abweichungen sind \emph{nicht} zul"assig.
+
+     Pro Publikation darf jeweils nur eine Akzentfarbe aus dem Farbschema
+     der Technischen Universit"at verwendet werden. Bei Grafiken und Tabellen,
+     f"ur die mehr als eine Farbe ben"otigt wird, k"onnen alle Farben des
+     Farbschemas benutzt werden.
+    \end{quote}
+  Diese Forderung bleibt jedoch in der Realit"at schwer zu erf"ullen, da
+  hierf"ur kalibrierte Ausgabeger"ate ben"otigt werden.
+
+  Alle zul"assigen Farben sind in der Datei \textaccent{tudcolors.def}
+  definiert. Sie lassen sich "uber das Pr"afix \textaccent{tud} und den Farbcode
+  aus dem Corporate Design Handbuch ansprechen, z.\ B.\ \textcolor{tud2a}{\textbackslash
+  textcolor\{tud2b\}\{<text>\}}. Die Ausnahmen sind \textaccent{black} und \textaccent{white}.
+  Ist die Akzentfarbe zu hell f"ur Text, wird stattdessen die Farbe Schwarz verwendet und
+  eine Warnung ausgegeben.
+  
+  \paragraph{Hinweis zum Paket \texorpdfstring{\textaccent{hyperref}}{hyperref}}
+    Um dem Farbschema des Corporate Designs gerecht zu werden, sind Farblinks und Rahmen um Links
+    ausgeschaltet. Dar"uber hinaus sind die Linkfarben auf \textaccent{tudtextaccent}
+    (siehe~\ref{sec_befehle}) und die Rahmenfarben der Links auf schwarz gesetzt, so dass sich beides ohne
+    farbliche Probleme einschalten l"asst. Hier sei noch auf den Befehl \textaccent{\textbackslash
+    texorpdfstring\{<tex string>\}\{<pdf string>\}} hingewiesen, der die meisten Fehler mit
+    \textaccent{hyperref} behebt.
+
+\chapter{Die Dokumentenklasse \texorpdfstring{\textaccent{tudreport}}{tudreport}}\label{chap:tudreport}
+
+  \section{Optionen der Dokumentenklasse \texorpdfstring{\textaccent{tudreport}}{tudreport}}
+    Es stehen neben den Optionen f"ur die \textaccent{report} Klasse noch folgende Optionen zur
+    Verf"ugung:\par
+    \nopagebreak
+    \begin{longtable}[h]{lp{\longtablewidth}}
+      \textaccent{article}         & L"adt die \textaccent{scrartcl} Klasse
+          und ersetzt die Option \textaccent{nopartpage} und \textaccent{noheadingspace}.\\
+      \textaccent{book}      & l"adt die \textaccent{scrbook}-Klasse anstatt der
+          \textaccent{scrreprt}-Klasse\\
+      \textaccent{accentcolor=$<$color$>$} & Setzt die Akzentfarbe
+          \textaccent{tudaccent} auf die Farbe \textaccent{$<$color$>$} und die Farbe
+          \textaccent{tudtextaccent} entsprechend (siehe Kap.~\ref{sec_befehle}). Der  Farbname von
+          \textaccent{$<$color$>$} setzt sich aus dem Prefix \textaccent{tud} und dem Farbcode
+          zusammen. Ausnahmen bilden \textaccent{black} und \textaccent{white}. (default:
+          \textcolor{tud0b}{\accentfont tud0b})\\ 
+          &Beispiel: \textaccent{\textbackslash documentclass$[$accentcolor=\textcolor{tud9a}{tud9a}$]$
+            $\{$tudreport$\}$ }\\
+      \textaccent{colortitle}      & setzt den Titel in der Farbe \textaccent{tudtextaccent}
+          (siehe Kap.~\ref{sec_befehle}). Diese Option sollte nur in
+          Sonderf"allen verwendet werden. (wird bei Option \textaccent{colorbacktitle} ignoriert)\\
+      \textaccent{colorbacktitle}  & hinterlegt den Titel mit der Akzentfarbe\\
+      \textaccent{colorback}       & hinterlegt die Titelseite unter dem Titel mit der Akzentfarbe\\
+          &(wird bei Option \textaccent{colorbacktitle} ignoriert)\\
+      \textaccent{inverttitle}     & setzt, wenn es erlaubt ist, die Textfarbe des Titels auf Wei"s.\\
+      \textaccent{inverttitlerule} & setzt, wenn es erlaubt ist, die Farbe der untersten
+          Begrenzungslinie des Titels auf Wei"s\\
+      \textaccent{blackrule}       & rein schwarze Identit"atsleiste\\
+      \textaccent{longdoc}         & Diese Option ist f"ur lange Dokumente
+        gedacht. Es wird der Seitenstil von \textaccent{plain} auf
+        \textaccent{headings} gesetzt (n"ahere Erleuterung siehe unten). Impliziert die Optionen
+        \textaccent{twoside} und \textaccent{openright}.\\
+%        \textaccent{twoside}, \textaccent{openright} und \textaccent{bigchapter}.\\
+      \textaccent{bigchapter}     & Setzt \textaccent{\textbackslash chapter} ohne die
+        Begrenzungslinien und in doppelter Schriftgr"o"se der restlichen "Uberschriften.\\
+      \textaccent{nopartpage}      & Beginnt den Text direkt unter der Begrenzungslinie und nicht
+        auf einer neuen Seite.\\
+      \textaccent{nochapterpage}   & entf"allt, wird mit \textaccent{article}
+	      erzwungen.\\
+      \textaccent{noheadingspace}  & Reduziert den Platz um "Uberschriften auf ein Minimum.\\
+      \textaccent{noresetcounter}  & Verhindert, dass die Z"ahler f"ur Gleichungen, Fu"snoten,
+          Abbildungen und Tabellen zu Beginn eines neuen Kapitels zur"uckgesetzt werden. Diese
+          Option imitiert damit das Verhalten der \textaccent{article} Klasse. (Ersetzt 
+          \textaccent{noresetequation} und \textaccent{noresetfootnote})\\
+      \textaccent{linedtoc} & F"ugt im Inhaltsvereichnis Linien wie bei den "Uberschriften f"ur
+          die oberste Gliederungsebene ein.\\
+      \textaccent{numbersubsubsec} & F"ugt eine Nummerierung der Ebene 
+          \textaccent{\textbackslash subsubsection} ein und listet sie im Inhaltsverzeichnis.\\
+      \textaccent{firstlineindent} & aktiviert die Einr"uckung der ersten
+          Zeile nach neuem \textaccent{\textbackslash chapter}, neuer
+	  \textaccent{\textbackslash section}, etc.\\
+      \textaccent{8pt 9.5pt 10pt 11pt 12pt} & Die Schriftgr"o"se wird auf den Standard von
+          \textaccent{9.5pt} gesetzt. Dar"uber hinaus gibt es die Optionen \textaccent{8pt},
+          \textaccent{10pt}, \textaccent{11pt} und \textaccent{12pt}. Die Option \textaccent{9.5pt}
+          muss nicht explizit gesetzt werden.\\ 
+      \textaccent{pagingbar}       & Setzt die Paginierung neben die Identit"atsleiste, wie es in
+          er ersten Auflage des \textaccent{Corporate Design Handbuch} vorgesehen war. (nur in
+          Verbindung mit dem Seitenstil \textaccent{plain})\\
+      \textaccent{marginparwidth=<num>} & Setzt die Breite und den Separator f"ur
+          Marginalien. Die Marginalienbreite wird auf <num> Rasterspaltenbreiten gesetzt.\\
+      \textaccent{paper=<papersize>} & Setzt die Papiergr"o"se. Erlaubt sind f"ur
+          \textaccent{<papersize>} \textaccent{a4report} und \textaccent{a5report} (mit Binderand).
+          Die Papiergr"o"sen \textaccent{a4} und \textaccent{a5} werden als \textaccent{a4report}
+          bzw.\ \textaccent{a5report} interpretiert. Standard ist \textaccent{a4report}.
+    \end{longtable}
+
+    Alle anderen Klassen-Optionen werden direkt an \textaccent{scrreprt} weiter gereicht.% Einzige
+%    Ausnahme bildet die Option \textaccent{paper}, da \textaccent{paper=a4paper}
+%    fest vorgegeben ist.
+
+    \paragraph{Hinweis zum Farbschema}
+    Ist die Akzentfarbe zu hell f"ur Text, wird statt ihrer die Farbe Schwarz verwendet und
+    eine Warnung ausgegeben. Die {\LaTeX} Klasse \textaccent{tudreport} setzt die Textfarbe des
+    Titels selbsts"andig auf Wei"s, wenn Schwarz nicht erlaubt ist und der Titel mit der
+    Akzentfarbe hinterlegt ist. Ist in diesem Fall nur Schwarz erlaubt, wird die Option 
+    \textaccent{inverttitle} ignoriert. Die Option \textaccent{inverttitlerule} wird immer
+    ignoriert, au"ser die Textfarbe des Titels ist Wei"s und ein Titelbild ist vorhanden.
+
+    \paragraph{Hinweis zu den Seitenstilen}
+    Die Seitenstile, die {\LaTeX} von Hause aus kennt, werden in der \textaccent{tudreport} Klasse
+    neu definiert. Der Seitenstil \textaccent{empty} beinhaltet nur die Identit"atsleiste und die
+    untere Begrenzungslinie. Beim Seitenstil \textaccent{plain} kommt die Seitenzahl
+    standardm"a"sig unter die Textbegrenzung. Dabei wird zwischen den Klassenoptionen
+    \textaccent{oneside} und \textaccent{twoside} unterschieden. Im ersten Fall wird die Seitenzahl
+    immer rechts gesetzt, im andern am "au"seren Rand, d.h abwechselnd rechts und links. Beim
+    Seitenstil \textaccent{headings} werden links bzw.\ am inneren Rand unterhalb der Begrenzungslinie
+    zus"atzlich Kapitelinformationen gesetzt. Dabei wird auf die Vorgaben der
+    \textaccent{scrreprt} Klasse zur"uckgegriffen. Neu dazu gekommen ist der Seitenstil
+    \textaccent{realempty}, der eine komplett leere Seite liefert. Alle Seitenstile sind nur f"ur
+    den \textbf{internen Gebrauch} gedacht und sollten nicht direkt angesprochen werden.
+    
+    Wenn Interesse besteht, kann die Fu"szeile angepasst werden. Dazu steht der Seitenstil
+    \textaccent{myheadings} zur Verf"ugung. Mit den Befehlen \textaccent{\textbackslash
+    mymarkright}, \textaccent{\textbackslash mymarkleft}, \textaccent{\textbackslash mymarkboth}
+    und \textaccent{\textbackslash mymarkcenter} kann der Inhalt der Fu"szeile analog zu den
+    Befehlen \textaccent{\textbackslash markright}, \textaccent{\textbackslash markleft},
+    \textaccent{\textbackslash markboth} und \textaccent{\textbackslash markcenter} ge"andert
+    werden.
+
+    Die Standardeinstellung ist \textaccent{plain}. Im Fall der Klassenoption \textaccent{longdoc}
+    wird \textaccent{headings} verwendet.
+    \begin{itemize}\itemsep-1ex
+      \item \textaccent{realempty}
+      \item \textaccent{empty}
+      \item \textaccent{plain}
+      \item \textaccent{headings}
+      \item\textaccent{myheadings}
+    \end{itemize}
+    
+    \paragraph{Typographische Anmerkungen}
+    Die Schriftgr"o"se \textaccent{9.5pt} ist vielen Leuten etwas zu klein,
+    die Zeilen des Flie"stextes werden dadurch n"amlich recht lang.
+    Als Faustregel kann man sagen, dass Zeilen eigentlich k"urzer als drei
+    vollst"andige Alphabete sein sollten, um gut
+    lesbar zu sein. Bei Verwendung kleiner Schriftgr"o"sen kann es sinnvoll
+    sein, den Text zwei- oder mehrspaltig zu setzen\footnote{Abbildungen sind
+    dann auch nur eine Spalte breit. Sollen sie sich "uber die gesamte Breite
+    erstrecken, so muss die Umgebung \{figure*\} verwendet
+    werden}, um die Lesbarkeit zu
+    verbessern. Man sollte allerdings beachten, dass sich Zeilen mit weniger 
+    als etwa 40 Zeichen nur schwer zu einem ordentlichen Blocksatz verarbeiten
+    lassen. Man kann jedoch durch Erzwingen von Silbentrennungen in
+    Worten \LaTeX{} bei der Erstellung eines gut gesetzten Dokumentes helfen.
+    Hilft dies alles nichts, so sollte man sich "uberlegen, ob man den
+    Text etwas umformuliert, um auf diese Weise ein ordentliches Dokument zu
+    erhalten. Selbstverst"andlich sind diese Feinarbeiten erst ganz am Ende
+    des Projektes sinnvoll, da ansonsten "Anderungen weiter vorne im Text die
+    geleistete Arbeit zunichte machen k"onnen. Dieses Dokument verwendet "ubrigens die
+    Schriftgr"o"se~\textaccent{\the\fontdimen6\font}.
+
+    Zeilenabst"ande sind in vielen Fachbereichen ein leidiges Thema. H"aufig
+    wird ein \glqq eineinhalbfacher\grqq{} Zeilenabstand vorgeschrieben, was das
+    auch immer hei"sen mag. Diese Abst"ande sind, rein typographisch
+    gesehen, zu gro"s. Allerdings kann man sich gegen Vorgaben des
+    Fachbereichs auch nur schwer sperren, selbst wenn das Resultat dann nicht
+    gut aussieht.
+
+  \section{Zus"atzliche Befehle}\label{sec_befehle}
+
+    In den TUD-Klassen sind einige neue Befehle definiert. Viele von ihnen
+    k"onnen in allen Klassen verwendet werden. Dadurch lassen sich relativ
+    leicht ganze Abschnitte aus einem Dokument in ein anderes "ubertragen. Im
+    Folgenden eine "Ubersicht "uber alle neuen Befehle.
+
+    \begin{longtable}[h]{lp{\longtablewidth}}
+      \textaccent{tudaccent}& "Uber diesen Farbnamen kann auf die Akzentfarbe zugegriffen werden.\\
+          & Beispiel:
+          {\fboxrule1.5pt\fboxsep1pt\fcolorbox{tudaccent}{white}{\textaccent{\textbackslash 
+          fcolorbox$\{$tudaccent$\}\{$white$\}\{<$text$>\}$}}}\\
+      \textaccent{tudtextaccent}& "Uber diesen Farbnamen kann auf die Akzentfarbe f"ur Text
+          zugegriffen werden. Sie entspricht \textaccent{tudaccent} wenn dies zul"assig ist,
+          ansonsten \textaccent{black}. In diesem Fall gibt {\LaTeX} eine Warnmeldung aus.
+          \textbf{Hinweis}: Diese Farbe sollte nur dann verwendet werden, wenn
+          \textaccent{\textbackslash textaccentcolor\{$<$text$>$\}} oder
+          \textaccent{\textbackslash begin\{accentcolor\}}
+          \textaccent{$<$text$>$}
+          \textaccent{\textbackslash end\{accentcolor\}}
+          nicht m"oglich ist.\\
+      \textaccent{\textbackslash acdefault} & liefert die Schriftbezeichnung der
+          Auszeichnungsschrift (Stafford)\\
+      \textaccent{\textbackslash accentfont} & Wechselt Schrifttyp zur Auszeichnungsschrift
+          (sollte nicht verwendet werden)\\
+      \textaccent{\textbackslash textaccent\{$<$text$>$\}} & Setzt \textaccent{$<$text$>$} in
+          der Auszeichnungsschrift.
+          Die entsprechende Umgebung kann mit\\
+          &$\quad$\textaccent{\textbackslash begin\{accenttext\}}
+          \textaccent{$<$text$>$}
+          \textaccent{\textbackslash end\{accenttext\}}\\
+          & gesetzt werden.\\
+      \textaccent{\textbackslash textaccentcolor\{$<$text$>$\}} & Setzt
+          \textaccent{$<$text$>$} in der Akzentfarbe \textaccent{tudtextaccent} und in der
+          Auszeichnungsschrift.
+          Dabei wird ein Fehler ausgegeben, wenn die Akzentfarbe zu hell ist.
+          Die entsprechende Umgebung kann mit\\
+          &$\quad$\textaccent{\textbackslash begin\{accentcolor\}}
+          \textaccent{$<$text$>$}
+          \textaccent{\textbackslash end\{accentcolor\}}\\
+          & gesetzt werden.\\
+      \textaccent{\textbackslash tudrule[$<$length$>$]} & Zeichnet eine waagrechte Trennlinie mit
+          der L"ange \mbox{\textaccent{\textbackslash linewidth}} bzw.\ \textaccent{$<$length$>$}.
+          Die Liniendicke h"angt von der Papiergr"o"se ab.\\
+      \textaccent{\textbackslash tudgoldenrule} & Wie \textaccent{\textbackslash tudrule}
+          mit einer L"ange, so dass  \textaccent{\textbackslash linewidth}
+          im Goldenen Schnitt geteilt wird. (z.B. Trennlinie f"ur Fu"snoten)\\
+      \textaccent{\textbackslash title\{$<$title$>$\}} & Setzt auf der Titelseite
+          den Titel auf \textaccent{$<$title$>$}
+          Der Titel kann mehrzeilig sein. Ist der Titel mehr als drei Zeilen lang, wird automatisch 
+          eine kleinere Schriftgr"o"se verwendet.\\
+      \textaccent{\textbackslash subtitle\{$<$subheader$>$\}} & Setzt in den Abschnitt unter
+          dem Titel den \glqq Subhead\grqq{} auf \textaccent{$<$subheader$>$}
+          Der \glqq Subhead\grqq{} kann mehrzeilig sein.\\
+      \textaccent{\textbackslash subsubtitle\{$<$subline$>$\}} & Setzt in den Abschnitt unter
+          dem Titel die \glqq Subline\grqq{} auf \textaccent{$<$subline$>$}
+          Die \glqq Subline\grqq{} kann mehrzeilig sein.\\
+      \textaccent{\textbackslash institution\{$<$institution$>$\}} & Setzt unter die Wort-Bildmarke
+          (TU-Logo) die Institutsbezeichnung auf \textaccent{$<$institution$>$}. Die
+          Institutsbezeichnung kann mehrzeilig sein.\\
+          & Wird \textaccent{\textbackslash setinstitutionlogo} verwendet, wird
+          \textaccent{\textbackslash institution} ignoriert.\\
+      \textaccent{\textbackslash setinstitutionlogo[width | height]\{$<$file$>$\}} & Setzt das Logo
+          \textaccent{$<$file$>$} unter die Wort-Bildmarke (TU-Logo)
+          Das Argument \textaccent{$<$file$>$} wird wie von \textaccent{\textbackslash
+          includegraphics$\{<$file$>\}$} behandelt. Das optionale Argument \textaccent{[width]}
+          bzw.\ \textaccent{[height]} gibt an, dass das Logo $2/3$ der Breite bzw.\ H"ohe der
+          Wort-Bildmarke haben soll. Die jeweils andere Gr"o"se wird angepasst. Ohne das
+          optionale Argument wird die Breite als Referenzgr"o"se verwendet.\\
+      \textaccent{\textbackslash settitlepicture[$<$options$>$]\{$<$file$>$\}} & Setzt das Bild 
+          \textaccent{$<$file$>$} als Hintergrundbild auf die Titelseite. Dabei werden
+          H"ohe und Breite an den vorhandenen Platz angepasst.
+          Die Argumente \textaccent{$<$file$>$} und \textaccent{$<$options$>$} werden wie von
+          \textaccent{\textbackslash includegraphics*[$<$options$>$]\{$<$file$>$\}} behandelt.\\
+      \textaccent{\textbackslash printpicturesize} & Gibt den vorhandenen Platz f"ur ein Bild 
+          in der linken unteren Ecke der Titelseite aus. Um Streckungen und Stauchungen des
+          Titelbildes zu vermeiden, kann somit das optimale Seitenverh"altnis bestimmt werden.\\
+      \textaccent{\textbackslash sponsor\{$<$sponsor$>$\}} & F"ugt eine Sponsorleise am unteren Rand
+          der Titelseite mit dem Inhalt \textaccent{$<$sponsor$>$} ein.\\
+      \textaccent{\textbackslash maketitle} & Generiert die Titelseite.\\
+      \textaccent{abstract} & Diese Umgebung setzt eine Seite ohne Seitenzahl, auf der eine
+          Zusammenfassung steht. Der Seitenz"ahler wird auf dieser Seite nicht erh"oht. Diese
+          Umgebung sollte direkt nach dem Befehl \textaccent{\textbackslash maketitle} verwendet
+          werden. Die Umgebung kann mit\\
+          &$\quad$\textaccent{\textbackslash begin\{abstract\}}
+          \textaccent{$<$text$>$}
+          \textaccent{\textbackslash end\{abstract\}}\\
+          &gesetzt werden.\\
+      \textaccent{seclinedepth} & Dieser Z"ahler gibt die Gliederungstiefe an, bis zu der die "Uberschriften mit
+          Linien versehen werden. Er wird analog zu \mbox{\textaccent{secnumdepth}} verwendet. Standard ist
+          \mbox{\textaccent{\textbackslash subsubsection}}\\
+%      \textaccent{\textbackslash mbseries} & setzt das Argument in medium-bold
+%          (nur bei der Frontpage verwendbar).\\
+%      \textaccent{\textbackslash mb} & wie \textaccent{\textbackslash
+%          normalfont\textbackslash mbseries}, sollte aber nicht verwendet werden,
+%          da er veraltet ist.\\
+%      \textaccent{\textbackslash mathmb} & setzt das Argument im Mathe-Modus in medium-bold
+%          (nur bei der Frontpage verwendbar).\\
+      \textaccent{\textbackslash markcenter} & zum "Andern der mittleren Fu"szeile beim
+          Seitenstil \mbox{\textaccent{headings}}\\
+      \textaccent{\textbackslash mymarkright} & zum "Andern der rechten Fu"szeile beim Seitenstil
+          \mbox{\textaccent{myheadings}}\\
+      \textaccent{\textbackslash mymarkleft} & zum "Andern der linken Fu"szeile beim Seitenstil
+          \mbox{\textaccent{myheadings}}\\
+      \textaccent{\textbackslash mymarkboth} & zum "Andern der rechten und linken Fu"szeile beim
+          Seitenstil \mbox{\textaccent{myheadings}}\\
+      \textaccent{\textbackslash mymarkcenter} & zum "Andern der mittleren Fu"szeile beim
+          Seitenstil \mbox{\textaccent{myheadings}}\\
+      \textaccent{\textbackslash textwhitespace} & gibt ein \textwhitespace{} aus\\
+      \textaccent{abstract} & Die Umgebung akzeptiert ein optionales Argument \textaccent{<num>}, um zwei 
+	  Zusammenfassungen verschiedener Sprachen zu erm"oglichen. F"ur die erste Zusammenfassung ist \textaccent{<num>} 1,
+	  f"ur die zweite 2.\\
+    \end{longtable}
+
+    Die Befehle wie \textaccent{\textbackslash author} oder \textaccent{\textbackslash date}
+    existieren zwar, werden aber nicht zur Erstellung der Titelseite
+    verwendet. An ihrer Stelle
+    m"ussen \textaccent{\textbackslash subtitle} und \textaccent{\textbackslash subsubtitle}
+    verwendet werden. Nur die Befehle \textaccent{\textbackslash title},
+    \textaccent{\textbackslash uppertitleback}, \textaccent{\textbackslash lowertitleback} 
+    und \textaccent{\textbackslash dedication} der KOMA-Klasse \textaccent{scrreprt} werden
+    unterst"utzt.
+
+\chapter{Die Dokumentenklasse \texorpdfstring{\textaccent{tudexercise}}{tudexercise}}\label{chap:tudexercise}
+  
+  Die Dokumentenklasse \textaccent{tudexercise} kann zur Erstellung von
+  "Ubungsbl"attern und Tischvorlagen genutzt werden. Auf die erste Seite wird oben eine
+  Kopfleiste gesetzt, in der die Identit"atsleiste, das Logo der TU Darmstadt, der
+  Titel des Dokumentes und die Untertitel (\textbackslash subtitle und
+  \textbackslash subsubtitle, f"ur den Namen des Dozenten bzw.\ der Dozentin,
+  und das Datum) stehen. Die folgenden Seiten haben nur noch die
+  Identit"atsleiste und die Fu"sleiste.
+  
+  Je nach dem, welche Sprache eingestellt ist (z.B. mit dem Paket \textaccent{babel} oder
+  \textaccent{ngerman}), wird jedem Kapitel \textbf{Problem} oder \textbf{Aufgabe} vorangestellt.
+  Dies l"a"st sich mit der Option \textaccent{nochapname} unterdr"ucken.
+
+  \section{Optionen der Dokumentenklasse \texorpdfstring{\textaccent{tudexercise}}{tudexercise}}
+
+  Die Klasse \textaccent{tudexercise} unterst"utzt alle Optionen der
+  \textaccent{tudreport} Klasse bis auf:
+  \begin{itemize}\itemsep-0.5ex
+     \item \textaccent{longdoc}
+     \item \textaccent{bigchapter}
+     \item \textaccent{colorback}
+     \item \textaccent{nopartpage} (hat keine Wirkung)
+     \item \textaccent{noheadingspace} (hat keine Wirkung)
+     \item \textaccent{noresetcounter} (hat keine Wirkung)
+  \end{itemize}
+  Es wird stattdessen die Option \textaccent{article} der Klasse
+  \textaccent{tudreport} \emph{fest} gesetzt.\\[0.5\baselineskip]
+  Zus"atzlich gibt es die Optionen \textaccent{solution} und \textaccent{nochapname}. Die Option \textaccent{solution}
+  ersetzt den Kapitelnamen \glqq Aufgabe\grqq{} durch \glqq{} L"osung\grqq. Mit der Option \textaccent{nochapname} kann
+  der Kapitelname unterdr"uckt werden.
+        
+  \section{Zus"atzliche Befehle}
+    Wie bei \textaccent{tudreport}. Dar"uber hinaus speziell f"ur Klausuren
+    gedacht gibt es:
+    \begin{itemize}\itemsep-0.5ex
+     \item Durch die Umgebung \textaccent{examheader} kann ein Seitenkopf angegeben werden, der ab
+       der zweiten Seite ausgegeben wird. Mit einem optionalen Argument kann dieser 
+       Seitenkopf ab einer beliebigen Seite gesetzt werden. Soll dies z.B. die dritte Seite sein,
+       sie das so aus:
+       \begin{verbatim}
+  \begin{examheader}[3]
+    \textmb{Vordiplom Experimentalphysik WS 2000/2001}
+    \examheaderdefault
+  \end{examheader}
+       \end{verbatim}
+     \item \textaccent{\textbackslash examheaderdefault} gibt eine Zeile mit Feldern f"ur Name,
+     Vorname und siebenstellige Matrikelnummer aus (s. \textaccent{\textbackslash textwhitespace})
+  \end{itemize}
+    
+
+\chapter{Die Dokumentenklasse \texorpdfstring{\textaccent{tudposter}}{tudposter}}\label{chap:tudposter}
+  
+  Mit der Dokumentenklasse \textaccent{tudposter} lassen sich Aush"ange und
+  Konferenzposter erzeugen.
+
+  \section{Optionen der Dokumentenklasse \texorpdfstring{\textaccent{tudposter}}{tudposter}}
+        
+  Die Klasse \textaccent{tudposter} unterst"utzt alle Optionen der
+  \textaccent{tudreport} Klasse bis auf:
+  \begin{itemize}\itemsep-0.5ex
+     \item \textaccent{longdoc}
+     \item \textaccent{bigchapter}
+     \item \textaccent{colorback}
+     \item \textaccent{8pt 9.5pt 11pt 12pt}. Die Schriftgr"o"se wird stattdessen
+       mit der Papiergr"o"se skaliert.
+  \end{itemize}
+  Zus"atzlich sind folgende Optionen erlaubt bzw.\ verhalten sich anders:
+  \begin{itemize}\itemsep-0.5ex
+    \item \textaccent{paper=[a1,a2,a3,a4,a0,a0b]}, wobei die Gr"o"se
+      \textaccent{a0b} Standard ist und Schnittmarken erzeugt.
+    \item \textaccent{colorbacktitle} hinterlegt nur den Titel mit der Akzentfarbe.
+    \item \textaccent{colorbacksubtitle} hinterlegt den Untertitel mit der Akzentfarbe,
+      wenn \textaccent{colorbacktitle} ausgew"ahlt wurde.
+  \end{itemize}
+        
+  \section{Zus"atzliche Befehle}
+    Wie bei \textaccent{tudreport}.
+    
+
+    \paragraph{Typographische Anmerkungen}
+    Die von uns voreingestellten Schriftgr"o"sen sind mit Sicherheit nicht f"ur
+    alle Anwendungen geeignet, das ist auch nur schwer m"oglich. In diesem
+    Fall m"ussen dann die Schriftgr"o"sen \emph{in der Pr"aambel des aktuellen
+    Dokuments} neu definiert werden. Anleitungen
+    hierzu findet man in \LaTeX-B"uchern, dem WWW und zumindest als Beispiel
+    in der Datei \textaccent{tudpostr\_fonts.sty}, die man aber \emph{nicht}
+    direkt editieren sollte!
+
+    Beim Druck von Konferenzpostern des Formates A0 im HRZ der TU Darmstadt sollte die
+    Papiergr"o"se a0b verwendet werden (voreingestellt), da das der Breite des
+    dort verwendeten Endlospapieres entspricht. Zus"atzlich werden
+    Schnittmarken erzeugt, mit deren Hilfe sich das Poster leicht auf das
+    gew"unschte Format A0 zuschneiden l"asst.
+
+    K"astchen, Schattenw"urfe, Trennlinien und "ahnliche 
+    \glqq Gestaltungselemente\grqq{} sind bei einem ordentlichen Layout unn"otig.
+    Das sollte man im Hinterkopf behalten, wenn man solche Elemente verwenden
+    will. Allerdings gibt es bestimmt Anwendungen, bei denen so etwas nach
+    reiflicher "Uberlegung eingesetzt werden kann.
+
+    Ein Nachteil von \LaTeX{} ist, dass es kein ordentliches Zeilenraster
+    verwendet. Dadurch fluchten Zeilen in unterschiedlichen Spalten nicht.
+
+    Weitere freie M"oglichkeiten ein Poster zu erzeugen sind Programme wie scribus
+    (bzw.\ scribus-ng), ein Open-Source DTP-Programm\footnote{DTP: DeskTop
+    Publishing} mit gro"sem Funktionsumfang, xfig, ein vektorbasiertes
+    Graphikprogramm, OpenOffice.org, die freie Office-Suite (bzw.\ das f"ur
+    Angeh"orige der TU Darmstadt verf"ugbare Staroffice). Im kommerziellen Bereich werden
+    Programme wie Quark und die Adobe-Suite verwendet, die einen gro"sen
+    Funktionsumfang bieten. Leider ist es bei allen diesen Programmen schwer
+    oder unkomfortabel, ordentliche Formeln zu setzen\footnote{Scribus hat in
+    der aktuellen Version ($\ge$1.3.5) einen \LaTeX-Interpreter, der das Einbinden von Formeln
+    erleichtert}.
+
+\chapter{Die Briefklasse \texorpdfstring{\textaccent{tudletter}}{tudletter}}\label{chap:tudletter}
+  \section{Optionen der Klasse \texorpdfstring{\textaccent{tudletter}}{tudletter}}
+    
+    Die Klasse \textaccent{tudletter} unterst"utzt zus"atzlich zu den Optionen
+    der \textaccent{scrlttr2}-Klasse folgende Optionen:\par
+    \nopagebreak
+    \begin{longtable}[h]{lp{\longtablewidth}}
+      \textaccent{accentcolor=$<$color$>$} & Setzt die Akzentfarbe
+          \textaccent{tudaccent} auf die Farbe \textaccent{$<$color$>$} und die Farbe
+          \textaccent{tudtextaccent} entprechend (siehe Kap.~\ref{sec_befehle}). Der  Farbname von
+          \textaccent{$<$color$>$} setzt sich aus dem Prefix \textaccent{tud} und dem Farbcode
+          zusammen. Ausnahmen bilden \textaccent{black} und \textaccent{white}. (default:
+          \textcolor{tud0b}{\accentfont tud0b})\\ 
+          &Beispiel: \textaccent{\textbackslash documentclass$[$accentcolor=\textcolor{tud9a}{tud9a}$]$
+            $\{$tudletter$\}$ }\\
+      \textaccent{blackrule}       & rein schwarze Indentit"atsleiste\\
+      \textaccent{logo[=true|=false]\normalfont{,} nologo} & Setzt oder entfernt die Wort-Bildmarke (TUD-Logo) ab der
+	      zweiten Seite. \textaccent{logo} entspricht \textaccent{logo=true}, \textaccent{nologo}
+          \textaccent{logo=false}.\\
+          & Bei Verwendung von \textaccent{twoside} wird \textaccent{nologo} gesetzt und
+          umgekehrt.\\
+      \textaccent{adr=$<$adr-file$>$} & L"adt die Konfigurationsdatei \textaccent{$<$adr-file$>$}
+          bzw.\ die Konfigurationsdatei \textaccent{$<$adr-file$>$.adr}.
+          N"aheres dazu in Kapitel~\ref{sec:tudletter:adr}
+    \end{longtable}
+  \section{Die Variablen}
+    Die \textaccent{tudletter}-Klasse unterst"utzt alle Variablen der \textaccent{scrlttr2}-Klasse
+    bis auf:
+    \begin{itemize}\itemsep-0.5ex
+      \item \textaccent{place} (Ort)
+      \item \textaccent{specialmail} (Versandart)
+      \item \textaccent{title} (Brieftitel)
+    \end{itemize}
+    Neu hinzugekommen sind:
+    \begin{itemize}\itemsep-0.5ex
+      \item \textaccent{frominstitution} (Institutsbezeichnung)
+      \item \textaccent{shortfromname} (kurzer Absendername f"ur Standard-\textaccent{backaddress})
+    \end{itemize}
+    Wie diese Variablen zu setzen sind, ist der Dokumentation der \textaccent{scrlttr2}-Klasse zu
+    entnehmen.
+
+  \section{Anmerkung zur Seitennummerierung}
+    Bei mehrseitigen Briefen wird unter der Textbegrenzungslinie die Seitenzahl und die Seitenzahl
+    der letzten Seite in der Form \mbox{\textsf{Seite}
+    \textaccent{<page>}\textsf{/}\textaccent{<last page>}} gesetzt. Die Seitenzahl der letzten
+    Seite ist jedoch erst nach einem "Ubersetzungsdurchlauf bekannt. Der Brief muss deshalb zweimal
+    "ubersetzt werden, "ahnlich wie bei Referenzen oder Inhaltsverzeichnissen.
+
+  \section{Die Konfigurations-Dateien}\label{sec:tudletter:adr}
+    Es gibt drei m"ogliche Konfigurationsdateien, die in einer bestimmten Reihenfolge geladen
+    werden. In diesen Konfigurationsdateien k"onnen allgemeine Definitionen wie Absender stehen.
+    Wichtig ist, dass diese Dateien im \LaTeX{}-Suchpfad stehen. Dabei ist es egal, ob dies das
+    aktuelle Verzeichnis ist, das \textaccent{texmf}-Verzeichnis des Benutzers oder das globale
+    \textaccent{texmf}-Verzeichnis.
+    
+    Zuerst wird die Datei \textaccent{tudletter.adr} geladen. Sie ist f"ur Definitionen gedacht,
+    die f"ur alle Benutzer gleich sind (z.B. Institut), und sollte im globalen \textaccent{texmf}-Verzeichnis
+    liegen. Danach wird die Konfigurationsdatei aus der Klassenoption
+    \mbox{\textaccent{adr=$<$adr-file$>$}} geladen. Diese Datei ist f"ur
+    pers"onliche
+    Standardkonfigurationen gedacht, wie z.B. Absendername oder Telefonnummer. Zuletzt wird die
+    Datei geladen, die so hei"st wie die \textaccent{.tex}-Datei, jedoch mit der Dateierweiterung
+    \textaccent{.adr}. Diese Datei wird nur im aktuellen Verzeichnis gesucht.
+    Zu beachten ist, dass jede Konfiguration aus einer zuvor geladenen Datei von einer danach
+    geladenen "uberschrieben werden kann.
+
+\chapter{Die Pr"asentationsklasse \texorpdfstring{\textaccent{tudbeamer}}{tudbeamer}}\label{chap:tudbeamer}
+
+  \section{Optionen der Klasse \texorpdfstring{\textaccent{tudbeamer}}{tudbeamer}}
+    
+    Die Klasse \textaccent{tudbeamer} unterst"utzt zus"atzlich zu den Optionen
+    der \textaccent{beamertex}-Klasse folgende Optionen:\par
+    \nopagebreak
+    \begin{longtable}[h]{lp{\longtablewidth}}
+      \textaccent{accentcolor=$<$color$>$} & Setzt die Akzentfarbe
+          \textaccent{tudaccent} auf die Farbe \textaccent{$<$color$>$} und die Farbe
+          \textaccent{tudtextaccent} entprechend (siehe Kap.~\ref{sec_befehle}). Der  Farbname von
+          \textaccent{$<$color$>$} setzt sich aus dem Prefix \textaccent{tud} und dem Farbcode
+          zusammen. Ausnahmen bilden \textaccent{black} und \textaccent{white}. (default:
+          \textcolor{tud0b}{\accentfont tud0b})\\ 
+          &Beispiel: \textaccent{\textbackslash documentclass$[$accentcolor=\textcolor{tud9a}{tud9a}$]$
+            $\{$tudbeamer$\}$ }\\
+      \textaccent{colortitle}      & setzt den Titel in der Farbe \textaccent{tudtextaccent}
+          (siehe Kap.~\ref{sec_befehle}). Diese Option sollte nur in
+          Sonderf"allen verwendet werden. (wird bei Option \textaccent{colorbacktitle} ignoriert)\\
+      \textaccent{colorbacktitle}  & hinterlegt den Titel mit der Akzentfarbe\\
+      \textaccent{colorback}       & hinterlegt die Titelseite unter dem Titel mit der Akzentfarbe\\
+          &(wird bei Option \textaccent{colorbacktitle} ignoriert)\\
+      \textaccent{inverttitle}     & setzt, wenn es erlaubt ist, die Textfarbe des Titels auf Wei"s.\\
+      \textaccent{inverttitlerule} & setzt, wenn es erlaubt ist, die Farbe der untersten
+          Begrenzungslinie des Titels auf Wei"s\\
+      \textaccent{blackrule}       & rein schwarze Indentit"atsleiste
+    \end{longtable}
+        
+  \section{Zus"atzliche Befehle}
+    
+    \begin{longtable}[h]{lp{\longtablewidth}}
+      Umgebung \textaccent{titlepage}& Diese Umgebung erzeugt die
+      Titelseite.\\
+      \textaccent{tudaccent}& "Uber diesen Farbnamen kann auf die Akzentfarbe zugegriffen werden.\\
+          & Beispiel:
+          {\fboxrule1.5pt\fboxsep1pt\fcolorbox{tudaccent}{white}{\textaccent{\textbackslash 
+          fcolorbox$\{$tudaccent$\}\{$white$\}\{<$text$>\}$}}}\\
+      \textaccent{tudtextaccent}& "Uber diesen Farbnamen kann auf die Akzentfarbe f"ur Text
+          zugegriffen werden. Sie entspricht \textaccent{tudaccent} wenn dies zul"assig ist,
+          ansonsten \textaccent{black}. In diesem Fall gibt {\LaTeX} eine Warnmeldung aus.
+          \textbf{Hinweis}: Diese Farbe sollte nur dann verwendet werden, wenn
+          \textaccent{\textbackslash textaccentcolor\{$<$text$>$\}} oder
+          \textaccent{\textbackslash begin\{accentcolor\}}
+          \textaccent{$<$text$>$}
+          \textaccent{\textbackslash end\{accentcolor\}}
+          nicht m"oglich ist.\\
+      \textaccent{\textbackslash textaccentcolor\{$<$text$>$\}} & Setzt
+          \textaccent{$<$text$>$} in der Akzentfarbe \textaccent{tudtextaccent}.
+          Dabei wird ein Fehler ausgegeben, wenn die Akzentfarbe zu hell ist.
+          Die entsprechende Umgebung kann mit\\
+          &$\quad$\textaccent{\textbackslash begin\{accentcolor\}}
+          \textaccent{$<$text$>$}
+          \textaccent{\textbackslash end\{accentcolor\}}\\
+          & gesetzt werden.\\
+      \textaccent{\textbackslash logo[$<$Multiplikator$>$]\{$<$Logo$>$\}} &
+          Beinhaltet das (Instituts-)Logo. Der optionale Multiplikator kann
+         verwendet werden, um die Logogr"o"se anzupassen, normalerweise ist
+         er auf den Wert 1 gesetzt.
+    \end{longtable}
+    Die Umgebung \textaccent{titlepage} ben"otigt zwei Durchl"aufe, um
+    aktualisiert zu werden, "ahnlich wie Inhaltsverzeichnisse und Referenzen,
+    da die ben"otigten L"angen erst nach der Erzeugung der Titelseite
+    verf"ugbar werden.
+
+  \section{Bekannte Fehler}
+
+    Die im Corporate Design Handbuch gezeigte M"oglichkeit, eine
+    titelseitenf"ullende Graphik einzubinden, funktioniert nicht. Ob dies
+    jemals zufriedenstellend implementiert werden kann ist leider fraglich.
+    Kreative L"osungen der Anwender sind hier gefragt.
+
+\end{document}

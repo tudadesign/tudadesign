@@ -1,0 +1,131 @@
+% define the TUD-colours
+\ProvidesFile{tudcolours.def}[2008/12/03]
+
+% define black, white and gray
+% in gray, cmyk and RGB
+% prefere gray definition, then RGB
+\ifx\color@gray\@undefined
+  \ifx\color@RGB\@undefined
+    \definecolor{black}{cmyk}{0.0,0.0,0.0,1.0}
+    \definecolor{tud0d}{cmyk}{0.0,0.0,0.0,0.8}
+    \definecolor{tud0c}{cmyk}{0.0,0.0,0.0,0.6}
+    \definecolor{tud0b}{cmyk}{0.0,0.0,0.0,0.4}
+    \definecolor{tud0a}{cmyk}{0.0,0.0,0.0,0.2}
+    \definecolor{white}{cmyk}{0.0,0.0,0.0,0.0}
+  \else
+    \definecolor{black}{RGB}{0,0,0}
+    \definecolor{tud0d}{RGB}{83,83,83}
+    \definecolor{tud0c}{RGB}{137,137,137}
+    \definecolor{tud0b}{RGB}{181,181,181}
+    \definecolor{tud0a}{RGB}{220,220,220}
+    \definecolor{white}{RGB}{255,255,255}
+  \fi
+\else
+  \definecolor{black}{gray}{0}
+  \definecolor{tud0d}{gray}{0.2}
+  \definecolor{tud0c}{gray}{0.4}
+  \definecolor{tud0b}{gray}{0.6}
+  \definecolor{tud0a}{gray}{0.8}
+  \definecolor{white}{gray}{1}
+\fi
+
+% define the real colours 
+% in cmyk and RGB
+% prefer RGB definition
+\ifx\color@RGB\@undefined
+  \definecolor{tud1a}{cmyk}{0.7,0.4,0,0}
+  \definecolor{tud2a}{cmyk}{0.8,0.2,0,0}
+  \definecolor{tud3a}{cmyk}{0.7,0,0.5,0}
+  \definecolor{tud4a}{cmyk}{0.4,0,0.8,0}
+  \definecolor{tud5a}{cmyk}{0.2,0,0.8,0}
+  \definecolor{tud6a}{cmyk}{0,0.1,0.7,0}
+  \definecolor{tud7a}{cmyk}{0,0.3,0.8,0}
+  \definecolor{tud8a}{cmyk}{0,0.6,0.8,0}
+  \definecolor{tud9a}{cmyk}{0,0.8,0.7,0}
+  \definecolor{tud10a}{cmyk}{0.2,0.9,0,0}
+  \definecolor{tud11a}{cmyk}{0.6,0.8,0,0}
+
+  \definecolor{tud1b}{cmyk}{1,0.6,0,0}
+  \definecolor{tud2b}{cmyk}{1,0.3,0,0}
+  \definecolor{tud3b}{cmyk}{1,0,0.6,0}
+  \definecolor{tud4b}{cmyk}{0.5,0,1,0}
+  \definecolor{tud5b}{cmyk}{0.3,0,1,0}
+  \definecolor{tud6b}{cmyk}{0,0.2,1,0}
+  \definecolor{tud7b}{cmyk}{0,0.4,1,0}
+  \definecolor{tud8b}{cmyk}{0,0.7,1,0}
+  \definecolor{tud9b}{cmyk}{0,1,0.9,0}
+  \definecolor{tud10b}{cmyk}{0.4,1,0,0}
+  \definecolor{tud11b}{cmyk}{0.7,1,0,0}
+
+  \definecolor{tud1c}{cmyk}{1,0.7,0.2,0}
+  \definecolor{tud2c}{cmyk}{1,0.5,0.2,0}
+  \definecolor{tud3c}{cmyk}{1,0.2,0.6,0}
+  \definecolor{tud4c}{cmyk}{0.6,0.1,1,0}
+  \definecolor{tud5c}{cmyk}{0.4,0.1,1,0}
+  \definecolor{tud6c}{cmyk}{0.2,0.3,1,0}
+  \definecolor{tud7c}{cmyk}{0.2,0.5,1,0}
+  \definecolor{tud8c}{cmyk}{0.2,0.8,1,0}
+  \definecolor{tud9c}{cmyk}{0.3,1,0.9,0}
+  \definecolor{tud10c}{cmyk}{0.5,1,0.3,0}
+  \definecolor{tud11c}{cmyk}{0.8,1,0.2,0}
+
+  \definecolor{tud1d}{cmyk}{1,0.9,0.3,0}
+  \definecolor{tud2d}{cmyk}{1,0.7,0.4,0}
+  \definecolor{tud3d}{cmyk}{1,0.4,0.7,0}
+  \definecolor{tud4d}{cmyk}{0.7,0.3,1,0}
+  \definecolor{tud5d}{cmyk}{0.5,0.2,1,0}
+  \definecolor{tud6d}{cmyk}{0.4,0.4,1,0}
+  \definecolor{tud7d}{cmyk}{0.3,0.6,1,0}
+  \definecolor{tud8d}{cmyk}{0.4,0.8,1,0}
+  \definecolor{tud9d}{cmyk}{0.5,1,0.9,0}
+  \definecolor{tud10d}{cmyk}{0.7,1,0.5,0}
+  \definecolor{tud11d}{cmyk}{0.9,1,0.3,0}
+\else
+  \definecolor{tud1a}{RGB}{93,133,195}
+  \definecolor{tud2a}{RGB}{0,156,218}
+  \definecolor{tud3a}{RGB}{80,182,149}
+  \definecolor{tud4a}{RGB}{175,204,80}
+  \definecolor{tud5a}{RGB}{221,223,72}
+  \definecolor{tud6a}{RGB}{255,224,92}
+  \definecolor{tud7a}{RGB}{248,186,60}
+  \definecolor{tud8a}{RGB}{238,122,52}
+  \definecolor{tud9a}{RGB}{233,80,62}
+  \definecolor{tud10a}{RGB}{201,48,142}
+  \definecolor{tud11a}{RGB}{128,69,151}
+
+  \definecolor{tud1b}{RGB}{0,90,169}
+  \definecolor{tud2b}{RGB}{0,131,204}
+  \definecolor{tud3b}{RGB}{0,157,129}
+  \definecolor{tud4b}{RGB}{153,192,0}
+  \definecolor{tud5b}{RGB}{201,212,0}
+  \definecolor{tud6b}{RGB}{253,202,0}
+  \definecolor{tud7b}{RGB}{245,163,0}
+  \definecolor{tud8b}{RGB}{236,101,0}
+  \definecolor{tud9b}{RGB}{230,0,26}
+  \definecolor{tud10b}{RGB}{166,0,132}
+  \definecolor{tud11b}{RGB}{114,16,133}
+
+  \definecolor{tud1c}{RGB}{0,78,138}
+  \definecolor{tud2c}{RGB}{0,104,157}
+  \definecolor{tud3c}{RGB}{0,136,119}
+  \definecolor{tud4c}{RGB}{127,171,22}
+  \definecolor{tud5c}{RGB}{177,189,0}
+  \definecolor{tud6c}{RGB}{215,172,0}
+  \definecolor{tud7c}{RGB}{210,135,0}
+  \definecolor{tud8c}{RGB}{204,76,3}
+  \definecolor{tud9c}{RGB}{185,15,34}
+  \definecolor{tud10c}{RGB}{149,17,105}
+  \definecolor{tud11c}{RGB}{97,28,115}
+
+  \definecolor{tud1d}{RGB}{36,53,114}
+  \definecolor{tud2d}{RGB}{0,78,115}
+  \definecolor{tud3d}{RGB}{0,113,94}
+  \definecolor{tud4d}{RGB}{106,139,55}
+  \definecolor{tud5d}{RGB}{153,166,4}
+  \definecolor{tud6d}{RGB}{174,142,0}
+  \definecolor{tud7d}{RGB}{190,111,0}
+  \definecolor{tud8d}{RGB}{169,73,19}
+  \definecolor{tud9d}{RGB}{156,28,38}
+  \definecolor{tud10d}{RGB}{115,32,84}
+  \definecolor{tud11d}{RGB}{76,34,106}
+\fi

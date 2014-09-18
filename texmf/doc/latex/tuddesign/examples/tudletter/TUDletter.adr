@@ -1,0 +1,10 @@
+\ProvidesFile{TUDletter.adr}[2008/11/22]
+
+\setkomavar{fromlogo}{\includegraphics[clip,width=\linewidth]{TUD_sublogo}}
+\setkomavar{frombank}{Kontonummer 123 456 789\\Sparkasse Darmstadt\\BLZ 508 501 50}
+\setkomavar{location}{\raggedright\textcolor{tudaccent}{Hier k"onnen noch Dinge in die%
+   Adressspalte geschrieben werden, die nicht vorgesehen sind.}}
+\setkomavar{yourmail}{12.07.08}
+\setkomavar{yourref}{12-234-342-1}
+\setkomavar{myref}{12-234-342-1}
+\setkomavar{invoice}{12-234-342-1}

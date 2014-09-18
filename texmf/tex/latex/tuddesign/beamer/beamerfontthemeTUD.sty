@@ -1,0 +1,190 @@
+% Copyright 2008 J. Werner and C. v. Loewenich
+% <tuddesign@pro-kevin.de>
+% based on beamerthemes by Till Tantau <tantau@users.sourceforge.net>
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+\def\fileversion{1.1}
+\def\filedate{2009/07/14}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerfontthemeTUD}
+ [\filedate\space\fileversion\space
+   Joe Werner's and Clemens von Loewenich's TUD-Design package]    
+
+
+% fix fontproblems (hopefully)
+\RequirePackage[scaled=0.94]{helvet}
+\RequirePackage{fix-cm}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[euro]{textcomp}
+\RequirePackage{xkeyval}
+
+\mode<presentation>{\beamer@suppressreplacementstrue}
+
+\setbeamerfont{title}{size=\large,series=\bfseries}
+\setbeamerfont{subtitle}{size=\normalsize,series=\bfseries}
+\setbeamerfont{institute}{size=\small}
+
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+
+\setbeamerfont{author in head/foot}{size=\tiny}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% declare math fonts as sans serife %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \math@sfGreek: Font for capital greeks: cmss or other?
+% \greek@shape: Capital greeks: normal or slanted? [slantedGreek]
+% \greek@bold@shape: Bold capital greeks: normal or slanted? [slantedGreek]
+% \greek@bold@sl: Bold capital greeks: "sl" if slanted possible
+%
+% \mathnormal@bold@shape: Bold letters: normal or slanted? (always bold)
+% \mathit@bold@series: Bold \mathit (\mathsl): medium or bold? (always
+% slanted)
+
+\newcommand{\math@sfGreek}{cmss}
+\newcommand{\greek@shape}{n}
+\newcommand{\greek@bold@shape}{n}
+\newcommand{\greek@bold@sl}{n}   
+\newcommand{\mathnormal@bold@shape}{n}
+\newcommand{\mathit@bold@series}{m}   
+
+% Change font for digits and "operators" (\sin, \exp, ...)
+% to default sans serif font
+
+\SetSymbolFont{operators}{normal}{OT1}{\sfdefault}{m}{n}
+\SetSymbolFont{operators}{bold}{OT1}{\sfdefault}{bx}{n} 
+
+% Most special math symbols remain unmodified (and many of those
+% don't have serifs); however all letters (A-Z, a-z) are
+% explicitely changed to the sans serif version (again  
+% default sans serif font).
+%
+% Unfortunately, there is no standard slanted+bold sans serif font
+% available (as Postscript Type 1 font), so try an upright
+% version (may be better than nothing).
+
+\DeclareSymbolFont{SFMath}{OT1}{\sfdefault}{m}{sl}
+\SetSymbolFont{SFMath}{normal}{OT1}{\sfdefault}{m}{sl}
+\SetSymbolFont{SFMath}{bold}{OT1}{\sfdefault}{bx}{\mathnormal@bold@shape}
+\DeclareMathSymbol{A}{\mathalpha}{SFMath}{`A}
+\DeclareMathSymbol{B}{\mathalpha}{SFMath}{`B}
+\DeclareMathSymbol{C}{\mathalpha}{SFMath}{`C}
+\DeclareMathSymbol{D}{\mathalpha}{SFMath}{`D}
+\DeclareMathSymbol{E}{\mathalpha}{SFMath}{`E}
+\DeclareMathSymbol{F}{\mathalpha}{SFMath}{`F}
+\DeclareMathSymbol{G}{\mathalpha}{SFMath}{`G}
+\DeclareMathSymbol{H}{\mathalpha}{SFMath}{`H}
+\DeclareMathSymbol{I}{\mathalpha}{SFMath}{`I}
+\DeclareMathSymbol{J}{\mathalpha}{SFMath}{`J}
+\DeclareMathSymbol{K}{\mathalpha}{SFMath}{`K}
+\DeclareMathSymbol{L}{\mathalpha}{SFMath}{`L}
+\DeclareMathSymbol{M}{\mathalpha}{SFMath}{`M}
+\DeclareMathSymbol{N}{\mathalpha}{SFMath}{`N}
+\DeclareMathSymbol{O}{\mathalpha}{SFMath}{`O}
+\DeclareMathSymbol{P}{\mathalpha}{SFMath}{`P}
+\DeclareMathSymbol{Q}{\mathalpha}{SFMath}{`Q}
+\DeclareMathSymbol{R}{\mathalpha}{SFMath}{`R}
+\DeclareMathSymbol{S}{\mathalpha}{SFMath}{`S}
+\DeclareMathSymbol{T}{\mathalpha}{SFMath}{`T}
+\DeclareMathSymbol{U}{\mathalpha}{SFMath}{`U}
+\DeclareMathSymbol{V}{\mathalpha}{SFMath}{`V}
+\DeclareMathSymbol{W}{\mathalpha}{SFMath}{`W}
+\DeclareMathSymbol{X}{\mathalpha}{SFMath}{`X}
+\DeclareMathSymbol{Y}{\mathalpha}{SFMath}{`Y}
+\DeclareMathSymbol{Z}{\mathalpha}{SFMath}{`Z}
+\DeclareMathSymbol{a}{\mathalpha}{SFMath}{`a}
+\DeclareMathSymbol{b}{\mathalpha}{SFMath}{`b}
+\DeclareMathSymbol{c}{\mathalpha}{SFMath}{`c}
+\DeclareMathSymbol{d}{\mathalpha}{SFMath}{`d}
+\DeclareMathSymbol{e}{\mathalpha}{SFMath}{`e}
+\DeclareMathSymbol{f}{\mathalpha}{SFMath}{`f}
+\DeclareMathSymbol{g}{\mathalpha}{SFMath}{`g}
+\DeclareMathSymbol{h}{\mathalpha}{SFMath}{`h}
+\DeclareMathSymbol{i}{\mathalpha}{SFMath}{`i}
+\DeclareMathSymbol{j}{\mathalpha}{SFMath}{`j}
+\DeclareMathSymbol{k}{\mathalpha}{SFMath}{`k}
+\DeclareMathSymbol{l}{\mathalpha}{SFMath}{`l}
+\DeclareMathSymbol{m}{\mathalpha}{SFMath}{`m}
+\DeclareMathSymbol{n}{\mathalpha}{SFMath}{`n}
+\DeclareMathSymbol{o}{\mathalpha}{SFMath}{`o}
+\DeclareMathSymbol{p}{\mathalpha}{SFMath}{`p}
+\DeclareMathSymbol{q}{\mathalpha}{SFMath}{`q}
+\DeclareMathSymbol{r}{\mathalpha}{SFMath}{`r}
+\DeclareMathSymbol{s}{\mathalpha}{SFMath}{`s}
+\DeclareMathSymbol{t}{\mathalpha}{SFMath}{`t}
+\DeclareMathSymbol{u}{\mathalpha}{SFMath}{`u}
+\DeclareMathSymbol{v}{\mathalpha}{SFMath}{`v}
+\DeclareMathSymbol{w}{\mathalpha}{SFMath}{`w}
+\DeclareMathSymbol{x}{\mathalpha}{SFMath}{`x}
+\DeclareMathSymbol{y}{\mathalpha}{SFMath}{`y}
+\DeclareMathSymbol{z}{\mathalpha}{SFMath}{`z}
+
+\DeclareMathSymbol{\imath}{\mathalpha}{SFMath}{"10}
+\DeclareMathSymbol{\jmath}{\mathalpha}{SFMath}{"11}
+
+
+% The symbols ",", ".", and "\ldotp" should be sans serif
+% but upright.
+
+\DeclareSymbolFont{SFMathUp}{OT1}{\sfdefault}{m}{n}
+\SetSymbolFont{SFMathUp}{normal}{OT1}{\sfdefault}{m}{n}
+\SetSymbolFont{SFMathUp}{bold}{OT1}{\sfdefault}{bx}{n}
+\DeclareMathSymbol{,}{\mathpunct}{SFMathUp}{`,}
+\DeclareMathSymbol{.}{\mathord}{SFMathUp}{`.}
+\DeclareMathSymbol{\ldotp}{\mathord}{SFMathUp}{`.}
+
+
+% Take capital greek letters from cmss or [tp]xss; other sans serif fonts
+% like helvetica don't have capital greeks, so here cmss is
+% taken instead of \sfdefault. Unfortunately, this does not work
+% within the alphabet commands \mathrm, \mathsf, ...
+
+\DeclareSymbolFont{SFMathGreek}{OT1}{\math@sfGreek}{m}{\greek@shape}
+\SetSymbolFont{SFMathGreek}{normal}{OT1}{\math@sfGreek}{m}{\greek@shape}
+\SetSymbolFont{SFMathGreek}{bold}{OT1}{\math@sfGreek}{bx}{\greek@bold@shape}
+
+\DeclareMathSymbol{\Gamma}{\mathalpha}{SFMathGreek}{"00}
+\DeclareMathSymbol{\Delta}{\mathalpha}{SFMathGreek}{"01}
+\DeclareMathSymbol{\Theta}{\mathalpha}{SFMathGreek}{"02}
+\DeclareMathSymbol{\Lambda}{\mathalpha}{SFMathGreek}{"03}
+\DeclareMathSymbol{\Xi}{\mathalpha}{SFMathGreek}{"04}
+\DeclareMathSymbol{\Pi}{\mathalpha}{SFMathGreek}{"05}
+\DeclareMathSymbol{\Sigma}{\mathalpha}{SFMathGreek}{"06}
+\DeclareMathSymbol{\Upsilon}{\mathalpha}{SFMathGreek}{"07}
+\DeclareMathSymbol{\Phi}{\mathalpha}{SFMathGreek}{"08}
+\DeclareMathSymbol{\Psi}{\mathalpha}{SFMathGreek}{"09}
+\DeclareMathSymbol{\Omega}{\mathalpha}{SFMathGreek}{"0A}
+
+
+\DeclareSymbolFont{SFMathUpGreek}{OT1}{\math@sfGreek}{m}{n}
+\SetSymbolFont{SFMathUpGreek}{normal}{OT1}{\math@sfGreek}{m}{n}
+\SetSymbolFont{SFMathUpGreek}{bold}{OT1}{\math@sfGreek}{bx}{n} 
+
+\DeclareMathSymbol{\upDelta}{\mathalpha}{SFMathUpGreek}{"01}
+\DeclareMathSymbol{\upOmega}{\mathalpha}{SFMathUpGreek}{"0A}
+
+
+% Define new behavior for math alphabet commands
+
+\SetMathAlphabet{\mathnormal}{normal}{OT1}{\sfdefault}{m}{sl}
+\SetMathAlphabet{\mathnormal}{bold}{OT1}{\sfdefault}{bx}{\mathnormal@bold@shape}
+
+\SetMathAlphabet{\mathrm}{normal}{OT1}{\sfdefault}{m}{n}
+\SetMathAlphabet{\mathrm}{bold}{OT1}{\sfdefault}{bx}{n} 
+
+\SetMathAlphabet{\mathbf}{normal}{OT1}{\sfdefault}{bx}{n}
+\SetMathAlphabet{\mathbf}{bold}{OT1}{\sfdefault}{bx}{n}  
+
+\SetMathAlphabet{\mathit}{normal}{OT1}{\sfdefault}{m}{sl}
+\SetMathAlphabet{\mathit}{bold}{OT1}{\sfdefault}{\mathit@bold@series}{sl}
+
+\SetMathAlphabet{\mathsf}{normal}{OT1}{\sfdefault}{m}{n}
+\SetMathAlphabet{\mathsf}{bold}{OT1}{\sfdefault}{bx}{n} 
+
+
+% Define new math alphabet command \mathsl
+
+\DeclareMathAlphabet{\mathsl}{OT1}{\sfdefault}{m}{sl}
+\SetMathAlphabet{\mathsl}{bold}{OT1}{\sfdefault}{\mathit@bold@series}{sl}
+

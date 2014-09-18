@@ -1,0 +1,209 @@
+% Erzeuge Identitaetsleiste und Fussleiste
+\def\fileversion{1.10}
+\def\filedate{2009/08/11}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudpage}
+ [\filedate\space\fileversion\space
+   Clemens von Loewenich's and Joe Werner's TUD-Design package]
+
+% load needed packages
+\RequirePackage{calc}
+\RequirePackage{xkeyval}
+
+\newif\ifTUD@pagingbar\TUD@pagingbarfalse
+
+\DeclareOptionX<\@currname>{pagingbar}{%
+  \ifTUD@longdoc
+    \PackageWarning{\@currname}{Option `pagingbar' ignored because off option `longdoc'.}
+  \else
+    \TUD@pagingbartrue
+  \fi}
+\DeclareOptionX*{%
+  \PassOptionsToPackage{\CurrentOption}{tudpaper}}
+\ProcessOptionsX<\@currname>
+
+\RequirePackage{tudpaper}
+
+% Formatierung der Fussnotenleiste (goldener Schnitt)
+\renewcommand*\footnoterule{%
+  \kern-3\p@
+  \ifx\@textbottom\relax\else\vskip \z@ \@plus.0005fil\fi
+  \hrule\@width0.3819660\linewidth\@height0.6pt
+  \kern 2.6\p@}
+% Formartierung der Fussnoten
+\@ifundefined{deffootnote}{}{
+  \newskip\TUD@footparindent
+  \AtBeginDocument{%
+    \TUD@footparindent \the\parindent%
+    \ifdim\TUD@footparindent<1.5em%
+      \TUD@footparindent1.5em%
+    \fi%
+    \deffootnote{\TUD@footparindent}{1em}{%
+    \makebox[\TUD@footparindent][l]{\textsuperscript{\thefootnotemark}}%
+  }}
+}
+
+\RequirePackage{fancyhdr}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  %%% realempty %%%
+  \fancypagestyle{realempty}{%
+    \fancyhf{}
+  }
+  %%% empty %%%
+  \fancypagestyle{empty}{%
+    \fancyhf{}
+    \if@reversemargin
+      \fancyhfoffset[LO]{\marginparwidth + \marginparsep}%
+      \fancyhfoffset[RO]{0pt}%
+    \else
+      \fancyhfoffset[LO]{0pt}%
+      \fancyhfoffset[RO]{\marginparwidth + \marginparsep}%
+    \fi
+    \if@twoside
+      \if@reversemargin
+        \fancyhfoffset[LE]{0pt}%
+        \fancyhfoffset[RE]{\marginparwidth + \marginparsep}%
+      \else
+        \fancyhfoffset[LE]{\marginparwidth + \marginparsep}%
+        \fancyhfoffset[RE]{0pt}%
+      \fi
+    \fi
+    \fancyhead[C]{\TUD@indentbar[\headwidth]}
+    \fancyfoot[C]{\tudrule[\headwidth]}
+  }
+  %%% plain %%%
+  \fancypagestyle{plain}{%
+    \fancyhf{}
+    \if@reversemargin
+      \fancyhfoffset[LO]{\marginparwidth + \marginparsep}%
+      \fancyhfoffset[RO]{0pt}%
+    \else
+      \fancyhfoffset[LO]{0pt}%
+      \fancyhfoffset[RO]{\marginparwidth + \marginparsep}%
+    \fi
+    \if@twoside
+      \if@reversemargin
+        \fancyhfoffset[LE]{0pt}%
+        \fancyhfoffset[RE]{\marginparwidth + \marginparsep}%
+      \else
+        \fancyhfoffset[LE]{\marginparwidth + \marginparsep}%
+        \fancyhfoffset[RE]{0pt}%
+      \fi
+    \fi
+    \ifTUD@pagingbar
+      \if@reversemargin
+        \fancyheadoffset[RO]{10mm}%
+      \else
+        \fancyheadoffset[RO]{\marginparwidth + \marginparsep + 10mm}%
+      \fi
+      \fancyhead[LO]{%
+        \pagingfont%
+        \TUD@indentbar[\headwidth - 10mm]\nobreak\hskip1.6mm\nobreak\thepage%
+      }
+      \if@twoside
+        \if@reversemargin
+          \fancyheadoffset[LE]{10mm}%
+        \else
+          \fancyheadoffset[LE]{\marginparwidth + \marginparsep + 10mm}%
+        \fi
+        \fancyhead[RE]{%
+          \pagingfont%
+          \thepage\nobreak\hskip1.6mm\nobreak\TUD@indentbar[\headwidth - 10mm]%
+        }
+      \fi
+    \else
+      \fancyhead[C]{\TUD@indentbar[\headwidth]}
+    \fi
+    \fancyfoot[C]{\tudrule[\headwidth]}
+    \ifTUD@pagingbar\else
+      \if@twoside
+        \fancyfoot[LE,RO]{\footerfont\strut\\\thepage}
+      \else
+        \fancyfoot[R]{\footerfont\strut\\\thepage}
+      \fi
+    \fi
+  }
+  %%% headings %%%
+  \fancypagestyle{headings}{%
+    \fancyhf{}
+    \if@reversemargin
+      \fancyhfoffset[LO]{\marginparwidth + \marginparsep}%
+      \fancyhfoffset[RO]{0pt}%
+    \else
+      \fancyhfoffset[LO]{0pt}%
+      \fancyhfoffset[RO]{\marginparwidth + \marginparsep}%
+    \fi
+    \if@twoside
+      \if@reversemargin
+        \fancyhfoffset[LE]{0pt}%
+        \fancyhfoffset[RE]{\marginparwidth + \marginparsep}%
+      \else
+        \fancyhfoffset[LE]{\marginparwidth + \marginparsep}%
+        \fancyhfoffset[RE]{0pt}%
+      \fi
+    \fi
+    \fancyhead[C]{\TUD@indentbar[\headwidth]}
+    \fancyfoot[C]{\tudrule[\headwidth]\footerfont\strut\\\nouppercase\centermark}
+    \if@twoside
+      \fancyfoot[LE,RO]{\footerfont\strut\\\thepage}
+      \fancyfoot[RE]{\footerfont\strut\\\nouppercase\leftmark}
+      \fancyfoot[LO]{\footerfont\strut\\\nouppercase\rightmark}
+    \else
+      \fancyfoot[R]{\footerfont\strut\\\thepage}
+      \fancyfoot[L]{\footerfont\strut\\\nouppercase\rightmark}
+    \fi
+  }
+  %%% myheadings %%%
+  \fancypagestyle{myheadings}{%
+    \fancyhf{}
+    \if@reversemargin
+      \fancyhfoffset[LO]{\marginparwidth + \marginparsep}%
+      \fancyhfoffset[RO]{0pt}%
+    \else
+      \fancyhfoffset[LO]{0pt}%
+      \fancyhfoffset[RO]{\marginparwidth + \marginparsep}%
+    \fi
+    \if@twoside
+      \if@reversemargin
+        \fancyhfoffset[LE]{0pt}%
+        \fancyhfoffset[RE]{\marginparwidth + \marginparsep}%
+      \else
+        \fancyhfoffset[LE]{\marginparwidth + \marginparsep}%
+        \fancyhfoffset[RE]{0pt}%
+      \fi
+    \fi
+    \fancyhead[C]{\TUD@indentbar[\headwidth]}
+    \fancyfoot[C]{\tudrule[\headwidth]\footerfont\strut\\\nouppercase\mycentermark}
+    \if@twoside
+      \fancyfoot[LE,RO]{\footerfont\strut\\\thepage}
+      \fancyfoot[RE]{\footerfont\strut\\\myleftmark}
+      \fancyfoot[LO]{\footerfont\strut\\\myrightmark}
+    \else
+      \fancyfoot[R]{\footerfont\strut\\\thepage}
+      \fancyfoot[L]{\footerfont\strut\\\myrightmark}
+    \fi
+  }
+
+\def\mymarkright#1{\gdef\myrightmark{#1}}
+\gdef\myrightmark{}
+\def\mymarkleft#1{\gdef\myleftmark{#1}}
+\gdef\myleftmark{}
+\def\mymarkboth#1#2{\gdef\mymarkleft{#1}\mymarkright{#2}}
+\def\mymarkcenter#1{\gdef\mycentermark{#1}}
+\gdef\mycentermark{}
+
+\def\markcenter#1{\gdef\centermark{#1}}
+\gdef\centermark{}
+
+\AtBeginDocument{%
+  \pagestyle{plain}
+  \providecommand{\autodot}{.}%
+  \providecommand{\enskip}{\hskip0.5em}%
+  \providecommand{\partmarkformat}{\partname~\thepart\autodot\enskip}%
+  \providecommand{\chaptermarkformat}{\chaptername~\thechapter\autodot\enskip}%
+  \providecommand{\sectionmarkformat}{\thesection\autodot\enskip}%
+  \providecommand{\partmark}{}\renewcommand{\partmark}[1]{\markboth{\partmarkformat #1}{}}%
+  \providecommand{\chaptermark}{}\renewcommand{\chaptermark}[1]{\markboth{\chaptermarkformat #1}{}}%
+  \providecommand{\sectionmark}{}\renewcommand{\sectionmark}[1]{\markright{\sectionmarkformat #1}}%
+}

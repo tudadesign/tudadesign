@@ -1,0 +1,7 @@
+\ProvidesFile{johannes.adr}[2008/11/22]
+\setkomavar{fromname}{Dipl.-Phys. Johannes Werner}
+\setkomavar{shortfromname}{J. Werner}
+\setkomavar{fromaddress}{Hochschulstra"se 6\\64289 Darmstadt}
+\setkomavar{fromphone}{+49 6151 16 - 5479}
+\setkomavar{fromfax}{+49 6151 16 - 2833}
+\setkomavar{fromemail}{tuddesign@pro-kevin.de}

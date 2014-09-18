@@ -1,0 +1,121 @@
+% tudreport is the report-class as described in the TUD-Design-Manual
+% It is based on (makes heavy use of) the KOMA-Class scrreprt
+\def\fileversion{1.12}
+\def\filedate{2009/09/18}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudfonts}
+ [\filedate\space\fileversion\space 
+   Clemens von Loewenich's and Joe Werner's TUD-Design package]
+
+% Include "niceties"
+\RequirePackage[T1]{fontenc}
+\RequirePackage[euro]{textcomp}
+\RequirePackage{tudcolours}
+
+% Waehle die TUD-Standardschriftarten
+  \RequirePackage{fix-cm}
+  \RequirePackage[bitstream-charter]{mathdesign}
+  % Ersetzte kursives Charter v durch Utopia v für bessere Unterscheidbarkeit vom \nu
+    \DeclareSymbolFont{utopiasymbol}{OML}{mdput}{m}{it}
+    \DeclareMathSymbol{v}{\mathalpha}{utopiasymbol}{`v}
+
+  \renewcommand*{\rmdefault}{5ch}
+  \renewcommand*{\sfdefault}{5fp}
+  \renewcommand*{\ttdefault}{txtt}
+  \newcommand{\acdefault}{5sf}
+  \renewcommand*{\bfdefault}{b}
+  \renewcommand*{\scdefault}{sc}
+
+  % fuer halbfette Schriftart z.B. fuer Frontpage
+  \DeclareRobustCommand\mbseries{\not@math@alphabet\mbseries\mathmb\fontseries{mb}\selectfont}
+  \DeclareOldFontCommand{\mb}{\normalfont\mbseries}{\mathmb}
+  \DeclareTextFontCommand{\textmb}{\mbseries}
+  \DeclareMathAlphabet{\mathmb}{\encodingdefault}{\rmdefault}{mb}{n}
+  \SetMathAlphabet{\mathmb}{normal}{\encodingdefault}{\rmdefault}{mb}{n}%
+  \SetMathAlphabet{\mathmb}{bold}{\encodingdefault}{\rmdefault}{mb}{n}%
+
+  \DeclareRobustCommand\em{%
+    \@nomath\em \ifdim \fontdimen\@ne\font <\z@%
+      \upshape \else \itshape \fi%
+  }
+
+  \let\@TUD@normalsize\normalsize
+  \renewcommand{\normalsize}{\@TUD@normalsize
+       \abovedisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip
+       \abovedisplayshortskip 0.25\baselineskip plus 1\baselineskip
+       \belowdisplayshortskip 0.75\baselineskip plus 0.5\baselineskip minus 0.5\baselineskip
+       \belowdisplayskip 1\baselineskip plus 0.25\baselineskip minus 0.75\baselineskip}
+
+  \AtEndOfClass{\newcommand{\pagingfont}{\fontfamily{\sfdefault}\fontseries{mb}\fontshape{n}\fontsize{\TUD@pagingfont@size}{\TUD@pagingfont@size}\selectfont}}
+  \AtEndOfClass{\newcommand{\footerfont}{\fontfamily{\sfdefault}\fontseries{m}\fontshape{n}\fontsize{\TUD@footerfont@size}{\TUD@footerfont@baselineskip}\selectfont}}
+
+  \DeclareRobustCommand{\accentfont}{\fontfamily{\acdefault}\fontseries{m}\fontshape{n}\selectfont}
+  \DeclareTextFontCommand{\textaccent}{\accentfont}
+%  \newenvironment{accenttext}{\bgroup\accentfont}{\egroup}
+  \let\accenttext\accentfont
+  \let\endaccenttext\endaccentfont
+
+  \AtBeginDocument{%
+    \providecommand*\descfont{}\renewcommand*\descfont{\normalcolor\fontfamily{\sfdefault}\fontseries{m}\fontshape{n}\normalsize}
+    \providecommand*\capfont{}\renewcommand*\capfont{\normalcolor\fontfamily{\sfdefault}\fontseries{m}\fontshape{n}\normalsize}
+    \providecommand*\caplabelfont{}\renewcommand*\caplabelfont{\normalcolor\fontfamily{\sfdefault}\fontseries{mb}\fontshape{n}\normalsize}
+    \providecommand*\marginparfont{}\renewcommand*\marginparfont{\accentfont\TUD@accenttextcolor\footnotesize}
+    \@ifpackageloaded{subfigure}{%
+      \renewcommand*{\subcapsize}{\normalsize}%
+      \renewcommand*{\subcapfont@f}{\fontfamily{\sfdefault}\selectfont}%
+      \renewcommand*{\subcapfont@c}{\fontseries{m}\selectfont}%
+      \renewcommand*{\subcapfont@s}{\fontshape{n}\selectfont}%
+    }{}
+  }
+
+
+  \newcommand*{\setfontheight}{\settoheight{\fontheight}{\mbox{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz}}}
+  \newcommand*{\setfontdepth}{\settodepth{\fontdepth}{\mbox{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz}}}
+  \newlength{\fontheight}
+  \newlength{\fontdepth}
+
+  \newbox\fontstrutbox
+  \def\fontstrut{\relax\ifmmode\copy\fontstrutbox\else\unhcopy\fontstrutbox\fi}
+  \newcommand*{\setfontstrut}{%
+    \setfontheight%
+    \setfontdepth%
+    \setbox\fontstrutbox\hbox{%
+      \vrule\@height\fontheight
+            \@depth\fontdepth
+            \@width\z@}%
+  }
+
+\AtBeginDocument{%
+  \let\@TUD@marginpar\marginpar
+  \def\marginpar{\@ifnextchar[{\@TUD@marginpar@two}{\@TUD@marginpar@one}}
+  \def\@TUD@marginpar@two[#1]#2{\@TUD@marginpar[\marginparfont #1]{\marginparfont #2}}
+  \def\@TUD@marginpar@one#1{\@TUD@marginpar{\marginparfont #1}}
+}
+
+\newcommand{\textwhitespace}{%
+  \mbox{%
+    \hskip0.1em%
+    \rule{\@TUD@ruleheight}{1ex}%
+    \rule{1em}{\@TUD@ruleheight}%
+    \rule{\@TUD@ruleheight}{1ex}%
+    \hskip0.1em%
+  }%
+}
+
+%%%%%%%%%%%%%% (aus DTK 1/2008, Seite 180) %%%%%%%%%%%%%%%%
+% kerning around "A" in \LaTeX logo shall
+% adjust to boldness of L and T neighbors
+\DeclareRobustCommand{\LaTeX}{%
+{L\setbox\z@\hbox{\check@mathfonts \fontsize\sf@size\z@
+ \math@fontsfalse\selectfont A}\kern-.57\wd\z@
+ \sbox\tw@ T\vbox to \ht\tw@{\copy\z@ \vss}\kern-.2\wd\z@}%
+{%
+ \ifdim\fontdimen1\font=\z@ \else \count\z@=\fontdimen5\font
+ \multiply\count\z@ by 64\relax\divide\count\z@ by\p@
+ \count\tw@=\fontdimen1\font \multiply\count\tw@ by\count\z@
+ \divide\count\tw@ by 64\relax\divide\count\tw@ by\tw@
+ \kern-\the\count\tw@ sp\relax\fi}%
+\TeX}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\normalsize

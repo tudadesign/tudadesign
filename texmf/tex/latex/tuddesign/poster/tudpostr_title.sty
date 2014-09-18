@@ -1,0 +1,145 @@
+% tud_report is the report-class as described in the TUD-Design-Manual
+% It is based on (makes heavy use of) the KOMA-Class scrreprt
+\def\fileversion{1.3}
+\def\filedate{2009/08/11}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudpostr_title}
+ [\filedate\space\fileversion\space 
+   Joe Werner's TUD-Design-Manual package]
+
+% Load the TUD-colourscheme and TUD-fonts
+\RequirePackage{xkeyval}
+\RequirePackage{tudcolours}
+\RequirePackage{tudpostr_fonts}
+\RequirePackage{tudpage}
+
+% definiere Abfrage und setzte Standardwert 
+  \newif\ifTUD@nonewpage\TUD@nonewpagefalse
+  \newif\ifTUD@colortitle\TUD@colortitlefalse
+  \newif\ifTUD@colorbacktitle\TUD@colorbacktitlefalse
+  \newif\ifTUD@colorbacksubtitle\TUD@colorbacksubtitlefalse
+  \newif\ifTUD@inverttitle\TUD@inverttitlefalse
+  \newif\ifTUD@inverttitlerule\TUD@inverttitlerulefalse
+%  \newif\ifTUD@titlepicture\TUD@titlepicturefalse
+  \newif\ifTUD@instlogo\TUD@instlogofalse
+  \newif\ifTUD@instlogo@width\TUD@instlogo@widthfalse
+  \newif\ifTUD@instlogo@height\TUD@instlogo@heightfalse
+  \newif\ifTUD@instbox\TUD@instboxfalse
+%  \newif\ifTUD@printsize\TUD@printsizefalse
+
+  \newcommand{\TUD@titlecolor}{\color{black}}%
+  \newcommand{\TUD@subtitlecolor}{\color{black}}%
+  \newcommand{\TUD@titleseprulecolor}{\color{black}}%
+  \newcommand{\TUD@titlerulecolor}{\color{black}}%
+
+
+% Verarbeitung der Optionen
+  \DeclareOptionX<\@currname>{nopartpage}{\TUD@nonewpagetrue}
+  \DeclareOptionX<\@currname>{nochapterpage}{\TUD@nonewpagetrue}
+  \DeclareOptionX<\@currname>{colortitle}{%
+    \ifTUD@colorbacktitle
+      \ifTUD@colorbacksubtitle
+        \PackageWarning{\@currname}{Option `colortitle' ignored because of option `colorbacktitle' and%
+          \MassageBreak option `colorbacksubtitle'.}
+      \else
+        \ifTUD@textaccent
+          \PackageWarning{\@currname}{Use option `colortitle' only in special cases.}
+          \renewcommand{\TUD@subtitlecolor}{\TUD@accenttextcolor}%
+          \TUD@colortitletrue%
+        \else
+          \PackageWarning{\@currname}{Option `colortitle' ignored because color not allowed.}
+        \fi
+      \fi
+    \else
+      \ifTUD@textaccent
+        \PackageWarning{\@currname}{Use option `colortitle' only in special cases.}
+        \renewcommand{\TUD@titlecolor}{\TUD@accenttextcolor}%
+        \renewcommand{\TUD@subtitlecolor}{\TUD@accenttextcolor}%
+        \TUD@colortitletrue%
+      \else
+        \PackageWarning{\@currname}{Option `colortitle' ignored because color not allowed.}
+      \fi
+    \fi}
+  \DeclareOptionX<\@currname>{colorbacktitle}{%
+    \TUD@colorbacktitletrue
+    \ifTUD@blacktitle\else 
+      \renewcommand{\TUD@titlecolor}{\color{white}}%
+      \TUD@inverttitletrue
+    \fi}
+  \DeclareOptionX<\@currname>{colorbacksubtitle}{%
+    \ifTUD@colorbacktitle
+      \TUD@colorbacksubtitletrue
+      \ifTUD@blacktitle\else 
+        \renewcommand{\TUD@subtitlecolor}{\color{white}}%
+        \renewcommand{\TUD@titleseprulecolor}{\color{white}}%
+        \TUD@inverttitletrue
+      \fi
+    \else
+      \PackageWarning{\@currname}{Option `colorbacksubtitle' ignored because there is no option `colorbacktitle'.}
+    \fi}
+  \DeclareOptionX<\@currname>{colorback}{%
+      \PackageWarning{\@currname}{Option `colorback' not supported.}
+    }
+  \DeclareOptionX<\@currname>{inverttitle}{%
+    \ifTUD@colorbacktitle
+      \ifTUD@whitetitle% 
+        \TUD@inverttitletrue%
+        \renewcommand{\TUD@titlecolor}{\color{white}}%
+        \ifTUD@colorbacksubtitle%
+          \renewcommand{\TUD@subtitlecolor}{\color{white}}%
+          \renewcommand{\TUD@titleseprulecolor}{\color{white}}%
+        \fi
+      \else
+        \PackageWarning{\@currname}{Option `inverttitle' ignored because color not allowed.}
+      \fi
+    \else
+      \PackageWarning{\@currname}{Option `inverttitle' ignored because there is no option `colorbacktitle'.}
+    \fi}
+  \DeclareOptionX<\@currname>{inverttitlerule}{%
+    \PackageWarning{\@currname}{Option `inverttitlerule' not supported.}}
+\ProcessOptionsX<\@currname>
+
+% load needed packages
+\RequirePackage{graphicx}
+\RequirePackage{calc}
+\RequirePackage{eso-pic}
+
+% define needed commands
+%\newcommand{\settitlepicture}[1]{%
+%    \TUD@titlepicturetrue%
+%    \newcommand{\@TUD@includetitlepicture}{\includegraphics[width=\textwidth,height=\TUD@colorbackheight,clip]{#1}}}
+\newcommand{\setinstitutionlogo}[2][width]{%
+    \TUD@instlogotrue%
+    \csname TUD@instlogo@#1true\endcsname%
+    \newcommand{\@TUD@instlogo@name}{#2}%
+    \newcommand{\@TUD@includeinstlogo}{\includegraphics[#1=\csname TUD@instlogo#1\endcsname,clip]{#2}}%
+}
+%\newcommand{\printpicturesize}{\TUD@printsizetrue}
+%
+%\@onlypreamble\settitlepicture
+\@onlypreamble\setinstitutionlogo
+%\@onlypreamble\printpicturesize
+
+% define subtitle and subsubtitle
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\gdef\@subtitle{}
+\let\@subtitle\@empty
+\def\subsubtitle#1{\gdef\@subsubtitle{#1}}
+\gdef\@subsubtitle{}
+\let\@subsubtitle\@empty
+\def\institution#1{\gdef\@institution{#1}}
+\gdef\@institution{}
+\let\@institution\@empty
+\def\uppertitleback#1{\gdef\@uppertitleback{#1}}
+\gdef\@uppertitleback{}
+\def\lowertitleback#1{\gdef\@lowertitleback{#1}}
+\gdef\@lowertitleback{}
+\def\dedication#1{\gdef\@dedication{#1}}
+\gdef\@dedication{}
+
+%make sure we do not break the horizontal raster
+\flushbottom
+
+\newif\if@TUD@resttwocol
+
+\input{tudpostr_title.def}

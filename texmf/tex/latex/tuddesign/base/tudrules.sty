@@ -1,0 +1,119 @@
+% define tudrule heights
+\def\fileversion{1.6}
+\def\filedate{2008/10/09}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudrules}
+ [\filedate\space\fileversion\space
+    Clemens von Loewenich's and Joe Werner's TUD-Design package]
+
+\RequirePackage{xkeyval}
+\RequirePackage{tudcolours}
+\RequirePackage{ifthen}
+
+\newlength{\TUD@indentbar@height}
+\newlength{\TUD@indentbar@depth}
+\newlength{\TUD@indentbar@totalheight}
+
+\newlength{\@TUD@indentbar@width}
+\newlength{\@TUD@largeruleheight}
+\newlength{\@TUD@smallruleheight}
+\newlength{\@TUD@rulesep}
+\newlength{\@TUD@ruleheight}
+
+\providecommand{\TUD@pagingfont@size}{}
+\providecommand{\TUD@footerfont@size}{}
+\providecommand{\TUD@footerfont@baselineskip}{}
+
+\newcommand{\@TUD@largerulecolor}{\TUD@identbarcolor}
+\newcommand{\@TUD@smallrulecolor}{\TUD@normalcolor}
+
+\DeclareOptionX<\@currname>{blackrule}{%
+    \renewcommand{\@TUD@largerulecolor}{\TUD@normalcolor}%
+    \renewcommand{\@TUD@smallrulecolor}{\TUD@normalcolor}}
+\DeclareOptionX<\@currname>{paper}{%
+  \ifthenelse{\equal{#1}{a0b}}{
+    \renewcommand{\TUD@footerfont@size}{40}%
+    \renewcommand{\TUD@footerfont@baselineskip}{48}%
+    \renewcommand{\TUD@pagingfont@size}{40}%
+    \setlength{\@TUD@largeruleheight}{16.0mm}%
+    \setlength{\@TUD@rulesep}{5.2mm}%
+    \setlength{\@TUD@smallruleheight}{4.75pt}%
+    \setlength{\@TUD@ruleheight}{2.2pt}}{%
+  \ifthenelse{\equal{#1}{a0}}{
+    \renewcommand{\TUD@footerfont@size}{40}%
+    \renewcommand{\TUD@footerfont@baselineskip}{48}%
+    \renewcommand{\TUD@pagingfont@size}{40}%
+    \setlength{\@TUD@largeruleheight}{16.0mm}%
+    \setlength{\@TUD@rulesep}{5.2mm}%
+    \setlength{\@TUD@smallruleheight}{4.75pt}%
+    \setlength{\@TUD@ruleheight}{2.2pt}}{%
+  \ifthenelse{\equal{#1}{a1}}{
+    \renewcommand{\TUD@footerfont@size}{25}%
+    \renewcommand{\TUD@footerfont@baselineskip}{30}%
+    \renewcommand{\TUD@pagingfont@size}{25}%
+    \setlength{\@TUD@largeruleheight}{10.0mm}%
+    \setlength{\@TUD@rulesep}{3.1mm}%
+    \setlength{\@TUD@smallruleheight}{2.8pt}%
+    \setlength{\@TUD@ruleheight}{1.4pt}}{%
+  \ifthenelse{\equal{#1}{a2}}{
+    \renewcommand{\TUD@footerfont@size}{20}%
+    \renewcommand{\TUD@footerfont@baselineskip}{24}%
+    \renewcommand{\TUD@pagingfont@size}{20}%
+    \setlength{\@TUD@largeruleheight}{8.0mm}%
+    \setlength{\@TUD@rulesep}{2.5mm}%
+    \setlength{\@TUD@smallruleheight}{2.2pt}%
+    \setlength{\@TUD@ruleheight}{1.1pt}}{%
+  \ifthenelse{\equal{#1}{a3}}{%
+    \renewcommand{\TUD@footerfont@size}{11.25}%
+    \renewcommand{\TUD@footerfont@baselineskip}{13.5}%
+    \renewcommand{\TUD@pagingfont@size}{11.25}%
+    \setlength{\@TUD@largeruleheight}{4.5mm}%
+    \setlength{\@TUD@rulesep}{1.4mm}%
+    \setlength{\@TUD@smallruleheight}{1.2pt}%
+    \setlength{\@TUD@ruleheight}{0.6pt}}{%
+  \ifthenelse{\equal{#1}{a4}}{%
+    \renewcommand{\TUD@footerfont@size}{10}%
+    \renewcommand{\TUD@footerfont@baselineskip}{12}%
+    \renewcommand{\TUD@pagingfont@size}{10}%
+    \setlength{\@TUD@largeruleheight}{4.0mm}%
+    \setlength{\@TUD@rulesep}{1.4mm}%
+    \setlength{\@TUD@smallruleheight}{1.2pt}%
+    \setlength{\@TUD@ruleheight}{0.6pt}}{%
+  \ifthenelse{\equal{#1}{a5}}{%
+    \renewcommand{\TUD@footerfont@size}{8.75}%
+    \renewcommand{\TUD@footerfont@baselineskip}{10.5}%
+    \renewcommand{\TUD@pagingfont@size}{8.75}%
+    \setlength{\@TUD@largeruleheight}{3.5mm}%
+    \setlength{\@TUD@rulesep}{1.4mm}%
+    \setlength{\@TUD@smallruleheight}{1.2pt}%
+    \setlength{\@TUD@ruleheight}{0.6pt}}{%
+  \ifthenelse{\equal{#1}{a6}}{%
+    \renewcommand{\TUD@footerfont@size}{7.5}%
+    \renewcommand{\TUD@footerfont@baselineskip}{9}%
+    \renewcommand{\TUD@pagingfont@size}{7.5}%
+    \setlength{\@TUD@rulesep}{1.4mm}%
+    \setlength{\@TUD@largeruleheight}{3.0mm}%
+    \setlength{\@TUD@smallruleheight}{1.2pt}%
+    \setlength{\@TUD@ruleheight}{0.6pt}}{%
+  \PackageError{\@currname}{Unknown papersize. `paper=#1'}
+  }}}}}}}}
+}
+\ExecuteOptionsX<\@currname>{paper=a4}
+\ProcessOptionsX<\@currname>
+
+\setlength{\TUD@indentbar@height}{\@TUD@largeruleheight}
+\setlength{\TUD@indentbar@depth}{\@TUD@rulesep}
+  \addtolength{\TUD@indentbar@depth}{\@TUD@smallruleheight}
+\setlength{\TUD@indentbar@totalheight}{\TUD@indentbar@height}
+  \addtolength{\TUD@indentbar@totalheight}{\TUD@indentbar@depth}
+
+\newcommand{\tudrule}[1][\linewidth]{\rule{#1}{\@TUD@ruleheight}}
+\newcommand{\tudgoldenrule}{\rule{0.3819660\linewidth}{\@TUD@ruleheight}}
+\newcommand{\TUD@indentbar}[1][\textwidth]{%
+  \setlength{\@TUD@indentbar@width}{#1}%
+  \mbox{%
+    \@TUD@largerulecolor\rule{\@TUD@indentbar@width}{\@TUD@largeruleheight}%
+    \hspace{-\@TUD@indentbar@width}%
+    \@TUD@smallrulecolor\rule[-\@TUD@rulesep-\@TUD@smallruleheight]{\@TUD@indentbar@width}{\@TUD@smallruleheight}%
+  }%
+}

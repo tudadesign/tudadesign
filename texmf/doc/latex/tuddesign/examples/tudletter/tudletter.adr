@@ -1,0 +1,5 @@
+\ProvidesFile{tudletter.adr}[2008/11/22]
+\setkomavar{frominstitution}{Institut f"ur Festk"orperphysik}
+\setkomavar*{fromphone}{Tel.: }
+\setkomavar*{fromfax}{Fax: }
+\setkomavar{fromurl}{www.fkp.tu-darmstadt.de}

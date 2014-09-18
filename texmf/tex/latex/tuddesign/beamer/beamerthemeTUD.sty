@@ -1,0 +1,43 @@
+% Copyright 2008 J. Werner and C. v. Loewenich
+% <tuddesign@pro-kevin.de>
+% based on beamerthemes by Till Tantau <tantau@users.sourceforge.net>
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+\def\fileversion{1.1}
+\def\filedate{2009/07/14}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeTUD}
+ [\filedate\space\fileversion\space
+   Joe Werner's and Clemens von Loewenich's TUD-Design package]    
+
+\mode<presentation>
+
+\RequirePackage{xkeyval}
+
+% Verarbeitung der Optionen
+  \DeclareOptionX<\@currname>{accentcolor}[tud2b]{%
+    \PassOptionsToPackage{accentcolor=#1}{tudcolours}}
+  \DeclareOptionX<\@currname>{colorback}{%
+    \PassOptionsToPackage{colorback}{beamercolorthemeTUD}}
+  \DeclareOptionX<\@currname>{colorbacktitle}{%
+    \PassOptionsToPackage{colorbacktitle}{beamercolorthemeTUD}}
+  \DeclareOptionX<\@currname>{inverttitle}{%
+    \PassOptionsToPackage{inverttitle}{beamercolorthemeTUD}}
+  \DeclareOptionX<\@currname>{inverttitlerule}{%
+    \PassOptionsToPackage{inverttitlerule}{beamercolorthemeTUD}}
+  \DeclareOptionX<\@currname>{blackrule}{%
+    \PassOptionsToPackage{blackrule}{beamercolorthemeTUD}}
+  \DeclareOptionX*{}
+\ProcessOptionsX<\@currname>
+
+\usefonttheme{TUD}
+\usecolortheme{TUD}
+\useoutertheme{TUD}
+\useinnertheme{TUD}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+
+\mode<all>

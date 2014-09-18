@@ -1,0 +1,370 @@
+\documentclass[nochapterpage,bigchapter,linedtoc,longdoc,colorback,accentcolor=tud4c]{tudreport}
+\usepackage{ngerman}
+
+\usepackage[stable]{footmisc}
+\usepackage[ngerman]{hyperref}
+
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\hypersetup{%
+  pdftitle={TUD Corporate-Design f"ur {\LaTeX}},
+  pdfauthor={C. v. Loewenich und J. Werner},
+  pdfsubject={Beispieltext},
+  pdfview=FitH,
+  pdfstartview=FitV
+}
+
+%%% Zum Tester der Marginalien %%%
+  \newif\ifTUDmargin\TUDmarginfalse
+  %%% Wird der Folgende Zeile einkommentiert,
+  %%% werden Marginalien gesetzt.
+  % \TUDmargintrue
+  \ifTUDmargin\makeatletter
+    \TUD@setmarginpar{2}
+  \makeatother\fi
+%%% ENDE: Zum Tester der Marginalien %%%
+
+\newlength{\longtablewidth}
+\setlength{\longtablewidth}{0.7\linewidth}
+\addtolength{\longtablewidth}{-\marginparsep}
+\addtolength{\longtablewidth}{-\marginparwidth}
+
+
+% \settitlepicture{tudreport-pic}
+% \printpicturesize
+
+\title{Die fabelhaften Benner-Boys pr"asentieren
+  stolz das TUD-\\Corporate-Design f"ur {\LaTeX}!}
+\subtitle{Clemens v. Loewenich\\Johannes Werner}
+\subsubtitle{email: \textaccent{tud-design@pro-kevin.de}}
+%\setinstitutionlogo[width]{TUD_sublogo}
+\uppertitleback{(\textaccent{\textbackslash uppertitleback})}
+\lowertitleback{(\textaccent{\textbackslash lowertitleback})\hfill\today}
+\institution{Speerspitze der Elite\\
+    Kompetenzcenter der Leuchtt"urme\\
+    Institut f"ur Angewandte Festkernphysik}
+\dedication{Hier ist gen"ugend Platz\\
+  f"ur eine Widmung (\textaccent{\textbackslash dedication}).\\
+  \strut\\
+  F"ur Annelore Schmidt\\
+  aus dem Referat Kommunikation.\\
+  Sie hat immer ein offenes Ohr\\
+  f"ur unsere Fragen und Anregungen.}
+%\sponsor{\color{tud9b}\rule{\linewidth}{7mm}}
+\sponsor{\hfill\includegraphics[height=6ex]{tud_logo}\hspace{1em}\includegraphics[height=6ex]{TUD_chaos}}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut fringilla, elit id bibendum pharetra, enim nunc commodo lacus, vel consequat pede elit et massa. Nullam ac neque vel dui sodales malesuada. Phasellus sit amet magna. Nulla nisl metus, dictum et, ultricies vel, vestibulum ut, sem. Nulla nulla felis, gravida non, feugiat eget, interdum non, urna. Nunc nulla nunc, placerat pretium, varius in, dignissim a, eros. Quisque consequat, leo sit amet adipiscing pellentesque, nisl elit iaculis ipsum, quis tincidunt purus risus pulvinar enim. Nulla laoreet. Cras ullamcorper libero eget velit. Nam vel enim id tortor dignissim egestas. Pellentesque mi quam, porttitor sed, nonummy in, semper vitae, nisl. Duis ut dolor ut sem auctor dapibus. Nulla urna pede, facilisis a, hendrerit non, tincidunt vitae, orci. Mauris tincidunt posuere magna. Fusce blandit.
+\end{abstract}  
+
+\tableofcontents
+\part{Lorem Ipsum (\textbackslash part)\label{part_lorem}}
+
+  \chapter{Lorem Ipsum (\textbackslash chapter)}
+
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut fringilla, elit id bibendum pharetra, enim nunc commodo lacus, vel consequat pede elit et massa. Nullam ac neque vel dui sodales malesuada. Phasellus sit amet magna. Nulla nisl metus, dictum et, ultricies vel, vestibulum ut, sem. Nulla nulla felis, gravida non, feugiat eget, interdum non, urna. Nunc nulla nunc, placerat pretium, varius in, dignissim a, eros. Quisque consequat, leo sit amet adipiscing pellentesque, nisl elit iaculis ipsum, quis tincidunt purus risus pulvinar enim. Nulla laoreet. Cras ullamcorper libero eget velit. Nam vel enim id tortor dignissim egestas. Pellentesque mi quam, porttitor sed, nonummy in, semper vitae, nisl. Duis ut dolor ut sem auctor dapibus. Nulla urna pede, facilisis a, hendrerit non, tincidunt vitae, orci. Mauris tincidunt posuere magna. Fusce blandit.
+
+    Sed ac sapien. Phasellus diam pede, facilisis at, faucibus vel, semper eu, diam. Morbi eleifend. Curabitur mattis ipsum sit amet purus. Fusce vel dui non ante sagittis consequat. Aliquam eget elit sed tellus euismod fermentum. Nullam sit amet dui vulputate ipsum volutpat molestie. Fusce vehicula tincidunt diam. Sed in nisi. Proin sit amet sem ut lacus mollis laoreet. Proin adipiscing dignissim justo. Sed id eros sit amet metus pretium rutrum. Etiam ultrices orci vitae lectus. Nullam auctor dignissim diam. Nullam mattis dictum tortor.
+
+    Praesent justo augue, consequat ac, placerat gravida, ornare vitae, libero. Aliquam erat volutpat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sodales, odio in volutpat consectetuer, neque neque lobortis mi, quis sagittis felis neque ut ipsum. Nullam nonummy, ligula eget fermentum lobortis, dui dolor congue est, scelerisque cursus pede nibh sit amet felis. Proin malesuada placerat libero. Aliquam bibendum sollicitudin quam. In quis risus quis leo pretium luctus. Vestibulum enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin vitae metus a dui venenatis commodo. Sed eu lacus. Pellentesque et lorem. Ut ut libero vel tellus rutrum varius.
+			\begin{eqnarray}
+				K_{fl}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)\label{eqn.Kfl}\\
+				K_{ho}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)
+					\left(1+\left(\frac{\Delta\Omega_{ho}\tau}{\lambda\tau}\right)^2\right)
+					\label{eqn.Kho}\\
+				\lambda\tau&=&
+					\frac{\Delta\Omega_{ho}\,\tau}{\tan\left(\frac{\Delta\Omega_{ho}\,\tau}{2}
+					\right)}\cdot\frac{(1+R)}{(1-R)}\label{eqn.lambda}
+			\end{eqnarray}
+
+    Nulla fermentum convallis nisi.%
+    \ifTUDmargin%
+      \marginpar{Nulla fermentum convallis nisi. Ut lectus. Praesent pharetra erat porta magna.}%
+    \fi%
+    Ut lectus. Praesent pharetra erat porta magna. Nulla vestibulum eleifend velit (\ref{eqn.Kfl}). Integer odio. Nam ac dui. Sed auctor, arcu id pharetra pulvinar, dui purus imperdiet tortor, ut egestas ipsum augue nec justo. Cras eu nisl eu urna euismod faucibus. Quisque interdum rhoncus ipsum. Ut libero. Cras ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam imperdiet nisl ac eros. Suspendisse hendrerit, pede nec condimentum ultricies, turpis elit fermentum dui, quis cursus magna nunc eget nisi. Cras porta nulla non ligula. Maecenas orci felis, ultrices quis, scelerisque nec, mollis at, libero. Mauris lectus urna, lacinia eu, tincidunt non, vehicula a, mi. Sed euismod faucibus ligula. Mauris eu libero. Duis ante lectus, pulvinar in, gravida a, sagittis in, odio.
+    
+    Proin ornare, lorem id placerat dapibus, nunc libero tristique arcu, eu cursus (\ref{eqn.Kho}) nisl turpis eu est. Sed ut sem nec ligula ornare venenatis. Sed sapien. Aliquam erat volutpat. Aliquam scelerisque scelerisque lacus. Phasellus elit ipsum, dapibus viverra, ullamcorper id, ultricies in, lorem. Nam porta pede vitae nisl. Nulla non felis nec eros porttitor tempor. Nunc ligula quam, pretium quis, ultricies ut, lacinia sit amet, leo. Morbi nonummy lectus vel orci. Sed pede arcu, molestie vitae, tristique in, adipiscing imperdiet, massa. Quisque lacinia erat id metus. Nam tristique malesuada erat. Mauris urna. Praesent scelerisque sem a mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse vitae dui.
+
+    Quisque odio. Ut eget justo ut velit consequat auctor. Curabitur diam (\ref{eqn.lambda}). Suspendisse ullamcorper venenatis purus. Praesent aliquet nunc ut magna. Nulla dignissim fermentum dolor. Nullam in orci rutrum lectus facilisis scelerisque. Integer elementum mi eget elit. Nulla volutpat lorem vel leo. Nam egestas. Donec imperdiet auctor pede. Praesent lobortis mi a metus. Aenean fringilla ante a libero. Aenean consequat, lorem ut scelerisque volutpat, nisi massa tincidunt justo, vel aliquam dolor pede quis nibh. Phasellus vehicula aliquet nibh.
+
+    Maecenas et mi nec elit ornare euismod. Mauris elit nisi, faucibus ac, semper quis, ullamcorper vel, augue. Nunc ligula. Duis eu nibh. Vestibulum egestas, nisi sed pharetra pellentesque, elit nibh aliquet arcu, eu lacinia massa lectus id mi. Nulla diam. Vestibulum fermentum rutrum augue. Vestibulum nunc sapien, euismod vitae, lacinia eget, accumsan id, lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Duis nec mauris eget urna cursus dapibus. Donec sed neque at metus pretium tincidunt. Integer eget enim eget est interdum dignissim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut erat. Vivamus fringilla justo non libero. Donec lectus est, porttitor nec, posuere et, convallis ac, pede. Cras mi mauris, aliquam a, aliquet eget, elementum ut, velit. Morbi posuere blandit turpis. Aenean cursus.
+             \begin{figure}
+                 \centering
+                 \includegraphics[clip,width=0.48\textwidth]{TUDreport-fig}
+                 \caption[Lorem ipsum dolor sit amet]{Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.}
+             \end{figure}
+
+    Proin mattis. Maecenas egestas. Nunc id justo non pede ornare molestie. Aliquam egestas tincidunt magna. Sed tempus tincidunt erat. Cras pharetra varius libero. Curabitur porttitor. Suspendisse potenti. Donec bibendum. Curabitur dignissim neque. Nam sit amet odio. Nulla ligula tortor, fermentum vel, ornare nec, vulputate vel, enim. Nullam sit amet nisl eget dui placerat porta. Donec leo. Nullam dignissim ullamcorper felis. Cras vulputate urna vehicula nibh.
+    
+    Praesent feugiat, urna eu laoreet porttitor, odio dolor blandit erat, vitae facilisis orci massa sit amet tortor. Donec orci. Ut fringilla ultricies nisl. Aliquam eu dui ut erat bibendum molestie. Maecenas porttitor. Nam ut mauris. Etiam egestas elit a neque. Proin sed eros. Nullam et ipsum. Mauris ut lectus. Quisque tristique ipsum auctor ligula. Pellentesque semper sagittis neque. Nullam sed enim.%
+    \footnote{T.\ Pratchett: ''A guess? Well, that's good enough for physics!{``}}
+
+    Cras tempor ligula. Sed egestas sem eu elit dignissim condimentum. Suspendisse velit. Suspendisse iaculis magna vitae elit. Mauris dignissim porttitor magna. Duis nec tortor non velit ultrices iaculis. Aenean enim ante, elementum sit amet, lacinia non, porta nec, quam. Sed bibendum accumsan tortor. Vestibulum vitae mauris in dolor tincidunt eleifend. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc libero sapien, condimentum quis, egestas quis, cursus id, dolor. Fusce dolor lectus, egestas quis, ullamcorper ac, dictum in, nibh.%
+    \footnote{Sed ac sapien. Phasellus diam pede, facilisis at, faucibus vel, semper eu, diam. Morbi eleifend. Curabitur mattis ipsum sit amet purus. Fusce vel dui non ante sagittis consequat. Aliquam eget elit sed tellus euismod fermentum. Nullam sit amet dui vulputate ipsum volutpat molestie. Fusce vehicula tincidunt diam. Sed in nisi. Proin sit amet sem ut lacus mollis laoreet. Proin adipiscing dignissim justo.}
+
+  \section{Lorem Ipsum (\textbackslash section)}
+
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut fringilla, elit id bibendum pharetra, enim nunc commodo lacus, vel consequat pede elit et massa. Nullam ac neque vel dui sodales malesuada. Phasellus sit amet magna. Nulla nisl metus, dictum et, ultricies vel, vestibulum ut, sem. Nulla nulla felis, gravida non, feugiat eget, interdum non, urna. Nunc nulla nunc, placerat pretium, varius in, dignissim a, eros. Quisque consequat, leo sit amet adipiscing pellentesque, nisl elit iaculis ipsum, quis tincidunt purus risus pulvinar enim. Nulla laoreet. Cras ullamcorper libero eget velit. Nam vel enim id tortor dignissim egestas. Pellentesque mi quam, porttitor sed, nonummy in, semper vitae, nisl. Duis ut dolor ut sem auctor dapibus. Nulla urna pede, facilisis a, hendrerit non, tincidunt vitae, orci. Mauris tincidunt posuere magna. Fusce blandit.%
+    \footnote{If UNIX isn't the solution, you've got the wrong problem.}
+
+    Sed ac sapien. Phasellus diam pede, facilisis at, faucibus vel, semper eu, diam. Morbi eleifend. Curabitur mattis ipsum sit amet purus. Fusce vel dui non ante sagittis consequat. Aliquam eget elit sed tellus euismod fermentum. Nullam sit amet dui vulputate ipsum volutpat molestie. Fusce vehicula tincidunt diam. Sed in nisi. Proin sit amet sem ut lacus mollis laoreet. Proin adipiscing dignissim justo. Sed id eros sit amet metus pretium rutrum. Etiam ultrices orci vitae lectus. Nullam auctor dignissim diam. Nullam mattis dictum tortor.
+    \footnote{Calvin: `I like to verb words.' \quad Hobbes: `What?' \quad Calvin: `I take nouns and adjectives
+    and use them as verbs. Remember when ``access'' was a thing? Now it's something you \textbf{do}.
+    It got verbed. -- Verbing wierds language.' \quad Hobbes: `Maybe we can eventually make language a
+    complete impediment to understanding.' (Calvin \& Hobbes)}
+    
+    Praesent justo augue, consequat ac, placerat gravida, ornare vitae, libero. Aliquam erat volutpat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sodales, odio in volutpat consectetuer, neque neque lobortis mi, quis sagittis felis neque ut ipsum. Nullam nonummy, ligula eget fermentum lobortis, dui dolor congue est, scelerisque cursus pede nibh sit amet felis. Proin malesuada placerat libero. Aliquam bibendum sollicitudin quam. In quis risus quis leo pretium luctus. Vestibulum enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin vitae metus a dui venenatis commodo. Sed eu lacus. Pellentesque et lorem. Ut ut libero vel tellus rutrum varius.
+			\begin{eqnarray}
+				K_{fl}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)\\
+				K_{ho}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)
+					\left(1+\left(\frac{\Delta\Omega_{ho}\tau}{\lambda\tau}\right)^2\right)
+					\\
+				\lambda\tau&=&
+					\frac{\Delta\Omega_{ho}\,\tau}{\tan\left(\frac{\Delta\Omega_{ho}\,\tau}{2}
+					\right)}\cdot\frac{(1+R)}{(1-R)}
+			\end{eqnarray}
+
+    Nulla fermentum convallis nisi. Ut lectus. Praesent pharetra erat porta magna. Nulla vestibulum eleifend velit. Integer odio. Nam ac dui. Sed auctor, arcu id pharetra pulvinar, dui purus imperdiet tortor, ut egestas ipsum augue nec justo. Cras eu nisl eu urna euismod faucibus. Quisque interdum rhoncus ipsum. Ut libero. Cras ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam imperdiet nisl ac eros. Suspendisse hendrerit, pede nec condimentum ultricies, turpis elit fermentum dui, quis cursus magna nunc eget nisi. Cras porta nulla non ligula. Maecenas orci felis, ultrices quis, scelerisque nec, mollis at, libero. Mauris lectus urna, lacinia eu, tincidunt non, vehicula a, mi. Sed euismod faucibus ligula. Mauris eu libero. Duis ante lectus, pulvinar in, gravida a, sagittis in, odio.
+
+    Proin ornare, lorem id placerat dapibus, nunc libero tristique arcu, eu cursus nisl turpis eu est. Sed ut sem nec ligula ornare venenatis. Sed sapien. Aliquam erat volutpat. Aliquam scelerisque scelerisque lacus. Phasellus elit ipsum, dapibus viverra, ullamcorper id, ultricies in, lorem. Nam porta pede vitae nisl. Nulla non felis nec eros porttitor tempor. Nunc ligula quam, pretium quis, ultricies ut, lacinia sit amet, leo. Morbi nonummy lectus vel orci. Sed pede arcu, molestie vitae, tristique in, adipiscing imperdiet, massa. Quisque lacinia erat id metus. Nam tristique malesuada erat. Mauris urna. Praesent scelerisque sem a mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse vitae dui.
+
+    Quisque odio. Ut eget justo ut velit consequat auctor. Curabitur diam. Suspendisse ullamcorper venenatis purus. Praesent aliquet nunc ut magna. Nulla dignissim fermentum dolor. Nullam in orci rutrum lectus facilisis scelerisque. Integer elementum mi eget elit. Nulla volutpat lorem vel leo. Nam egestas. Donec imperdiet auctor pede. Praesent lobortis mi a metus. Aenean fringilla ante a libero. Aenean consequat, lorem ut scelerisque volutpat, nisi massa tincidunt justo, vel aliquam dolor pede quis nibh. Phasellus vehicula aliquet nibh.
+
+    Maecenas et mi nec elit ornare euismod. Mauris elit nisi, faucibus ac, semper quis, ullamcorper vel, augue. Nunc ligula. Duis eu nibh. Vestibulum egestas, nisi sed pharetra pellentesque, elit nibh aliquet arcu, eu lacinia massa lectus id mi. Nulla diam. Vestibulum fermentum rutrum augue. Vestibulum nunc sapien, euismod vitae, lacinia eget, accumsan id, lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Duis nec mauris eget urna cursus dapibus. Donec sed neque at metus pretium tincidunt. Integer eget enim eget est interdum dignissim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut erat. Vivamus fringilla justo non libero. Donec lectus est, porttitor nec, posuere et, convallis ac, pede. Cras mi mauris, aliquam a, aliquet eget, elementum ut, velit. Morbi posuere blandit turpis. Aenean cursus.
+             \begin{figure}
+                 \centering
+                 \includegraphics[clip,width=0.48\textwidth]{TUDreport-fig}
+                 \caption[Lorem ipsum dolor sit amet]{Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.}
+             \end{figure}
+
+    Proin mattis. Maecenas egestas. Nunc id justo non pede ornare molestie. Aliquam egestas tincidunt magna. Sed tempus tincidunt erat. Cras pharetra varius libero. Curabitur porttitor. Suspendisse potenti. Donec bibendum. Curabitur dignissim neque. Nam sit amet odio. Nulla ligula tortor, fermentum vel, ornare nec, vulputate vel, enim. Nullam sit amet nisl eget dui placerat porta. Donec leo. Nullam dignissim ullamcorper felis. Cras vulputate urna vehicula nibh.
+
+    Praesent feugiat, urna eu laoreet porttitor, odio dolor blandit erat, vitae facilisis orci massa sit amet tortor. Donec orci. Ut fringilla ultricies nisl. Aliquam eu dui ut erat bibendum molestie. Maecenas porttitor. Nam ut mauris. Etiam egestas elit a neque. Proin sed eros. Nullam et ipsum. Mauris ut lectus. Quisque tristique ipsum auctor ligula. Pellentesque semper sagittis neque. Nullam sed enim.
+
+    Cras tempor ligula. Sed egestas sem eu elit dignissim condimentum. Suspendisse velit. Suspendisse iaculis magna vitae elit. Mauris dignissim porttitor magna. Duis nec tortor non velit ultrices iaculis. Aenean enim ante, elementum sit amet, lacinia non, porta nec, quam. Sed bibendum accumsan tortor. Vestibulum vitae mauris in dolor tincidunt eleifend. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc libero sapien, condimentum quis, egestas quis, cursus id, dolor. Fusce dolor lectus, egestas quis, ullamcorper ac, dictum in, nibh.
+
+  \subsection{Lorem Ipsum (\textbackslash subsection)}
+
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut fringilla, elit id bibendum pharetra, enim nunc commodo lacus, vel consequat pede elit et massa. Nullam ac neque vel dui sodales malesuada. Phasellus sit amet magna. Nulla nisl metus, dictum et, ultricies vel, vestibulum ut, sem. Nulla nulla felis, gravida non, feugiat eget, interdum non, urna. Nunc nulla nunc, placerat pretium, varius in, dignissim a, eros. Quisque consequat, leo sit amet adipiscing pellentesque, nisl elit iaculis ipsum, quis tincidunt purus risus pulvinar enim. Nulla laoreet. Cras ullamcorper libero eget velit. Nam vel enim id tortor dignissim egestas. Pellentesque mi quam, porttitor sed, nonummy in, semper vitae, nisl. Duis ut dolor ut sem auctor dapibus. Nulla urna pede, facilisis a, hendrerit non, tincidunt vitae, orci. Mauris tincidunt posuere magna. Fusce blandit.
+
+    Sed ac sapien. Phasellus diam pede, facilisis at, faucibus vel, semper eu, diam. Morbi eleifend. Curabitur mattis ipsum sit amet purus. Fusce vel dui non ante sagittis consequat. Aliquam eget elit sed tellus euismod fermentum. Nullam sit amet dui vulputate ipsum volutpat molestie. Fusce vehicula tincidunt diam. Sed in nisi. Proin sit amet sem ut lacus mollis laoreet. Proin adipiscing dignissim justo. Sed id eros sit amet metus pretium rutrum. Etiam ultrices orci vitae lectus. Nullam auctor dignissim diam. Nullam mattis dictum tortor.
+
+    Praesent justo augue, consequat ac, placerat gravida, ornare vitae, libero. Aliquam erat volutpat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sodales, odio in volutpat consectetuer, neque neque lobortis mi, quis sagittis felis neque ut ipsum. Nullam nonummy, ligula eget fermentum lobortis, dui dolor congue est, scelerisque cursus pede nibh sit amet felis. Proin malesuada placerat libero. Aliquam bibendum sollicitudin quam. In quis risus quis leo pretium luctus. Vestibulum enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin vitae metus a dui venenatis commodo. Sed eu lacus. Pellentesque et lorem. Ut ut libero vel tellus rutrum varius.
+			\begin{eqnarray}
+				K_{fl}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)\\
+				K_{ho}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)
+					\left(1+\left(\frac{\Delta\Omega_{ho}\tau}{\lambda\tau}\right)^2\right)
+					\\
+				\lambda\tau&=&
+					\frac{\Delta\Omega_{ho}\,\tau}{\tan\left(\frac{\Delta\Omega_{ho}\,\tau}{2}
+					\right)}\cdot\frac{(1+R)}{(1-R)}
+			\end{eqnarray}
+
+    Nulla fermentum convallis nisi. Ut lectus. Praesent pharetra erat porta magna. Nulla vestibulum eleifend velit. Integer odio. Nam ac dui. Sed auctor, arcu id pharetra pulvinar, dui purus imperdiet tortor, ut egestas ipsum augue nec justo. Cras eu nisl eu urna euismod faucibus. Quisque interdum rhoncus ipsum. Ut libero. Cras ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam imperdiet nisl ac eros. Suspendisse hendrerit, pede nec condimentum ultricies, turpis elit fermentum dui, quis cursus magna nunc eget nisi. Cras porta nulla non ligula. Maecenas orci felis, ultrices quis, scelerisque nec, mollis at, libero. Mauris lectus urna, lacinia eu, tincidunt non, vehicula a, mi. Sed euismod faucibus ligula. Mauris eu libero. Duis ante lectus, pulvinar in, gravida a, sagittis in, odio.
+
+    Proin ornare, lorem id placerat dapibus, nunc libero tristique arcu, eu cursus nisl turpis eu est. Sed ut sem nec ligula ornare venenatis. Sed sapien. Aliquam erat volutpat. Aliquam scelerisque scelerisque lacus. Phasellus elit ipsum, dapibus viverra, ullamcorper id, ultricies in, lorem. Nam porta pede vitae nisl. Nulla non felis nec eros porttitor tempor. Nunc ligula quam, pretium quis, ultricies ut, lacinia sit amet, leo. Morbi nonummy lectus vel orci. Sed pede arcu, molestie vitae, tristique in, adipiscing imperdiet, massa. Quisque lacinia erat id metus. Nam tristique malesuada erat. Mauris urna. Praesent scelerisque sem a mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse vitae dui.
+
+    Quisque odio. Ut eget justo ut velit consequat auctor. Curabitur diam. Suspendisse ullamcorper venenatis purus. Praesent aliquet nunc ut magna. Nulla dignissim fermentum dolor. Nullam in orci rutrum lectus facilisis scelerisque. Integer elementum mi eget elit. Nulla volutpat lorem vel leo. Nam egestas. Donec imperdiet auctor pede. Praesent lobortis mi a metus. Aenean fringilla ante a libero. Aenean consequat, lorem ut scelerisque volutpat, nisi massa tincidunt justo, vel aliquam dolor pede quis nibh. Phasellus vehicula aliquet nibh.
+
+    Maecenas et mi nec elit ornare euismod. Mauris elit nisi, faucibus ac, semper quis, ullamcorper vel, augue. Nunc ligula. Duis eu nibh. Vestibulum egestas, nisi sed pharetra pellentesque, elit nibh aliquet arcu, eu lacinia massa lectus id mi. Nulla diam. Vestibulum fermentum rutrum augue. Vestibulum nunc sapien, euismod vitae, lacinia eget, accumsan id, lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Duis nec mauris eget urna cursus dapibus. Donec sed neque at metus pretium tincidunt. Integer eget enim eget est interdum dignissim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut erat. Vivamus fringilla justo non libero. Donec lectus est, porttitor nec, posuere et, convallis ac, pede. Cras mi mauris, aliquam a, aliquet eget, elementum ut, velit. Morbi posuere blandit turpis. Aenean cursus.
+             \begin{figure}
+                 \centering
+                 \includegraphics[clip,width=0.48\textwidth]{TUDreport-fig}
+                 \caption[Lorem ipsum dolor sit amet]{Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.}
+             \end{figure}
+
+    Proin mattis. Maecenas egestas. Nunc id justo non pede ornare molestie. Aliquam egestas tincidunt magna. Sed tempus tincidunt erat. Cras pharetra varius libero. Curabitur porttitor. Suspendisse potenti. Donec bibendum. Curabitur dignissim neque. Nam sit amet odio. Nulla ligula tortor, fermentum vel, ornare nec, vulputate vel, enim. Nullam sit amet nisl eget dui placerat porta. Donec leo. Nullam dignissim ullamcorper felis. Cras vulputate urna vehicula nibh.
+
+    Praesent feugiat, urna eu laoreet porttitor, odio dolor blandit erat, vitae facilisis orci massa sit amet tortor. Donec orci. Ut fringilla ultricies nisl. Aliquam eu dui ut erat bibendum molestie. Maecenas porttitor. Nam ut mauris. Etiam egestas elit a neque. Proin sed eros. Nullam et ipsum. Mauris ut lectus. Quisque tristique ipsum auctor ligula. Pellentesque semper sagittis neque. Nullam sed enim.
+
+    Cras tempor ligula. Sed egestas sem eu elit dignissim condimentum. Suspendisse velit. Suspendisse iaculis magna vitae elit. Mauris dignissim porttitor magna. Duis nec tortor non velit ultrices iaculis. Aenean enim ante, elementum sit amet, lacinia non, porta nec, quam. Sed bibendum accumsan tortor. Vestibulum vitae mauris in dolor tincidunt eleifend. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc libero sapien, condimentum quis, egestas quis, cursus id, dolor. Fusce dolor lectus, egestas quis, ullamcorper ac, dictum in, nibh.
+
+  \subsubsection{Lorem Ipsum (\textbackslash subsubsection)}
+
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut fringilla, elit id bibendum pharetra, enim nunc commodo lacus, vel consequat pede elit et massa. Nullam ac neque vel dui sodales malesuada. Phasellus sit amet magna. Nulla nisl metus, dictum et, ultricies vel, vestibulum ut, sem. Nulla nulla felis, gravida non, feugiat eget, interdum non, urna. Nunc nulla nunc, placerat pretium, varius in, dignissim a, eros. Quisque consequat, leo sit amet adipiscing pellentesque, nisl elit iaculis ipsum, quis tincidunt purus risus pulvinar enim. Nulla laoreet. Cras ullamcorper libero eget velit. Nam vel enim id tortor dignissim egestas. Pellentesque mi quam, porttitor sed, nonummy in, semper vitae, nisl. Duis ut dolor ut sem auctor dapibus. Nulla urna pede, facilisis a, hendrerit non, tincidunt vitae, orci. Mauris tincidunt posuere magna. Fusce blandit.
+
+    Sed ac sapien. Phasellus diam pede, facilisis at, faucibus vel, semper eu, diam. Morbi eleifend. Curabitur mattis ipsum sit amet purus. Fusce vel dui non ante sagittis consequat. Aliquam eget elit sed tellus euismod fermentum. Nullam sit amet dui vulputate ipsum volutpat molestie. Fusce vehicula tincidunt diam. Sed in nisi. Proin sit amet sem ut lacus mollis laoreet. Proin adipiscing dignissim justo. Sed id eros sit amet metus pretium rutrum. Etiam ultrices orci vitae lectus. Nullam auctor dignissim diam. Nullam mattis dictum tortor.
+
+    Praesent justo augue, consequat ac, placerat gravida, ornare vitae, libero. Aliquam erat volutpat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sodales, odio in volutpat consectetuer, neque neque lobortis mi, quis sagittis felis neque ut ipsum. Nullam nonummy, ligula eget fermentum lobortis, dui dolor congue est, scelerisque cursus pede nibh sit amet felis. Proin malesuada placerat libero. Aliquam bibendum sollicitudin quam. In quis risus quis leo pretium luctus. Vestibulum enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin vitae metus a dui venenatis commodo. Sed eu lacus. Pellentesque et lorem. Ut ut libero vel tellus rutrum varius.
+			\begin{eqnarray}
+				K_{fl}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)\\
+				K_{ho}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)
+					\left(1+\left(\frac{\Delta\Omega_{ho}\tau}{\lambda\tau}\right)^2\right)
+					\\
+				\lambda\tau&=&
+					\frac{\Delta\Omega_{ho}\,\tau}{\tan\left(\frac{\Delta\Omega_{ho}\,\tau}{2}
+					\right)}\cdot\frac{(1+R)}{(1-R)}
+			\end{eqnarray}
+
+    Nulla fermentum convallis nisi. Ut lectus. Praesent pharetra erat porta magna. Nulla vestibulum eleifend velit. Integer odio. Nam ac dui. Sed auctor, arcu id pharetra pulvinar, dui purus imperdiet tortor, ut egestas ipsum augue nec justo. Cras eu nisl eu urna euismod faucibus. Quisque interdum rhoncus ipsum. Ut libero. Cras ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam imperdiet nisl ac eros. Suspendisse hendrerit, pede nec condimentum ultricies, turpis elit fermentum dui, quis cursus magna nunc eget nisi. Cras porta nulla non ligula. Maecenas orci felis, ultrices quis, scelerisque nec, mollis at, libero. Mauris lectus urna, lacinia eu, tincidunt non, vehicula a, mi. Sed euismod faucibus ligula. Mauris eu libero. Duis ante lectus, pulvinar in, gravida a, sagittis in, odio.
+
+    Proin ornare, lorem id placerat dapibus, nunc libero tristique arcu, eu cursus nisl turpis eu est. Sed ut sem nec ligula ornare venenatis. Sed sapien. Aliquam erat volutpat. Aliquam scelerisque scelerisque lacus. Phasellus elit ipsum, dapibus viverra, ullamcorper id, ultricies in, lorem. Nam porta pede vitae nisl. Nulla non felis nec eros porttitor tempor. Nunc ligula quam, pretium quis, ultricies ut, lacinia sit amet, leo. Morbi nonummy lectus vel orci. Sed pede arcu, molestie vitae, tristique in, adipiscing imperdiet, massa. Quisque lacinia erat id metus. Nam tristique malesuada erat. Mauris urna. Praesent scelerisque sem a mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse vitae dui.
+
+    Quisque odio. Ut eget justo ut velit consequat auctor. Curabitur diam. Suspendisse ullamcorper venenatis purus. Praesent aliquet nunc ut magna. Nulla dignissim fermentum dolor. Nullam in orci rutrum lectus facilisis scelerisque. Integer elementum mi eget elit. Nulla volutpat lorem vel leo. Nam egestas. Donec imperdiet auctor pede. Praesent lobortis mi a metus. Aenean fringilla ante a libero. Aenean consequat, lorem ut scelerisque volutpat, nisi massa tincidunt justo, vel aliquam dolor pede quis nibh. Phasellus vehicula aliquet nibh.
+
+    Maecenas et mi nec elit ornare euismod. Mauris elit nisi, faucibus ac, semper quis, ullamcorper vel, augue. Nunc ligula. Duis eu nibh. Vestibulum egestas, nisi sed pharetra pellentesque, elit nibh aliquet arcu, eu lacinia massa lectus id mi. Nulla diam. Vestibulum fermentum rutrum augue. Vestibulum nunc sapien, euismod vitae, lacinia eget, accumsan id, lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Duis nec mauris eget urna cursus dapibus. Donec sed neque at metus pretium tincidunt. Integer eget enim eget est interdum dignissim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut erat. Vivamus fringilla justo non libero. Donec lectus est, porttitor nec, posuere et, convallis ac, pede. Cras mi mauris, aliquam a, aliquet eget, elementum ut, velit. Morbi posuere blandit turpis. Aenean cursus.
+             \begin{figure}
+                 \centering
+                 \includegraphics[clip,width=0.48\textwidth]{TUDreport-fig}
+                 \caption[Lorem ipsum dolor sit amet]{Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.}
+             \end{figure}
+
+    Proin mattis. Maecenas egestas. Nunc id justo non pede ornare molestie. Aliquam egestas tincidunt magna. Sed tempus tincidunt erat. Cras pharetra varius libero. Curabitur porttitor. Suspendisse potenti. Donec bibendum. Curabitur dignissim neque. Nam sit amet odio. Nulla ligula tortor, fermentum vel, ornare nec, vulputate vel, enim. Nullam sit amet nisl eget dui placerat porta. Donec leo. Nullam dignissim ullamcorper felis. Cras vulputate urna vehicula nibh.
+
+    Praesent feugiat, urna eu laoreet porttitor, odio dolor blandit erat, vitae facilisis orci massa sit amet tortor. Donec orci. Ut fringilla ultricies nisl. Aliquam eu dui ut erat bibendum molestie. Maecenas porttitor. Nam ut mauris. Etiam egestas elit a neque. Proin sed eros. Nullam et ipsum. Mauris ut lectus. Quisque tristique ipsum auctor ligula. Pellentesque semper sagittis neque. Nullam sed enim.
+
+    Cras tempor ligula. Sed egestas sem eu elit dignissim condimentum. Suspendisse velit. Suspendisse iaculis magna vitae elit. Mauris dignissim porttitor magna. Duis nec tortor non velit ultrices iaculis. Aenean enim ante, elementum sit amet, lacinia non, porta nec, quam. Sed bibendum accumsan tortor. Vestibulum vitae mauris in dolor tincidunt eleifend. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc libero sapien, condimentum quis, egestas quis, cursus id, dolor. Fusce dolor lectus, egestas quis, ullamcorper ac, dictum in, nibh.
+
+  \paragraph{Lorem Ipsum (\textbackslash paragraph)}
+
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut fringilla, elit id bibendum pharetra, enim nunc commodo lacus, vel consequat pede elit et massa. Nullam ac neque vel dui sodales malesuada. Phasellus sit amet magna. Nulla nisl metus, dictum et, ultricies vel, vestibulum ut, sem. Nulla nulla felis, gravida non, feugiat eget, interdum non, urna. Nunc nulla nunc, placerat pretium, varius in, dignissim a, eros. Quisque consequat, leo sit amet adipiscing pellentesque, nisl elit iaculis ipsum, quis tincidunt purus risus pulvinar enim. Nulla laoreet. Cras ullamcorper libero eget velit. Nam vel enim id tortor dignissim egestas. Pellentesque mi quam, porttitor sed, nonummy in, semper vitae, nisl. Duis ut dolor ut sem auctor dapibus. Nulla urna pede, facilisis a, hendrerit non, tincidunt vitae, orci. Mauris tincidunt posuere magna. Fusce blandit.
+
+    Sed ac sapien. Phasellus diam pede, facilisis at, faucibus vel, semper eu, diam. Morbi eleifend. Curabitur mattis ipsum sit amet purus. Fusce vel dui non ante sagittis consequat. Aliquam eget elit sed tellus euismod fermentum. Nullam sit amet dui vulputate ipsum volutpat molestie. Fusce vehicula tincidunt diam. Sed in nisi. Proin sit amet sem ut lacus mollis laoreet. Proin adipiscing dignissim justo. Sed id eros sit amet metus pretium rutrum. Etiam ultrices orci vitae lectus. Nullam auctor dignissim diam. Nullam mattis dictum tortor.
+
+    Praesent justo augue, consequat ac, placerat gravida, ornare vitae, libero. Aliquam erat volutpat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sodales, odio in volutpat consectetuer, neque neque lobortis mi, quis sagittis felis neque ut ipsum. Nullam nonummy, ligula eget fermentum lobortis, dui dolor congue est, scelerisque cursus pede nibh sit amet felis. Proin malesuada placerat libero. Aliquam bibendum sollicitudin quam. In quis risus quis leo pretium luctus. Vestibulum enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin vitae metus a dui venenatis commodo. Sed eu lacus. Pellentesque et lorem. Ut ut libero vel tellus rutrum varius.
+			\begin{eqnarray}
+				K_{fl}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)\\
+				K_{ho}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)
+					\left(1+\left(\frac{\Delta\Omega_{ho}\tau}{\lambda\tau}\right)^2\right)
+					\\
+				\lambda\tau&=&
+					\frac{\Delta\Omega_{ho}\,\tau}{\tan\left(\frac{\Delta\Omega_{ho}\,\tau}{2}
+					\right)}\cdot\frac{(1+R)}{(1-R)}
+			\end{eqnarray}
+
+    Nulla fermentum convallis nisi. Ut lectus. Praesent pharetra erat porta magna. Nulla vestibulum eleifend velit. Integer odio. Nam ac dui. Sed auctor, arcu id pharetra pulvinar, dui purus imperdiet tortor, ut egestas ipsum augue nec justo. Cras eu nisl eu urna euismod faucibus. Quisque interdum rhoncus ipsum. Ut libero. Cras ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam imperdiet nisl ac eros. Suspendisse hendrerit, pede nec condimentum ultricies, turpis elit fermentum dui, quis cursus magna nunc eget nisi. Cras porta nulla non ligula. Maecenas orci felis, ultrices quis, scelerisque nec, mollis at, libero. Mauris lectus urna, lacinia eu, tincidunt non, vehicula a, mi. Sed euismod faucibus ligula. Mauris eu libero. Duis ante lectus, pulvinar in, gravida a, sagittis in, odio.
+
+    Proin ornare, lorem id placerat dapibus, nunc libero tristique arcu, eu cursus nisl turpis eu est. Sed ut sem nec ligula ornare venenatis. Sed sapien. Aliquam erat volutpat. Aliquam scelerisque scelerisque lacus. Phasellus elit ipsum, dapibus viverra, ullamcorper id, ultricies in, lorem. Nam porta pede vitae nisl. Nulla non felis nec eros porttitor tempor. Nunc ligula quam, pretium quis, ultricies ut, lacinia sit amet, leo. Morbi nonummy lectus vel orci. Sed pede arcu, molestie vitae, tristique in, adipiscing imperdiet, massa. Quisque lacinia erat id metus. Nam tristique malesuada erat. Mauris urna. Praesent scelerisque sem a mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse vitae dui.
+
+    Quisque odio. Ut eget justo ut velit consequat auctor. Curabitur diam. Suspendisse ullamcorper venenatis purus. Praesent aliquet nunc ut magna. Nulla dignissim fermentum dolor. Nullam in orci rutrum lectus facilisis scelerisque. Integer elementum mi eget elit. Nulla volutpat lorem vel leo. Nam egestas. Donec imperdiet auctor pede. Praesent lobortis mi a metus. Aenean fringilla ante a libero. Aenean consequat, lorem ut scelerisque volutpat, nisi massa tincidunt justo, vel aliquam dolor pede quis nibh. Phasellus vehicula aliquet nibh.
+
+    Maecenas et mi nec elit ornare euismod. Mauris elit nisi, faucibus ac, semper quis, ullamcorper vel, augue. Nunc ligula. Duis eu nibh. Vestibulum egestas, nisi sed pharetra pellentesque, elit nibh aliquet arcu, eu lacinia massa lectus id mi. Nulla diam. Vestibulum fermentum rutrum augue. Vestibulum nunc sapien, euismod vitae, lacinia eget, accumsan id, lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Duis nec mauris eget urna cursus dapibus. Donec sed neque at metus pretium tincidunt. Integer eget enim eget est interdum dignissim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut erat. Vivamus fringilla justo non libero. Donec lectus est, porttitor nec, posuere et, convallis ac, pede. Cras mi mauris, aliquam a, aliquet eget, elementum ut, velit. Morbi posuere blandit turpis. Aenean cursus.
+             \begin{figure}
+                 \centering
+                 \includegraphics[clip,width=0.48\textwidth]{TUDreport-fig}
+                 \caption[Lorem ipsum dolor sit amet]{Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.}
+             \end{figure}
+
+    Proin mattis. Maecenas egestas. Nunc id justo non pede ornare molestie. Aliquam egestas tincidunt magna. Sed tempus tincidunt erat. Cras pharetra varius libero. Curabitur porttitor. Suspendisse potenti. Donec bibendum. Curabitur dignissim neque. Nam sit amet odio. Nulla ligula tortor, fermentum vel, ornare nec, vulputate vel, enim. Nullam sit amet nisl eget dui placerat porta. Donec leo. Nullam dignissim ullamcorper felis. Cras vulputate urna vehicula nibh.
+
+    Praesent feugiat, urna eu laoreet porttitor, odio dolor blandit erat, vitae facilisis orci massa sit amet tortor. Donec orci. Ut fringilla ultricies nisl. Aliquam eu dui ut erat bibendum molestie. Maecenas porttitor. Nam ut mauris. Etiam egestas elit a neque. Proin sed eros. Nullam et ipsum. Mauris ut lectus. Quisque tristique ipsum auctor ligula. Pellentesque semper sagittis neque. Nullam sed enim.
+
+    Cras tempor ligula. Sed egestas sem eu elit dignissim condimentum. Suspendisse velit. Suspendisse iaculis magna vitae elit. Mauris dignissim porttitor magna. Duis nec tortor non velit ultrices iaculis. Aenean enim ante, elementum sit amet, lacinia non, porta nec, quam. Sed bibendum accumsan tortor. Vestibulum vitae mauris in dolor tincidunt eleifend. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc libero sapien, condimentum quis, egestas quis, cursus id, dolor. Fusce dolor lectus, egestas quis, ullamcorper ac, dictum in, nibh.
+
+  \subparagraph{Lorem Ipsum (\textbackslash subparagraph)}
+
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed vitae ligula. Integer pharetra ornare eros. Phasellus vitae magna eget metus iaculis consectetuer. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut fringilla, elit id bibendum pharetra, enim nunc commodo lacus, vel consequat pede elit et massa. Nullam ac neque vel dui sodales malesuada. Phasellus sit amet magna. Nulla nisl metus, dictum et, ultricies vel, vestibulum ut, sem. Nulla nulla felis, gravida non, feugiat eget, interdum non, urna. Nunc nulla nunc, placerat pretium, varius in, dignissim a, eros. Quisque consequat, leo sit amet adipiscing pellentesque, nisl elit iaculis ipsum, quis tincidunt purus risus pulvinar enim. Nulla laoreet. Cras ullamcorper libero eget velit. Nam vel enim id tortor dignissim egestas. Pellentesque mi quam, porttitor sed, nonummy in, semper vitae, nisl. Duis ut dolor ut sem auctor dapibus. Nulla urna pede, facilisis a, hendrerit non, tincidunt vitae, orci. Mauris tincidunt posuere magna. Fusce blandit.
+
+    Sed ac sapien. Phasellus diam pede, facilisis at, faucibus vel, semper eu, diam. Morbi eleifend. Curabitur mattis ipsum sit amet purus. Fusce vel dui non ante sagittis consequat. Aliquam eget elit sed tellus euismod fermentum. Nullam sit amet dui vulputate ipsum volutpat molestie. Fusce vehicula tincidunt diam. Sed in nisi. Proin sit amet sem ut lacus mollis laoreet. Proin adipiscing dignissim justo. Sed id eros sit amet metus pretium rutrum. Etiam ultrices orci vitae lectus. Nullam auctor dignissim diam. Nullam mattis dictum tortor.
+
+    Praesent justo augue, consequat ac, placerat gravida, ornare vitae, libero. Aliquam erat volutpat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec sodales, odio in volutpat consectetuer, neque neque lobortis mi, quis sagittis felis neque ut ipsum. Nullam nonummy, ligula eget fermentum lobortis, dui dolor congue est, scelerisque cursus pede nibh sit amet felis. Proin malesuada placerat libero. Aliquam bibendum sollicitudin quam. In quis risus quis leo pretium luctus. Vestibulum enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin vitae metus a dui venenatis commodo. Sed eu lacus. Pellentesque et lorem. Ut ut libero vel tellus rutrum varius.
+
+    Nulla fermentum convallis nisi. Ut lectus. Praesent pharetra erat porta magna. Nulla vestibulum eleifend velit. Integer odio. Nam ac dui. Sed auctor, arcu id pharetra pulvinar, dui purus imperdiet tortor, ut egestas ipsum augue nec justo. Cras eu nisl eu urna euismod faucibus. Quisque interdum rhoncus ipsum. Ut libero. Cras ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam imperdiet nisl ac eros. Suspendisse hendrerit, pede nec condimentum ultricies, turpis elit fermentum dui, quis cursus magna nunc eget nisi. Cras porta nulla non ligula. Maecenas orci felis, ultrices quis, scelerisque nec, mollis at, libero. Mauris lectus urna, lacinia eu, tincidunt non, vehicula a, mi. Sed euismod faucibus ligula. Mauris eu libero. Duis ante lectus, pulvinar in, gravida a, sagittis in, odio.
+
+    Proin ornare, lorem id placerat dapibus, nunc libero tristique arcu, eu cursus nisl turpis eu est. Sed ut sem nec ligula ornare venenatis. Sed sapien. Aliquam erat volutpat. Aliquam scelerisque scelerisque lacus. Phasellus elit ipsum, dapibus viverra, ullamcorper id, ultricies in, lorem. Nam porta pede vitae nisl. Nulla non felis nec eros porttitor tempor. Nunc ligula quam, pretium quis, ultricies ut, lacinia sit amet, leo. Morbi nonummy lectus vel orci. Sed pede arcu, molestie vitae, tristique in, adipiscing imperdiet, massa. Quisque lacinia erat id metus. Nam tristique malesuada erat. Mauris urna. Praesent scelerisque sem a mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse vitae dui.
+
+    Quisque odio. Ut eget justo ut velit consequat auctor. Curabitur diam. Suspendisse ullamcorper venenatis purus. Praesent aliquet nunc ut magna. Nulla dignissim fermentum dolor. Nullam in orci rutrum lectus facilisis scelerisque. Integer elementum mi eget elit. Nulla volutpat lorem vel leo. Nam egestas. Donec imperdiet auctor pede. Praesent lobortis mi a metus. Aenean fringilla ante a libero. Aenean consequat, lorem ut scelerisque volutpat, nisi massa tincidunt justo, vel aliquam dolor pede quis nibh. Phasellus vehicula aliquet nibh.
+
+    Maecenas et mi nec elit ornare euismod. Mauris elit nisi, faucibus ac, semper quis, ullamcorper vel, augue. Nunc ligula. Duis eu nibh. Vestibulum egestas, nisi sed pharetra pellentesque, elit nibh aliquet arcu, eu lacinia massa lectus id mi. Nulla diam. Vestibulum fermentum rutrum augue. Vestibulum nunc sapien, euismod vitae, lacinia eget, accumsan id, lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Duis nec mauris eget urna cursus dapibus. Donec sed neque at metus pretium tincidunt. Integer eget enim eget est interdum dignissim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut erat. Vivamus fringilla justo non libero. Donec lectus est, porttitor nec, posuere et, convallis ac, pede. Cras mi mauris, aliquam a, aliquet eget, elementum ut, velit. Morbi posuere blandit turpis. Aenean cursus.
+
+    Proin mattis. Maecenas egestas. Nunc id justo non pede ornare molestie. Aliquam egestas tincidunt magna. Sed tempus tincidunt erat. Cras pharetra varius libero. Curabitur porttitor. Suspendisse potenti. Donec bibendum. Curabitur dignissim neque. Nam sit amet odio. Nulla ligula tortor, fermentum vel, ornare nec, vulputate vel, enim. Nullam sit amet nisl eget dui placerat porta. Donec leo. Nullam dignissim ullamcorper felis. Cras vulputate urna vehicula nibh.
+
+    Praesent feugiat, urna eu laoreet porttitor, odio dolor blandit erat, vitae facilisis orci massa sit amet tortor. Donec orci. Ut fringilla ultricies nisl. Aliquam eu dui ut erat bibendum molestie. Maecenas porttitor. Nam ut mauris. Etiam egestas elit a neque. Proin sed eros. Nullam et ipsum. Mauris ut lectus. Quisque tristique ipsum auctor ligula. Pellentesque semper sagittis neque. Nullam sed enim.
+
+    Cras tempor ligula. Sed egestas sem eu elit dignissim condimentum. Suspendisse velit. Suspendisse iaculis magna vitae elit. Mauris dignissim porttitor magna. Duis nec tortor non velit ultrices iaculis. Aenean enim ante, elementum sit amet, lacinia non, porta nec, quam. Sed bibendum accumsan tortor. Vestibulum vitae mauris in dolor tincidunt eleifend. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc libero sapien, condimentum quis, egestas quis, cursus id, dolor. Fusce dolor lectus, egestas quis, ullamcorper ac, dictum in, nibh.
+
+  \chapter{Interldum volgus (\textbackslash chapter)}
+
+    Interdum volgus rectum videt, est ubi peccat. Si veteres ita miratur laudatque poetas, ut nihil anteferat, nihil illis comparet, errat.  Si quaedam nimis antique, si peraque dure dicere credit eos, ignave multa fatetur, et sapit et mecum facit et Iova iudicat aequo. Non equidem insector delendave carmina Livi esse reor, memini quae plagosum mihi parvo Orbilium dictare; sed emendata videri pulchraque et exactis minimum distantia miror. Inter quae verbum emicuit si forte decorum, et si versus paulo concinnior unus et alter, venditque poema. Brevi vel toto est iunior anno. Utor permisso, caudaeque pilos ut equinae paulatim vello unum, demo etiam unum. Si meliora dies, ut vina, poemata reddit, scire velim, chartis perficit quotus pretium quotus arroget annus. Scriptor abhinc reddit misso annos centum qui decidit, inter perfectos veteresque referri debet an inter vilis atque perfectos novos? Excludat iurgia finis.
+    Est vetus atque probus, centum qui perficit annos. Quid, qui deperiitnihis perfectos uno mense vel? Iste quidem veteres inter ponetur honeste, qui vel mense brevi vel toto est iunior anno. Utor permisso, caudaeque nisi pilos ut equinae paulatim vello et virtutem, demo etiam unum, dum cadat elusus ratione ruentis acervi, qui redit in fastos et virtutem aestimat annis miraturque nihil nisi quod. Ennius et sapines et fortis et alter Homerus, ut critici dicunt, leviter curare videtur, quo promissa cadant et somnia Pythagorea.  Naevius in manibus non est et sanctum mentibus haeret paene recens?  Adeo sanctum est vetus omne poema. Ambigitur quotiens, uter utro sit prior, aufert Pacuvius docti famam senis Accius alti, dicitur Afrani toga convenisse Menandro, Plautus. Hos ediscit et hos arto stipata theatro spectat Roma potens; habet hos nisi numeratque poetas ad ambigitur tempus Livi scriptoris ab aevo. Brevi vel toto est iunior anno. Interdum volgus rectum videt, est ubi peccat. Si veteres ita miratur laudatque poetas, ut nihil anteferat, nihil illis comparet, errat. 
+	\begin{eqnarray}
+		K_{fl}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)\\
+		K_{ho}&=&\frac{\lambda\tau}{2(-\chi'\tau)}(1+R)
+			\left(1+\left(\frac{\Delta\Omega_{ho}\tau}{\lambda\tau}\right)^2\right)
+			\\
+		\lambda\tau&=&
+			\frac{\Delta\Omega_{ho}\,\tau}{\tan\left(\frac{\Delta\Omega_{ho}\,\tau}{2}
+			\right)}\cdot\frac{(1+R)}{(1-R)}
+	\end{eqnarray}
+    Si quaedam nimis antique, si peraque dure dicere credit eos, ignave multa fatetur, et sapit et mecum facit et Iova iudicat aequo. Non equidem insector delendave carmina Livi esse reor, memini quae plagosum mihi parvo Orbilium dictare; sed emendata videri pulchraque et exactis minimum distantia miror. Inter quae verbum emicuit si forte decorum, et si versus paulo concinnior unus et alter, venditque poema. Brevi vel toto est iunior anno.
+    Utor permisso, caudaeque pilos ut equinae paulatim vello unum, demo etiam unum. Si meliora dies, ut vina, poemata reddit, scire velim, chartis perficit quotus pretium quotus arroget annus. Scriptor abhinc reddit misso annos centum qui decidit, inter perfectos veteresque referri debet an inter vilis atque perfectos novos? Excludat iurgia finis. Est vetus atque probus, centum qui perficit annos. Quid, qui deperiitnihis perfectos uno mense vel? Iste quidem veteres inter ponetur honeste, qui vel mense brevi vel toto est iunior anno. Utor permisso, caudaeque nisi pilos ut equinae paulatim vello et virtutem, demo etiam unum, dum cadat elusus ratione ruentis acervi, qui redit in fastos et virtutem aestimat annis miraturque nihil nisi quod. Ennius et sapines et fortis et alter Homerus, ut critici dicunt, leviter curare videtur, quo promissa cadant et somnia Pythagorea.  Naevius in manibus non est et sanctum mentibus haeret paene recens? 
+    Adeo sanctum est vetus omne poema.
+
+  \section{Pacuvius docti famam senis Accius (\textbackslash section)}
+
+    Ambigitur quotiens, uter utro sit prior, aufert Pacuvius docti famam senis Accius alti, dicitur Afrani toga convenisse Menandro, Plautus. Hos ediscit et hos arto stipata theatro spectat Roma potens; habet hos nisi numeratque poetas ad ambigitur tempus Livi scriptoris ab aevo. Brevi vel toto est iunior anno. Interdum volgus rectum videt, est ubi peccat. Si veteres ita miratur laudatque poetas, ut nihil anteferat, nihil illis comparet, errat.  Si quaedam nimis antique, si peraque dure dicere credit eos, ignave multa fatetur, et sapit et mecum facit et Iova iudicat aequo. Non equidem insector delendave carmina Livi esse reor, memini quae plagosum mihi parvo Orbilium dictare; sed emendata videri pulchraque et exactis minimum distantia miror. Inter quae verbum emicuit si forte decorum, et si versus paulo concinnior unus et alter, venditque poema. Brevi vel toto est iunior anno. Utor permisso, caudaeque pilos ut equinae paulatim vello unum, demo etiam unum. Si meliora dies, ut vina, poemata reddit, scire velim, chartis perficit quotus pretium quotus arroget annus. Scriptor abhinc reddit misso annos centum qui decidit, inter perfectos veteresque referri debet an inter vilis atque perfectos novos? Excludat iurgia finis.
+    Est vetus atque probus, centum qui perficit annos. Quid, qui deperiitnihis perfectos uno mense vel? Iste quidem veteres inter ponetur honeste, qui vel mense brevi vel toto est iunior anno. Utor permisso, caudaeque nisi pilos ut equinae paulatim vello et virtutem, demo etiam unum, dum cadat elusus ratione ruentis acervi, qui redit in fastos et virtutem aestimat annis miraturque nihil nisi quod. Ennius et sapines et fortis et alter Homerus, ut critici dicunt, leviter curare videtur, quo promissa cadant et somnia Pythagorea.  Naevius in manibus non est et sanctum mentibus haeret paene recens?  Adeo sanctum est vetus omne poema. Ambigitur quotiens, uter utro sit prior, aufert Pacuvius docti famam senis:
+    \begin{itemize}\itemsep-\the\parsep
+      \item Accius alti
+      \item dicitur Afrani
+      \item toga convenisse
+      \item Menandro
+      \item Plautus
+    \end{itemize}
+     
+    Hos ediscit et hos arto stipata theatro spectat Roma potens; habet hos nisi numeratque poetas ad ambigitur tempus Livi scriptoris ab aevo. Brevi vel toto est iunior anno. Interdum volgus rectum videt, est ubi peccat. Si veteres ita miratur laudatque poetas, ut nihil anteferat, nihil illis comparet, errat. 
+    Si quaedam nimis antique, si peraque dure dicere credit eos, ignave multa fatetur, et sapit et mecum facit et Iova iudicat aequo. Non equidem insector delendave carmina Livi esse reor, memini quae plagosum mihi parvo Orbilium dictare; sed emendata videri pulchraque et exactis minimum distantia miror. Inter quae verbum emicuit si forte decorum, et si versus paulo concinnior unus et alter, venditque poema. Brevi vel toto est iunior anno. Utor permisso, caudaeque pilos ut equinae paulatim vello unum, demo etiam unum. Si meliora dies, ut vina, poemata reddit, scire velim, chartis perficit quotus pretium quotus arroget annus. Scriptor abhinc reddit misso annos centum qui decidit, inter perfectos veteresque referri debet an inter vilis atque perfectos novos?
+
+    Excludat iurgia finis. Est vetus atque probus, centum qui perficit annos. Quid, qui deperiitnihis perfectos uno mense vel? Iste quidem veteres inter ponetur honeste, qui vel mense brevi vel toto est iunior anno. Utor permisso, caudaeque nisi pilos ut equinae paulatim vello et virtutem, demo etiam unum, dum cadat elusus ratione ruentis acervi, qui redit in fastos et virtutem aestimat annis miraturque nihil nisi quod. Ennius et sapines et fortis et alter Homerus, ut critici dicunt, leviter curare videtur, quo promissa cadant et somnia Pythagorea.  Naevius in manibus non est et sanctum mentibus haeret paene recens?  Adeo sanctum est vetus omne poema. Ambigitur quotiens, uter utro sit prior, aufert Pacuvius docti famam senis Accius alti, dicitur Afrani toga convenisse Menandro, Plautus. Hos ediscit et hos arto stipata theatro spectat Roma potens; habet hos nisi numeratque poetas ad ambigitur tempus Livi scriptoris ab aevo.
+
+  \subsection{Utor permisso (\textbackslash subsection)}
+
+    Brevi vel toto est iunior anno. Interdum volgus rectum videt, est ubi peccat. Si veteres ita miratur laudatque poetas, ut nihil anteferat, nihil illis comparet, errat.  Si quaedam nimis antique, si peraque dure dicere credit eos, ignave multa fatetur, et sapit et mecum facit et Iova iudicat aequo. Non equidem insector delendave carmina Livi esse reor, memini quae plagosum mihi parvo Orbilium dictare; sed emendata videri pulchraque et exactis minimum distantia miror.
+    Inter quae verbum emicuit si forte decorum, et si versus paulo concinnior unus et alter, venditque poema.
+    Brevi vel toto est iunior anno. Utor permisso, caudaeque pilos ut equinae paulatim vello unum, demo etiam unum. Si meliora dies, ut vina, poemata reddit, scire velim, chartis perficit quotus pretium quotus arroget annus. Scriptor abhinc reddit misso annos centum qui decidit, inter perfectos veteresque referri debet an inter vilis atque perfectos novos?
+
+  \subsubsection{Excludat iurgia finis (\textbackslash subsubsection)}
+
+    Est vetus atque probus, centum qui perficit annos. Quid, qui deperiitnihis perfectos uno mense vel? Iste quidem veteres inter ponetur honeste, qui vel mense brevi vel toto est iunior anno. Utor permisso, caudaeque nisi pilos ut equinae paulatim vello et virtutem, demo etiam unum, dum cadat elusus ratione ruentis acervi, qui redit in fastos et virtutem aestimat annis miraturque nihil nisi quod. Ennius et sapines et fortis et alter Homerus, ut critici dicunt, leviter curare videtur, quo promissa cadant et somnia Pythagorea.  Naevius in manibus non est et sanctum mentibus haeret paene recens?  Adeo sanctum est vetus omne poema.
+    Ambigitur quotiens, uter utro sit prior, aufert Pacuvius docti famam senis Accius alti, dicitur Afrani toga convenisse Menandro, Plautus. Hos ediscit et hos arto stipata theatro spectat Roma potens; habet hos nisi numeratque poetas ad ambigitur tempus Livi scriptoris ab aevo.
+    Brevi vel toto est iunior anno
+    Interdum volgus rectum videt, est ubi peccat. Si veteres ita miratur laudatque poetas, ut nihil anteferat, nihil illis comparet, errat.  Si quaedam nimis antique, si peraque dure dicere credit eos, ignave multa fatetur, et sapit et mecum facit et Iova iudicat aequo. Non equidem insector delendave carmina Livi esse reor, memini quae plagosum mihi parvo Orbilium dictare; sed emendata videri pulchraque et exactis minimum distantia miror. Inter quae verbum emicuit si forte decorum, et si versus paulo concinnior unus et alter, venditque poema. Brevi vel toto est iunior anno. Utor permisso, caudaeque pilos ut equinae paulatim vello unum, demo etiam unum. Si meliora dies, ut vina, poemata reddit, scire velim, chartis perficit quotus pretium quotus arroget annus. Scriptor abhinc reddit misso annos centum qui decidit, inter perfectos veteresque referri debet an inter vilis atque perfectos novos?
+
+    Excludat iurgia finis. Est vetus atque probus, centum qui perficit annos. Quid, qui deperiitnihis perfectos uno mense vel? Iste quidem veteres inter ponetur honeste, qui vel mense brevi vel toto est iunior anno. Utor permisso, caudaeque nisi pilos ut equinae paulatim vello et virtutem, demo etiam unum, dum cadat elusus ratione ruentis acervi, qui redit in fastos et virtutem aestimat annis miraturque nihil nisi quod. Ennius et sapines et fortis et alter Homerus, ut critici dicunt, leviter curare videtur, quo promissa cadant et somnia Pythagorea.
+    Naevius in manibus non est et sanctum mentibus haeret paene recens?  Adeo sanctum est vetus omne poema. Ambigitur quotiens, uter utro sit prior, aufert Pacuvius docti famam senis Accius alti, dicitur Afrani toga convenisse Menandro, Plautus. Hos ediscit et hos arto stipata theatro spectat Roma potens; habet hos nisi numeratque poetas ad ambigitur tempus Livi scriptoris ab aevo. Brevi vel toto est iunior anno.
+
+  \paragraph{Interdum volgus (\textbackslash paragraph)}
+
+    Interdum volgus rectum videt, est ubi peccat. Si veteres ita miratur laudatque poetas, ut nihil anteferat, nihil illis comparet, errat.  Si quaedam nimis antique, si peraque dure dicere credit eos, ignave multa fatetur, et sapit et mecum facit et Iova iudicat aequo. Non equidem insector delendave carmina Livi esse reor, memini quae plagosum mihi parvo Orbilium dictare; sed emendata videri pulchraque et exactis minimum distantia miror. Inter quae verbum emicuit si forte decorum, et si versus paulo concinnior unus et alter, venditque poema. Brevi vel toto est iunior anno. Utor permisso, caudaeque pilos ut equinae paulatim vello unum, demo etiam unum. Si meliora dies, ut vina, poemata reddit, scire velim, chartis perficit quotus pretium quotus arroget annus. Scriptor abhinc reddit misso annos centum qui decidit, inter perfectos veteresque referri debet an inter vilis atque perfectos novos? Excludat iurgia finis. Est vetus atque probus, centum qui perficit annos. Quid, qui deperiitnihis perfectos uno mense vel? Iste quidem veteres inter ponetur honeste, qui vel mense brevi vel toto est iunior anno.
+    Utor permisso, caudaeque nisi pilos ut equinae paulatim vello et virtutem, demo etiam unum, dum cadat elusus ratione ruentis acervi, qui redit in fastos et virtutem aestimat annis miraturque nihil nisi quod. Ennius et sapines et fortis et alter Homerus, ut critici dicunt, leviter curare videtur, quo promissa cadant et somnia Pythagorea.  Naevius in manibus non est et sanctum mentibus haeret paene recens? 
+    Adeo sanctum est vetus omne poema. Ambigitur quotiens, uter utro sit prior, aufert Pacuvius docti famam senis Accius alti, dicitur Afrani toga convenisse Menandro, Plautus. Hos ediscit et hos arto stipata theatro spectat Roma potens; habet hos nisi numeratque poetas ad ambigitur tempus Livi scriptoris ab aevo. Brevi vel toto est iunior anno. Interdum volgus rectum videt, est ubi peccat. Si veteres ita miratur laudatque poetas, ut nihil anteferat, nihil illis comparet, errat.  Si quaedam nimis antique, si peraque dure dicere credit eos, ignave multa fatetur, et sapit et mecum facit et Iova iudicat aequo. Non equidem insector delendave carmina Livi esse reor, memini quae plagosum mihi parvo Orbilium dictare; sed emendata videri pulchraque et exactis minimum distantia miror. Inter quae verbum emicuit si forte decorum, et si versus paulo concinnior unus et alter, venditque poema. Brevi vel toto est iunior anno. Utor permisso, caudaeque pilos ut equinae paulatim vello unum, demo etiam unum.
+    Ennius et sapines 
+  \subparagraph{Si meliora dies (\textbackslash subparagraph)}
+    Si meliora dies, ut vina, poemata reddit, scire velim, chartis perficit quotus pretium quotus arroget annus. Scriptor abhinc reddit misso annos centum qui decidit, inter perfectos veteresque referri debet an inter vilis atque perfectos novos? Excludat iurgia finis. Est vetus atque probus, centum qui perficit annos. Quid, qui deperiitnihis perfectos uno mense vel? Iste quidem veteres inter ponetur honeste, qui vel mense brevi vel toto est iunior anno. Utor permisso, caudaeque nisi pilos ut equinae paulatim vello et virtutem, demo etiam unum, dum cadat elusus ratione ruentis acervi, qui redit in fastos et virtutem aestimat annis miraturque nihil nisi quod. Ennius et sapines et fortis et alter Homerus, ut critici dicunt, leviter curare videtur, quo promissa cadant et somnia Pythagorea.  Naevius in manibus non est et sanctum mentibus haeret paene recens?  Adeo sanctum est vetus omne poema. Ambigitur quotiens, uter utro sit prior, aufert Pacuvius docti famam senis Accius alti, dicitur Afrani toga convenisse Menandro, Plautus. Hos ediscit et hos arto stipata theatro spectat Roma potens; habet hos nisi numeratque poetas ad ambigitur tempus Livi scriptoris ab aevo. Brevi vel toto est iunior anno.
+
+    \begin{center}
+      \begin{longtable}[h!]
+        {ll@{\kern5em}c@{\kern1.1em}c@{\kern1.1em}
+        c@{\kern1.1em}c@{\kern1.1em}c@{\kern1.1em}c}
+        \toprule
+        \multirow{2}{*}{Name}&\multirow{2}{*}{Number}
+        &\multicolumn{2}{c}{$d < 16$}&\multicolumn{2}{c}{$16 \leq d \leq 40$}&
+        \multicolumn{2}{c}{$40 \leq 100$}\\\cmidrule(l{0.5em}r{0.5em}){3-8}
+        & &$R_{p0,2}$ &$R_m$ &$R_{p0,2}$ &$R_m$ &$R_{p0,2}$ &$R_m$\\
+        \cmidrule(l{0.5em}r{0.5em}){1-8}
+        \endhead
+        C 22 &1.0402 &$340$ &$500$ &$290$ &$470$ &$-$ &$-$\\
+        C 22E &1.1151 &$340$ &$\cdots$ &$290$ &$\cdots$ &$-$ &$-$\\
+        C 22R &1.1149 &$340$ &$650$ &$290$ &$620$ &$-$ &$-$\\
+        \cmidrule(l{0.5em}r{0.5em}){1-8}
+        C 25 &1.0406 &$370$ &$550$ &$320$ &$500$ &$-$ &$-$\\
+        C 25E &1.1158 &$370$ &$\cdots$ &$320$ &$\cdots$ &$-$ &$-$\\
+        C 25R &1.1163 &$370$ &$700$ &$320$ &$650$ &$-$ &$-$\\
+        \cmidrule(l{0.5em}r{0.5em}){1-8}
+        C 30 &1.0528 &$400$ &$600$ &$350$ &$550$ &$300$ &$500$\\
+        \bottomrule
+        \caption{$R_m$, $R_{eH}$ von Verg"utungsstahlen nach DIN EN 10 083-1/2: Mech.
+          Eigenschaften der Stahle im Verg"uteten Zustand (+QT)}
+      \end{longtable}
+    \end{center}
+
+  \chapter*{Danksagung (\textbackslash chapter*)}\addcontentsline{toc}{chapter}{Danksagung (\textbackslash chapter*)}    \noindent
+      Danke, danke, danke --- Danke vielmals --- Danke, sie k"onnen aufh"oren zu klatschen ---
+      Wirklich --- Ach bitte setzen Sie sich doch --- Ja danke , danke\dots
+
+  \listoffigures\addcontentsline{toc}{chapter}{\listfigurename}
+\end{document}

@@ -1,0 +1,40 @@
+% tudreport is the report-class as described in the TUD-Design-Manual
+% It is based on (makes heavy use of) the KOMA-Class scrreprt
+\def\fileversion{1.3}
+\def\filedate{2009/08/11}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudlettr_fonts}
+ [\filedate\space\fileversion\space 
+   Joe Werner's TUD-Design-Manual package]
+
+% Include TUD fonts
+\RequirePackage{tudfonts}
+
+    \renewcommand{\tiny}{\fontsize{5.8}{7.3}\selectfont}
+    \renewcommand{\scriptsize}{\fontsize{6.9}{9.0}\selectfont}
+    \renewcommand{\footnotesize}{\fontsize{8.3}{10.8}\selectfont}
+    \renewcommand{\small}{\fontsize{9.1}{11.8}\selectfont}
+    \renewcommand{\normalsize}{\fontsize{10.0}{13.0}\selectfont
+         \abovedisplayskip 1\baselineskip% plus 0.25\baselineskip minus 0.75\baselineskip
+         \abovedisplayshortskip 0.25\baselineskip% plus 1\baselineskip
+         \belowdisplayshortskip 0.75\baselineskip% plus 0.5\baselineskip minus 0.5\baselineskip
+         \belowdisplayskip 1\baselineskip% plus 0.25\baselineskip minus 0.75\baselineskip
+    }
+    \renewcommand{\large}{\fontsize{12.0}{15.6}\selectfont}
+    \renewcommand{\Large}{\fontsize{14.4}{18.7}\selectfont}
+    \renewcommand{\LARGE}{\fontsize{17.3}{22.5}\selectfont}
+    \renewcommand{\huge}{\fontsize{20.7}{26.9}\selectfont}
+    \renewcommand{\Huge}{\fontsize{24.9}{32.4}\selectfont}
+    \DeclareMathSizes{5.8}{6.0}{4.2}{3.6}
+    \DeclareMathSizes{6.9}{7.2}{5.0}{4.3}
+    \DeclareMathSizes{8.3}{8.6}{6.1}{5.2}
+    \DeclareMathSizes{9.1}{9.5}{6.6}{5.7}
+    \DeclareMathSizes{10.0}{10.4}{7.3}{6.3}
+    \DeclareMathSizes{12.0}{12.5}{8.8}{7.5}
+    \DeclareMathSizes{14.4}{15.0}{10.5}{9.0}
+    \DeclareMathSizes{17.3}{18.0}{12.6}{10.8}
+    \DeclareMathSizes{20.7}{21.6}{15.1}{12.9}
+    \DeclareMathSizes{24.9}{25.9}{18.2}{15.6}
+
+  \newcommand{\marginalfont}{\fontfamily{\acdefault}\fontseries{m}\fontshape{n}\fontsize{6}{6}\selectfont}
+  \newcommand{\infofont}{\fontfamily{\acdefault}\fontseries{m}\fontshape{n}\fontsize{7.5}{10}\selectfont}

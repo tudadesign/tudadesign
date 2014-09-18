@@ -1,0 +1,75 @@
+% It is based on (makes heavy use of) the KOMA-Class scrreprt
+\def\fileversion{0.2}
+\def\filedate{2010/03/22}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudexrcse_exame}
+ [\filedate\space\fileversion\space
+   Clemens von Loewenich's and Joe Werner's TUD-Design package]
+
+\RequirePackage{afterpage}
+\RequirePackage{eso-pic}
+
+\newbox\TUD@exercise@exameheader
+\newlength{\TUD@exercise@exameheader@height}
+\newlength{\TUD@exercise@exameheader@depth}
+\newlength{\TUD@exercise@exameheader@headsep@orig}
+\newlength{\TUD@exercise@exameheader@headsep}
+\newlength{\TUD@exercise@exameheader@textheight}
+\newcounter{TUD@exercise@exameheader@page}
+
+\newcommand{\TUD@exercise@exameheader@afterpage}{%
+  \ifnum\thepage=\theTUD@exercise@exameheader@page%
+    \global\TUD@exercise@exameheader@headsep@orig\headsep%
+    \global\headsep\TUD@exercise@exameheader@headsep%
+    \global\textheight\TUD@exercise@exameheader@textheight%
+    \global\vsize\textheight%
+    \global\@colht\textheight%
+    \global\@colroom\textheight%
+    \AddToShipoutPicture{%
+      \AtTextUpperLeft{\put(0,\LenToUnit{\TUD@exercise@exameheader@headsep@orig}){%
+        \copy\TUD@exercise@exameheader%
+      }}%
+    }%   
+  \else%
+    \global\afterpage{\TUD@exercise@exameheader@afterpage}%
+  \fi%
+}
+
+\newenvironment{examheader}[1][2]{%      
+  \setcounter{TUD@exercise@exameheader@page}{#1}%
+  \global\setbox\TUD@exercise@exameheader=\expandafter\vbox\bgroup\sublinefont\parindent=0pt%
+}{%
+  \par\rule{\textwidth}{\@TUD@smallruleheight}%
+  \egroup%
+  \settoheight{\TUD@exercise@exameheader@height}{\usebox{\TUD@exercise@exameheader}}%
+  \settodepth{\TUD@exercise@exameheader@depth}{\usebox{\TUD@exercise@exameheader}}%
+  \addtolength{\TUD@exercise@exameheader@height}{\TUD@exercise@exameheader@depth}%
+  \setlength{\TUD@exercise@exameheader@headsep}{2\headsep}%
+    \addtolength{\TUD@exercise@exameheader@headsep}{\TUD@exercise@exameheader@height}%
+  \global\TUD@exercise@exameheader@headsep\TUD@exercise@exameheader@headsep%
+  \setlength{\TUD@exercise@exameheader@textheight}{\textheight}%
+    \addtolength{\TUD@exercise@exameheader@textheight}{\headsep}%
+    \addtolength{\TUD@exercise@exameheader@textheight}{-\TUD@exercise@exameheader@headsep}%
+  \global\TUD@exercise@exameheader@textheight\TUD@exercise@exameheader@textheight%
+  \ifnum\thepage=\theTUD@exercise@exameheader@page
+    \TUD@exercise@exameheader@afterpage
+  \else
+    \afterpage{\TUD@exercise@exameheader@afterpage}%
+  \fi
+}
+
+\newcommand{\examheaderdefault}{%
+    \par%
+    \vrule\@height1.7\baselineskip%
+          \@depth0.3\baselineskip%
+          \@width\z@%
+    Name, Vorname: \hrulefill\hskip1em%
+    Matrikelnummer: %
+      \textwhitespace%
+      \textwhitespace%
+      \textwhitespace%
+      \textwhitespace%
+      \textwhitespace%
+      \textwhitespace%
+      \textwhitespace%
+}

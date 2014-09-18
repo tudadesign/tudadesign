@@ -1,0 +1,537 @@
+latex-tuddesign (0.0.20100410) unstable; urgency=high
+
+  * environment abstract supports two abstracts on one page
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Sat, 10 Apr 2010 01:34:51 +0100
+
+latex-tuddesign (0.0.20100326) unstable; urgency=high
+
+  * fix environment examheader in tudexercise
+  * minor documentation fix 
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Fri, 04 Mar 2010 21:51:27 +0100
+
+latex-tuddesign (0.0.20100204) unstable; urgency=high
+
+  * fix package dependency (Utopia fonts)
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 04 Feb 2010 22:50:59 +0100
+
+latex-tuddesign (0.0.20091231) unstable; urgency=high
+
+  * fix stretches below headings
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 31 Dec 2009 15:05:11 +0100
+
+latex-tuddesign (0.0.20091117) unstable; urgency=high
+
+  * fix option article with noresetcounter (tudreport)
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 17 Nov 2009 17:16:15 +0100
+
+latex-tuddesign (0.0.20090923) unstable; urgency=high
+
+  * fix pagebreak in headings
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 23 Sep 2009 22:07:20 +0100
+
+latex-tuddesign (0.0.20090921) unstable; urgency=high
+
+  * add \sponsor to tudreport class
+  * add counter seclinedepth tu tudheadings.sty
+  * add option solution tu tudexercise.cls
+  * add \LaTeX fix to tudfonts.sty (thanks to C.-D. Bredel)
+  * if \title has more the 4 lines, reduce fontsize (tudreport)
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Mon, 21 Sep 2009 15:20:27 +0100
+
+latex-tuddesign (0.0.20090811) unstable; urgency=high
+
+  * replace Charter v by Utopia v in mathmode
+  * changed mathfont scaling and \default[script]scriptratio
+  * chaneg fontsize \tiny
+  * remove keyval dependency, use xkeyval instead
+  * some minor changes
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Tue, 11 Aug 2009 12:09:54 +0100
+
+latex-tuddesign (0.0.20090806) unstable; urgency=high
+
+  * fix \part with marginpar
+  * insert option linedtoc in tudreport
+  * change caption fonts from Stafford to Frontpage
+  * fix footer in tudreport (leftmark and rightmark swaped)
+  * use Helvetica instead of Coputer Modern to avoid rasterd fonts (tudbeamer)
+  * fix \notes in tudbeamer
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 06 Aug 2009 15:56:22 +0100
+
+latex-tuddesign (0.0.20090625) unstable; urgency=high
+
+  * fix documentation
+  * some cleanup
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 25 Jun 2009 14:23:24 +0100
+
+latex-tuddesign (0.0.20090620) unstable; urgency=high
+
+  * remove option nochapterpage
+  * load class scrartcl in tudexercise
+  * load class scrartcl in tudposter
+  * load class scrartcl with option article in tudreport
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Sun, 20 Jun 2009 11:05:52 +0100
+
+latex-tuddesign (0.0.20090531) unstable; urgency=high
+
+  * change marginpar font to \footnotesize
+  * nopartpage doesn't include nochapterpage anymore
+  * tudletter allows more then 28 letters in one document
+  * some minor fixes
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Sun, 31 May 2009 17:11:31 +0100
+
+latex-tuddesign (0.0.20090220) unstable; urgency=high
+
+  * port tudbeamer to xkeyval
+  * fix \subsection and \subsubsection fontseries (regular -> medium)
+  * fix \institution with papersize a5 in tudreport
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Fri, 20 Feb 2009 15:36:12 +0100
+
+latex-tuddesign (0.0.20090212) unstable; urgency=high
+
+  * fix "unused global option: accentcolor" warning
+  * add \textwhitespace to tudfonts.sty
+  * fix numbering \paragraph and \subparagraph
+    thanks to Florian Greil for reporting this bug
+  * \subsection and \subsubsection uses fontseries regular
+  * add environment examheader to tudexercise
+  * add \examheaderdefault to tudexercise
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 12 Feb 2009 21:47:36 +0100
+
+latex-tuddesign (0.0.20090202) unstable; urgency=high
+
+  * fix \textaccentcolor and environment accentcolor in tudbeamer
+  * fix "pop emty color stack" warning
+  * add \markcenter and \mymarkcenter
+  * if package a4 is loaded, stop with error
+  * don't clear \@classoptionslist (fixes e.g. fixme)
+  * remove onelinecaption by default from tudreport  
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Mon, 02 Feb 2009 16:02:41 +0100
+
+latex-tuddesign (0.0.20090107) unstable; urgency=high
+
+  * make some code more general
+  * fix \part for papersizes different from a4
+  * fix \institution and \setinstitutionlogo for papersizes different from a4
+  * add option landscape to tudreport tudexercise and tudposter
+  * fix cropmarks with option landscape
+  * add option paper=<papersize> to tudexercise (a4report and a5report)
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 07 Jan 2009 15:54:25 +0100
+
+latex-tuddesign (0.0.20081224) unstable; urgency=high
+
+  * add class option book to tudreport
+  * fix heading indent for different secnumdepth values
+  * fix heading indent for stared versions
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 24 Dec 2008 00:50:23 +0100
+
+latex-tuddesign (0.0.20081219) unstable; urgency=high
+
+  * fix jumping titles in tudbeamer
+  * change heading indent with option bigchapter
+  * ensure pagestyle empty after abstract environment
+  * redefine abstract environment olny if it exists
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Fri, 19 Dec 2008 17:23:51 +0100
+
+latex-tuddesign (0.0.20081216) unstable; urgency=high
+
+  * don't pass option OT1 to fontenc (fixes bug with mathdesign)
+  * add removesome values for hyperref in tudcolours.sty
+  * replace dependency from package type1cm to fix-cm
+  * add \phantomsection to \chapter* if hyperref loaded
+  * \settitlepicture accept \includegraphics options (tudreport)
+  * don't pass option 'paper=a4' to scrlttr2 (tudletter)
+  * remove \@parskipfalse and \@parskip@indent from tudletter
+  * substitute \parskip=0pt by scrlttr2 option parskip=false (tudletter)
+  * add option nochapname to tudexercise
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Tue, 16 Dec 2008 11:32:13 +0100
+
+latex-tuddesign (0.0.20081120) unstable; urgency=high
+
+  * add default values for hyperref to tudcolours.sty
+  * remove a4report and a4letter from tudrules.sty
+  * add a5report to tudpaper.sty
+  * add option paper=<papersize> to tudreport (a4report and a5report)
+  * add option a4, a5 and 8pt to tudreprt_fonts.sty
+  * add option a4paper and a5paper to tudreprt_title
+  * add english support for tudexercise
+  * add twoside support to tudletter
+  * add option blackrule and adr=<file> to tudletter
+  * add configuration file support to tudletter
+  * set displayskips to constant values in tudlettr_fonts.sty
+  * set foldingmarks according to DIN 5008 in tudletter
+  * fix pagenumbers in tudletter
+  * complete from field in tudletter
+  * expand textwidth on second page in tudletter
+  * add KOMA variable shortfromname to tudletter
+  * fix titleframe in tudbeamer
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 20 Nov 2008 21:19:26 +0100
+
+latex-tuddesign (0.0.20081102) unstable; urgency=high
+
+  * rewritten tudexercise.cls
+  * add fix \maketitle in tudposter and tudexercise without \subtitle and
+    \subsubtitle
+  * add option colorbacksubtitle to tudposter
+  * change option colorbacktitle in tudposter to work with colorbacksubtitle
+  * add pagestyle myheadings and commands \mymarkleft, \mymarkright and \mymarkboth
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Sun, 02 Nov 2008 14:42:12 +0100
+
+latex-tuddesign (0.0.20081029) unstable; urgency=high
+
+  * add tudexercise class
+  * add tudletter class
+  * add tudposter class
+  * add \mbseries, \textmb, \mathmb and \mb for medium bold fonts
+  * set \em to \itshape (for \emph and environemt em)
+  * fix quote environment
+  * add crop marks to paper=a0b
+  * expand a0b to 920mm x 1268mm
+  * rearranged and rewritten code to be more general
+  * fix some minor and/or internal issues
+  * new documentation for all classes
+  
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 29 Oct 2008 10:58:23 +0100
+
+latex-tuddesign (0.0.20081009) unstable; urgency=high 
+  * fix problem with mathdesign package and lyx 
+  * use viewport= instead of bb= with \includegraphics
+  * don't use texcoord with eso-pic because of problems with pdfinclude
+  * change pagenumber position 
+  * fix abstract environment
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 09 Oct 2008 15:18:32 +0100
+
+latex-tuddesign (0.0.20080819) unstable; urgency=high
+
+  * add a4letter to tudpaper
+  * fix problems with fonts (tudbeamer)
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Tue, 19 Aug 2008 09:20:12 +0100
+
+latex-tuddesign (0.0.20080815) unstable; urgency=high
+
+  * Pass 'onelinecaption` instead of 'noonelinecaption` to scrreprt
+  * fix wrong spacing in frametitles (tudbeamer)
+  * fix problems with fonts (tudbeamer)
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Fri, 15 Aug 2008 14:02:52 +0100
+
+latex-tuddesign (0.0.20080814) unstable; urgency=high
+
+  * fix wrong spacing in frametitles (tudbeamer)
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 14 Aug 2008 16:35:43 +0100
+
+latex-tuddesign (0.0.20080811) unstable; urgency=high
+
+  * some minor fixes
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Mon, 11 Aug 2008 14:51:16 +0100
+
+latex-tuddesign (0.0.20080809) unstable; urgency=high
+
+  * fix bug with \mathbf
+  * fix footer in pagestyle headigns
+  * fix institutionlogo in tudreport
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Sat, 09 Aug 2008 16:11:34 +0100
+
+latex-tuddesign (0.0.20080722) unstable; urgency=high
+
+  * add option marginparwidth in tudreport
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Tue, 22 Jul 2008 17:28:14 +0100
+
+latex-tuddesign (0.0.20080625) unstable; urgency=high
+
+  * use package textcomp for symbols (tudfonts.sty)
+  * fix spacings with Option bigchapter
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 25 Jun 2008 18:31:32 +0100
+
+latex-tuddesign (0.0.20080623) unstable; urgency=high
+
+  * fix smallcap fonts
+  * remove options bigchapter from option longdoc
+  * fix headlines with more then one line
+  * prevent pagebreak in headlines
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Sun, 15 Jun 2008 22:49:31 +0100
+
+latex-tuddesign (0.0.20080615) unstable; urgency=high
+
+  * adapt tudreport to new corporate design manual
+  * add options bigchapter and paginbar to tudreport
+  * remove options invertrule from tudreport
+  * fix margins on title page and titleback page
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Sun, 15 Jun 2008 22:49:31 +0100
+
+latex-tuddesign (0.0.20080528) unstable; urgency=high
+
+  * add fonstsizes for 10pt in tudreprt_fonts
+  * introduce classoptions 9.5pt in tudreport
+  * fix error with default accentcolor
+  * add Package dependency (type1cm)
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 28 May 2008 22:39:13 +0100
+
+latex-tuddesign (0.0.20080508) unstable; urgency=high
+
+  * change fonstsizes in tudreprt_fonts (9.5pt alias 10pt)
+  * add fonstsizes for 11pt and 12pt in tudreprt_fonts
+  * introduce classoptions 10pt, 11pt and 12pt in tudreport
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 08 May 2008 17:24:32 +0100
+
+latex-tuddesign (0.0.20080507) unstable; urgency=high
+
+  * introduce colour tudidentbar
+  * fix error with scrreprt v2.95
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 07 May 2008 09:42:54 +0100
+
+latex-tuddesign (0.0.20080506) unstable; urgency=high
+
+  * change footerfont from weight medium to regular (tudreport)
+  * fix caption font with package subfigure
+  * \marginpar: change marginalia font to Stafford and 
+    marginalia fontcolor to tudtextaccent in (tudreport)
+  * fix problems with self defined margins
+  * change \part layout (tudreport)
+  * minor changes, hopefully
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Tue, 06 May 2008 14:21:23 +0100
+
+latex-tuddesign (0.0.20080410) unstable; urgency=high
+
+  * fix broken a0b paper
+  * split tudfonts in tudfonts.sty and tudreprt_fonts.sty
+  * fix indentbar width e.g. in case of \marginpar
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 10 Apr 2008 11:59:24 +0100
+
+latex-tuddesign (0.0.20080408) unstable; urgency=high
+
+  * fix wrong colours in tudbeamer (should be more general)
+  * introduce colour tudtextaccent
+  * \textaccentcolor and environment accentcolor are using colour tudtextaccent now
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Tue, 08 Apr 2008 11:18:53 +0100
+
+latex-tuddesign (0.0.20080407) unstable; urgency=high
+
+  * fix wrong colours in description and enumeration (tudbeamer)
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Mon, 07 Apr 2008 14:31:34 +0100
+
+latex-tuddesign (0.0.20080404) unstable; urgency=high
+
+  * fix broken options colorback, colorbacktitle and inverttitle in
+    tudbeamer
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Fri, 04 Apr 2008 14:07:32 +0100
+
+latex-tuddesign (0.0.20080403) unstable; urgency=high
+
+  * change spacing around headings in tudreport
+  * introduce option noheadingspace to get old behavior
+  * introduce option article into tudreport
+  * replace options noresetequation and noresetfootnote by option noresetcounter in tudreport
+  * introduce option numbersubsubsec into tudreport
+  * fix titlepage with geometry package option bindingoffset in tudreport
+  * set abstract always in onecolumn mode, even twocolumn is set (tudreport)
+  * fix problem with class option parsing in KOMA v2.95
+  * fix dependencies for ubuntu 7.10
+  * addapted footline to specification in CD manual (tudbeamer)
+  * completed colour definitions in tudbeamer
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 03 Apr 2008 15:23:15 +0100
+
+latex-tuddesign (0.0.20080317-2) unstable; urgency=high
+
+  * fix wrong spacings on titlepage in tudreport
+    hopefully the last time
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Mon, 17 Mar 2008 14:48:54 +0100
+
+latex-tuddesign (0.0.20080317) unstable; urgency=high
+
+  * some parts in tudreport are rewritten to be more general
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Mon, 17 Mar 2008 09:11:12 +0100
+
+latex-tuddesign (0.0.20080314) unstable; urgency=high
+
+  * fix wrong spacings on titlepage in tudreport
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Fri, 14 Mar 2008 09:24:43 +0100
+
+latex-tuddesign (0.0.20080313) unstable; urgency=high
+
+  * add \institution and \setinstitutionlogo to tudreport class
+  * fix bug with abstract environmet and class option twoside
+  * fix bug with titlepage and class option parskip -
+    thanks to Michael Kunz
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 13 Mar 2008 14:53:47 +0100
+
+latex-tuddesign (0.0.20080312) unstable; urgency=high
+
+  * remove pagestyle TUD and TUDempty
+  * redefine pagstyle empty plain headings
+  * define pagestyle realempty as compensation to the redefined empty
+  * fix some bugs with class options openright
+  * some minor layout changes
+  * some clean up
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 12 Mar 2008 11:20:03 +0100
+
+latex-tuddesign (0.0.20080311) unstable; urgency=high
+
+  * not parindent after an new chapter, ... and subsubsection - thanks to Dirk grosse Osterhues
+  * include class option firstlineindent in to tudreport - thanks to Dirk grosse Osterhues
+  * include class option noresetequation and noresetfootnote in to tudreport -
+    thanks to Volker Sauer
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Tue, 11 Mar 2008 17:04:42 +0100
+
+latex-tuddesign (0.0.20080307) unstable; urgency=high
+
+  * fix scrreprt class option openright in tudreport
+  * fix scrreprt class options liststotoc, bibtotoc, idxtotoc in tudreport
+  * \paragraph and \subparagraph broke sometimes the layout. Fixed (tudreport)
+  * remove named color TUDaccent
+  * set color scheme order to grayscale -> RGB -> cmyk
+    fixes strange colors with innertheme(rounded)
+  * add environment abstract to tudreport
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Fri, 07 Mar 2008 12:43:23 +0100
+
+latex-tuddesign (0.0.20080221) unstable; urgency=high
+
+  * change math font in tudbeamer class to sans serife dont "Computer Modern Sans" (cmss)
+  * fix nochapterpage option in tudreport class
+  * use viewport for tud_logo instead of manipulated file
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 21 Feb 2008 13:40:51 +0100
+
+latex-tuddesign (0.0.20080220) unstable; urgency=high
+
+  * Minor layout fixes in tudbeamer class
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 20 Feb 2008 08:59:51 +0100
+
+latex-tuddesign (0.0.20080219) unstable; urgency=high
+
+  * Fix titleframe in tudbeamer
+  * Fix color definition RGB white 
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Tue, 19 Feb 2008 11:29:11 +0100
+
+latex-tuddesign (0.0.20080217) unstable; urgency=high
+
+  * Improve positioning in tudbeamer outertheme
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Sun, 17 Feb 2008 11:26:34 +0100
+
+latex-tuddesign (0.0.20080215) unstable; urgency=high
+
+  * Add tudbeamer class
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Fri, 15 Feb 2008 15:06:23 +0100
+
+latex-tuddesign (0.0.20080214-2) unstable; urgency=high
+
+  * Fix layout with option twocolumn
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 14 Feb 2008 21:45:06 +0100
+
+latex-tuddesign (0.0.20080214-1) unstable; urgency=high
+
+  * Code rearrangement as preparation for poster and beamer class
+  * tudpaper.sty included. Proviedes bars, papersize and margins 
+    for Paper DIN A6 - DIN A0, DIN LANG. There are to options, a4 and 
+    a4report. a4report has differtent marigns then a4.
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 14 Feb 2008 16:30:53 +0100
+
+latex-tuddesign (0.0.20080214) unstable; urgency=high
+
+  * fix Problems with option processing
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 13 Feb 2008 23:12:11 +0100
+
+latex-tuddesign (0.0.20080213) unstable; urgency=high
+
+  * Fix wrong bottom margin on first side with class option ownside
+  * improve tudcolor.cfg to allow multiple accentcolor options.
+    If accentcolor was set twice or more, color checks failed.
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Mon, 11 Feb 2008 14:10:42 +0100
+
+latex-tuddesign (0.0.20080211) unstable; urgency=high
+
+  * Use mathdesign for better math fonts
+  * Code rearrangement as preparation for poster and beamer class
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Mon, 11 Feb 2008 15:19:23 +0100
+
+latex-tuddesign (0.0.20080201) unstable; urgency=high
+
+  * Some minor layout changes
+  * Some clean up
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Fri, 01 Feb 2008 08:03:16 +0100
+
+latex-tuddesign (0.0.20080131) unstable; urgency=high
+
+  * Some minor layout changes
+  * fix problem with Charter Italic
+  * Some clean up
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 31 Jan 2008 08:20:23 +0100
+
+latex-tuddesign (0.0.20080130) unstable; urgency=high
+
+  * introduce environments accenttext and accentcolor
+  * bugfix in checks for colors
+  * redefine some command / length als local instead of global 
+  * Some clean up
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 30 Jan 2008 09:38:15 +0100
+
+latex-tuddesign (0.0.20080129) unstable; urgency=high
+
+  * documentclass checks validity of colors
+  * minor bugfix in option nopartpage
+  * Some clean up
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Tue, 29 Jan 2008 16:02:23 +0100
+
+latex-tuddesign (0.0.20080124) unstable; urgency=high
+
+  * Initial Release.
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 24 Jan 2008 06:50:42 +0100

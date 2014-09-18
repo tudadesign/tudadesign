@@ -1,0 +1,304 @@
+% Copyright 2008 Clemens von Loewenich and Johannes Werner
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+\def\fileversion{1.1}
+\def\filedate{2009/07/14}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerouterthemeTUD}
+ [\filedate\space\fileversion\space
+   Joe Werner's and Clemens von Loewenich's TUD-Design package]    
+
+% paper size is 128mm x 96mm
+% all sizes are A5 scaled to our paperwidth
+\mode<all>
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+% load needed packages
+\RequirePackage{xkeyval}
+\RequirePackage{calc}
+\RequirePackage{graphicx}
+
+\newlength{\TUD@titleboxheight}
+\newlength{\TUD@titleboxwidth}
+\newlength{\TUD@titleboxdepth}%
+\newlength{\TUD@titleboxcomplete}%
+\newlength{\TUD@frametitleboxheight}
+\newlength{\TUD@frametitleboxwidth}
+\newlength{\TUD@logoboxheight}
+\newlength{\TUD@logoboxwidth}
+\newlength{\TUD@logoboxskip}
+\newlength{\TUD@rulelength}
+\newlength{\TUD@ruleskip}
+\newlength{\TUD@largeruleheight}
+\newlength{\TUD@smallruleheight}
+\newlength{\TUD@fontheight}
+\newlength{\TUD@smalllogoboxheight}
+\newlength{\TUD@smalllogoboxdepth}
+\newlength{\TUD@smalllogoboxwidth}
+\newlength{\TUD@smallauthorboxwidth}
+
+\setlength{\TUD@rulelength}{.95\paperwidth}
+\setlength{\TUD@largeruleheight}{0.017\paperwidth}
+\setlength{\TUD@smallruleheight}{0.002\paperwidth}
+\setlength{\TUD@ruleskip}{0.007\paperwidth}
+
+\setlength{\TUD@logoboxskip}{0.025\paperheight}
+
+% Definition der verschiedenen Linien
+\newcommand{\tudrule}{\rule{\TUD@rulelength}{0.5\TUD@smallruleheight}}
+
+% neue Kommandos
+\renewcommand\logo[2][1]{
+  \newlength{\TUD@institutelogoboxheight}
+  \defbeamertemplate*{logo}{large}{%
+    #2
+  }%
+  \defbeamertemplate{logo}{small}{%
+    \usebeamerfont{author in head/foot}%
+    \settoheight{\TUD@fontheight}{\strut}%
+    \TUD@institutelogoboxheight=1.5\TUD@fontheight%
+    \resizebox{!}{#1\TUD@institutelogoboxheight}{#2}%
+  }%
+}
+
+\newcommand\insertsmalllogo{\setbeamertemplate{logo}[small]\usebeamertemplate{logo}}
+
+% Boxen
+\newsavebox{\TUD@logobox}
+\savebox{\TUD@logobox}[0.189\paperwidth]{
+  \fboxrule0mm %
+  \fboxsep0mm %
+  \fcolorbox{black}{white}{\includegraphics[viewport=0 0 135.79 63,width=0.189\paperwidth]{tud_logo}}
+}
+
+\settowidth{\TUD@logoboxwidth}{\usebox\TUD@logobox}
+\settoheight{\TUD@logoboxheight}{\usebox\TUD@logobox}
+
+\newsavebox{\frametitlebox}
+\newsavebox{\frameauthorbox}
+\newsavebox{\framelogobox}
+\newsavebox{\TUD@titlebox}
+\newsavebox{\TUD@titlepagebox}
+
+\newcommand{\TUD@rules}{%
+  \mbox{%
+    \color{largerulecolor}\rule{\TUD@rulelength}{0.017\paperwidth}%
+    \hspace{-\TUD@rulelength}%
+    \color{smallrulecolor}\rule[-0.009\paperwidth]{\TUD@rulelength}{0.002\paperwidth}%
+  }%
+}
+
+\setlength{\TUD@frametitleboxwidth}{\TUD@rulelength}
+\addtolength{\TUD@frametitleboxwidth}{-\TUD@logoboxwidth}
+\addtolength{\TUD@frametitleboxwidth}{-0.04\paperwidth}
+\setlength{\TUD@frametitleboxheight}{\TUD@logoboxheight}
+\addtolength{\TUD@frametitleboxheight}{2\TUD@logoboxskip}
+\setlength{\TUD@titleboxwidth}{\TUD@frametitleboxwidth}
+
+\defbeamertemplate*{sidebar left}{TUD theme}{}
+\defbeamertemplate*{sidebar right}{TUD theme}{}
+
+\defbeamertemplate*{footline}{TUD theme}
+{
+  \nointerlineskip%
+  \leavevmode%
+  \savebox{\frameauthorbox}{%
+    % Datum|FB|Institut|Autor|Seitenzahl, 
+    % wobei FB und Institut einunddasselbe Feld sind naemlich "institute".
+    \usebeamerfont{author in head/foot}%
+    \hbox{%
+      \ifx\beamer@shortdate\@empty%
+      \else\insertshortdate\fi%
+      \ifx\beamer@shortinstitute\@empty%
+      \else\ifx\beamer@shortdate\@empty\else~\textbar~\fi%
+        \insertshortinstitute\fi%
+      \ifx\beamer@shortauthor\@empty%
+      \else\ifx\beamer@shortinstitute\@empty%
+        \ifx\beamer@shortdate\@empty\else~\textbar~\fi%
+	\else~\textbar~\fi%
+	\insertshortauthor%
+      \fi%
+      ~\textbar~\insertframenumber%
+    }%
+  }%
+  \savebox{\framelogobox}{%
+    \mbox{\insertsmalllogo}%
+  }% 
+  \settoheight{\TUD@smalllogoboxheight}{\usebox{\framelogobox}}%
+  \settodepth{\TUD@smalllogoboxdepth}{\usebox{\framelogobox}}%
+  \addtolength{\TUD@smalllogoboxheight}{\TUD@smalllogoboxdepth}%
+  \settowidth{\TUD@smalllogoboxwidth}{\usebox{\framelogobox}}%
+  \settowidth{\TUD@smallauthorboxwidth}{\usebox{\frameauthorbox}}%
+  \begin{center}
+  \begin{minipage}{\TUD@rulelength}%
+    \tudrule\\%
+    \vskip1pt%
+    \begin{minipage}[t][\height][b]{\TUD@smallauthorboxwidth}
+    \usebox{\frameauthorbox}%
+    \end{minipage}%
+    \hfill%
+    \begin{minipage}[t][\height][b]{\TUD@smalllogoboxwidth}
+      \usebox{\framelogobox}%
+    \end{minipage}
+  \end{minipage}
+  \end{center}
+  \vskip-4pt%
+}
+
+\defbeamertemplate*{headline}{TUD theme}
+{
+  \leavevmode%
+  \begin{center}
+  \shortstack[c]{%
+    \TUD@rules\\%[-\baselineskip]%
+    \leavevmode%
+    \vspace{-0.6pt}%
+    \vspace*{-0.0194\paperheight}\\
+    \begin{beamercolorbox}[wd=\TUD@rulelength,ht=\TUD@frametitleboxheight,dp=0ex]{frametitle}%
+      \raggedleft%
+      \vbox{%
+      \vspace{\TUD@logoboxskip}%
+      \usebox{\TUD@logobox}\\%
+      \vspace{\TUD@logoboxskip}}%
+    \end{beamercolorbox}\\%
+    \vspace{-0.8pt}%
+    \vspace*{-0.0194\paperheight}\\
+    \tudrule%
+  }%
+  \end{center}
+}
+
+\defbeamertemplate{headline}{TUD title}{%
+  \savebox{\TUD@titlebox}{%
+    \usebeamerfont*{title}%
+    \leavevmode%
+    \hspace{1ex}%
+    \parbox{\TUD@titleboxwidth}{%
+      \usebeamerfont*{title}%
+      \usebeamercolor[fg]{title}%
+      \strut\normalbaselines\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\normalbaselines\strut\insertsubtitle\strut\par}%
+      \fi}%   
+  }%
+  \settoheight{\TUD@titleboxheight}{\usebox{\TUD@titlebox}}%
+  \addtolength{\TUD@titleboxheight}{2\TUD@logoboxskip}%
+  \settodepth{\TUD@titleboxdepth}{\usebox{\TUD@titlebox}}%
+  \setlength{\TUD@titleboxcomplete}{\TUD@titleboxheight}%
+  \addtolength{\TUD@titleboxcomplete}{\TUD@titleboxdepth}%
+    \ifdim \TUD@titleboxcomplete < \TUD@frametitleboxheight%
+      \setlength{\TUD@titleboxcomplete}{\TUD@frametitleboxheight}%
+    \fi%
+  \addtolength{\TUD@titleboxcomplete}{-\TUD@logoboxskip}%
+  \addtocontents{len}{\protect\global\TUD@titleboxcomplete\the\TUD@titleboxcomplete}
+  \leavevmode%
+  \begin{center}
+  \shortstack[c]{%
+    \leavevmode%
+    \TUD@rules\\%[-\baselineskip]%
+    \leavevmode%
+    \vspace{-0.6pt}%
+    \vspace*{-0.0194\paperheight}\\
+    \begin{beamercolorbox}[wd=\TUD@rulelength,ht=\TUD@logoboxskip,dp=\TUD@titleboxcomplete]{title}%
+      \raggedleft%
+      \parbox[t][\height][b]{\TUD@titleboxwidth}{%
+        \vspace*{-2pt}%
+	\usebox{\TUD@titlebox}}%
+      \hfill%
+      \parbox[t][\height][b]{\TUD@logoboxwidth}{%
+        \vbox{%
+	\usebox{\TUD@logobox}\\%
+        \vspace*{\TUD@titleboxcomplete}%
+        \vspace*{-\TUD@frametitleboxheight}%
+        \vspace{\TUD@logoboxskip}}%
+      }%
+    \end{beamercolorbox}\\%
+    \vspace{-0.8pt}%
+    \vspace*{-0.0194\paperheight}\\%
+    \tudrule%
+  }%
+  \end{center}
+}
+
+\defbeamertemplate*{frametitle}{TUD theme}{%
+  \vspace{-\TUD@frametitleboxheight}
+  \vspace{-.021\paperheight}
+  \savebox{\frametitlebox}[\TUD@frametitleboxwidth][l]{%
+    \begin{minipage}[t][\TUD@frametitleboxheight-0.02\paperheight]{\TUD@frametitleboxwidth}%
+      \usebeamerfont{frametitle}%
+      \raggedright%
+      \hspace*{0.85ex}%
+      \parbox[t][\TUD@frametitleboxheight-\TUD@logoboxskip]{\TUD@frametitleboxwidth-1ex}{\normalbaselines\strut\insertframetitle\strut\par}%
+    \end{minipage}
+  }
+  \usebox{\frametitlebox}
+  \vspace*{\beamer@frametopskip}
+}
+
+
+\defbeamertemplate*{title page}{TUD theme}{%
+%  \vspace*{-\baselineskip}%
+%  \vspace*{-1.3pt}%
+%  \begin{beamercolorbox}[wd=\TUD@rulelength]{frametitle}%
+%    \hspace*{1ex}
+%    \vbox{%
+%    \vspace*{\TUD@logoboxskip}%
+%    \insertauthor\\
+%    \vspace*{\baselineskip}%
+%    \usebeamerfont{institute}%
+%    \insertinstitute\\%
+%    \vspace*{\TUD@logoboxskip}%
+%    }%
+%  \end{beamercolorbox}%
+%  \vspace*{-\baselineskip}%
+%  \tudrule%
+}
+
+\defbeamertemplate*{note page}{TUD theme}
+{%
+  {%
+    \scriptsize
+    \insertvrule{.25\paperheight}{tud0a}
+    \vskip-.25\paperheight
+    \nointerlineskip
+    \vbox{
+      \hfill\insertslideintonotes{0.25}\hskip-\Gm@rmargin\hskip0pt%
+      \vskip-0.25\paperheight%
+      \nointerlineskip
+      \begin{pgfpicture}{0cm}{0cm}{0cm}{0cm}
+        \begin{pgflowlevelscope}{\pgftransformrotate{90}}
+          {\pgftransformshift{\pgfpoint{-2cm}{0.2cm}}%
+          \pgftext[base,left]{\usebeamerfont{author in head/foot}\the\year-\ifnum\month<10\relax0\fi\the\month-\ifnum\day<10\relax0\fi\the\day}}
+        \end{pgflowlevelscope}
+      \end{pgfpicture}}
+    \nointerlineskip
+    \vbox to .25\paperheight{\vskip0.5em
+      \hbox{\insertshorttitle[width=8cm]}%
+      \setbox\beamer@tempbox=\hbox{\insertsection}%
+      \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip4pt\raise3pt\hbox{\vrule
+            width0.4pt height7pt\vrule width 9pt
+            height0.4pt}}\hskip1pt\hbox{\begin{minipage}[t]{7.5cm}\def\breakhere{}\insertsection\end{minipage}}\fi%
+      }%
+      \setbox\beamer@tempbox=\hbox{\insertsubsection}%
+      \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip17.4pt\raise3pt\hbox{\vrule
+            width0.4pt height7pt\vrule width 9pt
+            height0.4pt}}\hskip1pt\hbox{\begin{minipage}[t]{7.5cm}\def\breakhere{}\insertsubsection\end{minipage}}\fi%
+      }%
+      \setbox\beamer@tempbox=\hbox{\insertshortframetitle}%
+      \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip30.8pt\raise3pt\hbox{\vrule
+            width0.4pt height7pt\vrule width 9pt
+            height0.4pt}}\hskip1pt\hbox{\insertshortframetitle[width=7cm]}\fi%
+      }%
+      \vfil}%
+  }%
+  \vskip.25em
+  \nointerlineskip
+  \linewidth=\textwidth
+  \insertnote
+}
+
+\mode
+<all>

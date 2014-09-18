@@ -1,0 +1,506 @@
+% tud_report is the report-class as described in the TUD-Design-Manual
+% It is based on (makes heavy use of) the KOMA-Class scrreprt
+\def\fileversion{1.11}
+\def\filedate{2009/09/18}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudreprt_title}
+ [\filedate\space\fileversion\space 
+   Clemens von Loewenich's and Joe Werner's TUD-Design package]
+
+% Load the TUD-colourscheme and TUD-fonts
+\RequirePackage{xkeyval} 
+\RequirePackage{tudcolours}
+\RequirePackage{tudreprt_fonts}
+\RequirePackage{tudpage}
+
+% definiere Abfrage und setzte Standardwert 
+  \newif\ifTUD@nonewpage\TUD@nonewpagefalse
+  \newif\ifTUD@colortitle\TUD@colortitlefalse
+  \newif\ifTUD@colorbacktitle\TUD@colorbacktitlefalse
+  \newif\ifTUD@colorback\TUD@colorbackfalse
+  \newif\ifTUD@inverttitle\TUD@inverttitlefalse
+  \newif\ifTUD@inverttitlerule\TUD@inverttitlerulefalse
+  \newif\ifTUD@titlepicture\TUD@titlepicturefalse
+  \newif\ifTUD@instlogo\TUD@instlogofalse
+  \newif\ifTUD@instlogo@width\TUD@instlogo@widthfalse
+  \newif\ifTUD@instlogo@height\TUD@instlogo@heightfalse
+  \newif\ifTUD@instbox\TUD@instboxfalse
+  \newif\ifTUD@printsize\TUD@printsizefalse
+
+  \newcommand{\TUD@titlecolor}{\color{black}}%
+  \newcommand{\TUD@titleseprulecolor}{\color{black}}%
+  \newcommand{\TUD@titlerulecolor}{\color{black}}%
+
+
+% Verarbeitung der Optionen
+  \DeclareOptionX<\@currname>{nopartpage}{\TUD@nonewpagetrue}
+  \DeclareOptionX<\@currname>{colortitle}{%
+    \ifTUD@colorbacktitle
+      \PackageWarning{\@currname}{Option `colortitle' ignored because off option `colorbacktitle'.}
+    \else
+      \ifTUD@textaccent
+        \PackageWarning{\@currname}{Use option `colortitle' only in special cases.}
+        \renewcommand{\TUD@titlecolor}{\TUD@accenttextcolor}%
+        \TUD@colortitletrue%
+      \else
+        \PackageWarning{\@currname}{Option `colortitle' ignored because color not allowed.}
+      \fi
+    \fi}
+  \DeclareOptionX<\@currname>{colorbacktitle}{%
+    \TUD@colorbacktitletrue
+    \ifTUD@blacktitle\else
+      \renewcommand{\TUD@titlecolor}{\color{white}}%
+      \renewcommand{\TUD@titleseprulecolor}{\color{white}}%
+      \TUD@inverttitletrue
+    \fi}
+  \DeclareOptionX<\@currname>{colorback}{%
+    \ifTUD@colorbacktitle
+      \PackageWarning{\@currname}{Option `colorback' ignored because of `colorbacktitle'.}
+    \else%
+      \TUD@colorbacktrue%
+    \fi}
+  \DeclareOptionX<\@currname>{inverttitle}{%
+    \ifTUD@colorbacktitle
+      \ifTUD@whitetitle%
+        \TUD@inverttitletrue%
+        \renewcommand{\TUD@titlecolor}{\color{white}}%
+      \else
+        \PackageWarning{\@currname}{Option `inverttitle' ignored because color not allowed.}
+      \fi
+    \else
+      \PackageWarning{\@currname}{Option `inverttitle' ignored because there is no option `colorbacktitle'.}
+    \fi}
+  \DeclareOptionX<\@currname>{inverttitlerule}{%
+    \ifTUD@inverttitle
+      \renewcommand{\TUD@titlerulecolor}{\ifTUD@titlepicture\color{white}\fi}%
+    \else
+      \PackageWarning{\@currname}{Option `inverttitlerule' ignored because title is not inverted and there is no picture.}
+    \fi}
+
+\ProcessOptionsX<\@currname>
+
+% load needed packages
+\RequirePackage{graphicx}
+\RequirePackage{calc}
+\RequirePackage{eso-pic}
+
+% define needed commands
+\newcommand{\settitlepicture}[2][]{%
+    \TUD@titlepicturetrue%
+    \newcommand{\@TUD@includetitlepicture}{\includegraphics*[#1]{#2}}}
+\newcommand{\setinstitutionlogo}[2][width]{%
+    \TUD@instlogotrue%
+    \csname TUD@instlogo@#1true\endcsname%
+    \newcommand{\@TUD@instlogo@name}{#2}%
+    \newcommand{\@TUD@includeinstlogo}{\includegraphics[#1=\csname TUD@instlogo#1\endcsname,clip]{#2}}%
+}
+\newcommand{\printpicturesize}{\TUD@printsizetrue}
+\newsavebox{\TUD@sponsorlogo}
+%
+\@onlypreamble\settitlepicture
+\@onlypreamble\setinstitutionlogo
+\@onlypreamble\printpicturesize
+
+% define subtitle and subsubtitle
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\gdef\@subtitle{}
+\let\@subtitle\@empty
+\def\subsubtitle#1{\gdef\@subsubtitle{#1}}
+\gdef\@subsubtitle{}
+\let\@subsubtitle\@empty
+\def\institution#1{\gdef\@institution{#1}}
+\gdef\@institution{}
+\let\@institution\@empty
+\def\uppertitleback#1{\gdef\@uppertitleback{#1}}
+\gdef\@uppertitleback{}
+\def\lowertitleback#1{\gdef\@lowertitleback{#1}}
+\gdef\@lowertitleback{}
+\def\dedication#1{\gdef\@dedication{#1}}
+\gdef\@dedication{}
+\def\sponsor#1{\gdef\@sponsor{#1}}
+\gdef\@sponsor{}
+
+\newif\if@TUD@resttwocol
+\newlength{\TUD@titleskip}%
+
+\let\TUD@titlesize\titlesize%
+
+\renewcommand*\maketitle[1][1]{%
+  { %
+    % newline does not generate vspace with
+    \newlength{\@TUD@tmp@baselineskip}%
+    \setlength{\@TUD@tmp@baselineskip}{\the\baselineskip}%
+    \setlength{\baselineskip}{0.0pt}%
+    \begingroup%
+      \if@reversemargin%
+        \addtolength{\oddsidemargin}{-\marginparwidth - \marginparsep}%
+      \else%
+        \addtolength{\evensidemargin}{-\marginparwidth - \marginparsep}%
+      \fi%
+      \addtolength{\textwidth}{\marginparwidth + \marginparsep}%
+      \setlength{\linewidth}{\textwidth}%
+      \setlength{\marginparwidth}{0pt}\setlength{\marginparsep}{0pt}%
+      %\@parskipfalse\@parskip@indent%
+      \parskip=0pt%
+      \if@twocolumn%
+        \@TUD@resttwocoltrue\onecolumn%
+      \else%
+        \@TUD@resttwocolfalse%
+      \fi%
+      %
+      % define some heights and depths for boxes
+      % needed for package textpos.sty
+      \newlength{\TUD@titleboxheight}%
+      \newlength{\TUD@titleboxdepth}%
+      \newlength{\TUD@subtitleboxheight}%
+      \newlength{\TUD@subtitleboxdepth}%
+      \newlength{\TUD@logoboxheight}%
+      \newlength{\TUD@logoboxwidth}%
+      \newlength{\TUD@colorbackheight}%
+      \newlength{\TUD@colorbacktitleheight}%
+      \newlength{\TUD@instboxheight}%
+      \newlength{\TUD@instboxdepth}%
+      \newlength{\TUD@instboxwidth}%
+      \newlength{\TUD@instlogoheight}%
+      \newlength{\TUD@instlogowidth}%
+      \newlength{\TUD@sponsorheight}%
+      %
+      % for debugging with frame boxes
+      \setlength{\fboxsep}{0pt}%
+      \setlength{\fboxrule}{0.6pt}%
+      %
+      % Abstand berechnet sich f"ur a4 aus ( 42mm - 15mm ) - ( 4mm + 1.2mm + 1.2pt)
+      % Abstand des Titels vom oberen Rand: 42mm
+      % Oberer Papierrand: 15mm
+      % H"ohe der Indentit"atsleiste: ( 4mm + 1.2mm + 1.2pt)
+      \setlength{\TUD@titleskip}{\TUD@titlepos}%
+      \addtolength{\TUD@titleskip}{-1in -\topmargin}%
+      \addtolength{\TUD@titleskip}{-\headheight}%
+      \addtolength{\TUD@titleskip}{-\headsep}%
+      %
+      % check, if ther is a an subtitle or subsubtitle
+      \newif\ifTUD@subhead\TUD@subheadfalse%
+      \ifx\@subtitle\@empty\else\TUD@subheadtrue\fi%
+      \ifx\@subsubtitle\@empty\else\TUD@subheadtrue\fi%
+      %
+      % define some boxes for titlepage
+      \newsavebox{\TUD@titlebox}%
+      \newsavebox{\TUD@subtitlebox}%
+      \newsavebox{\TUD@logobox}%
+      \newsavebox{\TUD@instbox}%
+      \newsavebox{\TUD@sponsorbox}%
+      %
+      \newlength{\TUD@tmp@height}%
+      \newlength{\TUD@tmp@depth}%
+      % just for measurment
+      % final definition below
+      \savebox{\TUD@titlebox}[\textwidth]{%
+        \hspace*{\TUD@titlebox@sep@left}%
+        \parbox{\textwidth -\TUD@titlebox@sep@left -\TUD@titlebox@sep@right}{%
+          \raggedright%
+          \headfont\TUD@titlesize\TUD@titlecolor%
+          \strut\@title\strut\par%
+        }%
+        \hfill%
+      }%
+      \settoheight{\TUD@titleboxheight}{\usebox{\TUD@titlebox}}%
+      \settodepth{\TUD@titleboxdepth}{\usebox{\TUD@titlebox}}%  
+      \addtolength{\TUD@titleboxheight}{\TUD@titleboxdepth}%    
+      \settodepth{\TUD@titleboxdepth}{\titlefont\strut}% 
+      \divide\TUD@titleboxheight by 65535%
+      \divide\TUD@titleboxheight by \titlebaselineskip%
+      \newcount\@TUD@titlelines%
+      \@TUD@titlelines=\TUD@titleboxheight%
+      \ifnum\@TUD@titlelines>3%
+          \PackageWarning{\@currname}{Title has more then 3 lines. Fontsize reduced}%
+          \let\TUD@titlesize\smaltitlesize%
+          \settoheight{\TUD@titleboxheight}{\usebox{\TUD@titlebox}}%
+          \settodepth{\TUD@titleboxdepth}{\usebox{\TUD@titlebox}}%  
+          \addtolength{\TUD@titleboxheight}{\TUD@titleboxdepth}%    
+          \settodepth{\TUD@titleboxdepth}{\titlefont\strut}% 
+          \divide\TUD@titleboxheight by \smaltitlebaselineskip%
+          \divide\TUD@titleboxheight by 65535%
+          \@TUD@titlelines=\TUD@titleboxheight%
+          \ifnum\@TUD@titlelines>7% wahrscheinlich wegen Rundungsfehler
+            \PackageWarning{\@currname}{Title has more then 6 lines.}%
+          \fi%
+      \fi
+      % final definition
+      \savebox{\TUD@titlebox}[\textwidth]{%
+        \hspace*{\TUD@titlebox@sep@left}%
+        \parbox{\textwidth -\TUD@titlebox@sep@left -\TUD@titlebox@sep@right}{%
+          \raggedright%
+          \headfont\TUD@titlesize\TUD@titlecolor%
+          \settoheight{\TUD@tmp@height}{\strut}%
+          \settodepth{\TUD@tmp@depth}{\strut}%
+          \setfontheight%
+          \vspace*{\fontheight}
+          \vspace*{-\TUD@tmp@height}
+          \strut\@title\strut\par%
+          \vspace{-\TUD@tmp@depth}%
+        }%
+        \hfill%
+      }%
+      \savebox{\TUD@subtitlebox}[\textwidth]{%
+        \hspace*{\TUD@titlebox@sep@left}%
+        \parbox{\textwidth -\TUD@titlebox@sep@left -\TUD@titlebox@sep@right}{%
+          \raggedright%
+          \sublinefont\TUD@titlecolor%
+          % because of strut height
+          \ifx\@subtitle\@empty\else%
+            \subheadfont%
+            \settoheight{\TUD@tmp@height}{\strut}%
+            \settodepth{\TUD@tmp@depth}{\strut}%
+            \setfontheight%
+            \vspace*{\fontheight}
+            \vspace*{-\TUD@tmp@height}
+            \strut\@subtitle\strut\par%
+          \fi%
+          \ifx\@subsubtitle\@empty\else%
+            \sublinefont%
+            \ifx\@subtitle\@empty%
+              \settoheight{\TUD@tmp@height}{\strut}%
+              \settodepth{\TUD@tmp@depth}{\strut}%
+              \setfontheight%
+              \vspace{\fontheight}
+              \vspace{-\TUD@tmp@height}
+            \fi
+            \strut\@subsubtitle\strut\par%
+          \fi%
+          \vspace{-\TUD@tmp@depth}%
+        }%
+        \hfill%
+      }%
+      \savebox{\TUD@logobox}[\textwidth]{%
+        \hfill\TUD@includelogo%
+      }%
+      %
+      \if@twoside\setcounter{page}{#1 - 2}%
+      \else\setcounter{page}{#1 - 1}\fi%
+      \thispagestyle{empty}%
+      %
+      \let\footnotesize\small%
+      \let\footnoterule\relax%
+      \renewcommand*\thefootnote{\@fnsymbol\c@footnote}%
+      \let\@oldmakefnmark\@makefnmark%
+        \renewcommand*{\@makefnmark}{\rlap\@oldmakefnmark}%
+      \noindent%
+      \raggedright%
+      %
+      \vfilneg%
+      \vspace*{\TUD@titleskip}\vspace{-1pt}%
+      \vspace{-10pt}\vspace{-1pt}% nur Gott wei"s woher diese 10pt kommen!
+      \settoheight{\TUD@titleboxheight}{\usebox{\TUD@titlebox}}%
+      \settodepth{\TUD@titleboxdepth}{\usebox{\TUD@titlebox}}\addtolength{\TUD@titleboxdepth}{\TUD@titlebox@sep@bottom+0.5\@TUD@ruleheight}%vspace{8mm} + 1/2\smallruleheight
+      \usebox{\TUD@titlebox}\par%
+      \addvspace{\TUD@titlebox@sep@bottom}\vspace{-1pt}\par%
+      % execute only if subtitle or subsubtitle exist
+      \ifTUD@subhead%
+          {\TUD@titleseprulecolor\tudrule}\par%
+          \addvspace{\TUD@subtitlebox@sep}\vspace{-1pt}\par%
+          \settoheight{\TUD@subtitleboxheight}{\usebox{\TUD@subtitlebox}}\addtolength{\TUD@subtitleboxheight}{\TUD@subtitlebox@sep}%vspace{3mm}
+          \settodepth{\TUD@subtitleboxdepth}{\usebox{\TUD@subtitlebox}}\addtolength{\TUD@subtitleboxdepth}{\TUD@subtitlebox@sep+\@TUD@ruleheight}%vspace{3mm} + \smallruleheight
+          \usebox{\TUD@subtitlebox}\par%
+          \addvspace{\TUD@subtitlebox@sep}\vspace{-1pt}%
+      \fi%
+      {\TUD@titlerulecolor\tudrule}\par%
+      \settoheight{\TUD@logoboxheight}{\usebox{\TUD@logobox}}%
+      \vspace{0.5\TUD@logoboxheight}
+      \usebox{\TUD@logobox}%
+      \settowidth{\TUD@logoboxwidth}{\mbox{\TUD@includelogo}}%
+      \ifTUD@instlogo\TUD@instboxtrue\else\ifx\@institution\@empty\else\TUD@instboxtrue\fi\fi%
+      \ifTUD@instbox%
+        \ifTUD@instlogo%
+          \ifTUD@instlogo@height%
+            \setlength{\TUD@instboxheight}{2\TUD@logoboxheight}%
+            \divide \TUD@instboxheight by 3%
+            \setlength{\TUD@instlogoheight}{\TUD@instboxheight}%
+            \savebox{\TUD@instbox}{\@TUD@includeinstlogo}%
+            \settowidth{\TUD@instboxwidth}{\usebox{\TUD@instbox}}%
+            \newlength{\temp@logoboxwidth}\setlength{\temp@logoboxwidth}{\TUD@logoboxwidth-\TUD@logo@leftskip}%
+            \ifdim\TUD@instboxwidth > \temp@logoboxwidth%
+              \setlength{\TUD@instlogowidth}{\temp@logoboxwidth}%
+              \renewcommand{\@TUD@includeinstlogo}{\includegraphics[width=\TUD@instlogowidth,clip]{\@TUD@instlogo@name}}%
+            \fi%
+            \savebox{\TUD@instbox}[\TUD@logoboxwidth][l]{%
+              \parbox[l][\TUD@instboxheight][c]{\TUD@logoboxwidth}{%
+                \hspace*{\TUD@logo@leftskip}%
+                \@TUD@includeinstlogo%
+              }%
+            }%
+            \setlength{\TUD@instboxwidth}{\TUD@logoboxwidth}
+          \fi%
+          \settodepth{\TUD@instboxdepth}{0pt}%
+          \ifTUD@instlogo@width%
+            \setlength{\TUD@instboxwidth}{2\TUD@logoboxwidth}%
+            \divide \TUD@instboxwidth by 3%
+            \setlength{\TUD@instlogowidth}{\TUD@instboxwidth}%
+            \savebox{\TUD@instbox}{\@TUD@includeinstlogo}%
+            \settoheight{\TUD@instboxheight}{\usebox{\TUD@instbox}}%
+          \fi%
+          \par%
+          \vspace{5mm}%
+          \makebox[\textwidth][l]{%
+            \hfill%
+            \colorbox{white}{\usebox{\TUD@instbox}\hspace*{10pt}}%
+            \hspace*{-10pt}%
+          }%
+        \else\ifx\@institution\@empty\else%
+          % definition just for measuring
+          % final definition is below
+          \savebox{\TUD@instbox}{%
+            \parbox{\TUD@logoboxwidth-\TUD@logo@leftskip}{%
+              \institutionfont\normalcolor%
+              \strut\@institution\strut%
+            }%
+          }%
+          \settoheight{\TUD@instboxheight}{\usebox{\TUD@instbox}}%
+          \settodepth{\TUD@instboxdepth}{\usebox{\TUD@instbox}}%
+          \addtolength{\TUD@instboxheight}{\TUD@instboxdepth}%
+          \settodepth{\TUD@instboxdepth}{\institutionfont\strut}%
+          \divide\TUD@instboxheight by 65535%
+          \divide\TUD@instboxheight by \instbaselineskip%
+          \newcount\@TUD@logolines%
+          \@TUD@logolines=\TUD@instboxheight%
+          \ifnum\@TUD@logolines<4%
+            \setlength{\TUD@instboxheight}{0.5\TUD@logoboxheight}%
+          \else%
+            \ifnum\@TUD@logolines<8%
+              \setlength{\TUD@instboxheight}{\TUD@logoboxheight}%
+            \else%
+              \PackageError{\@currname}{'instituion` has to many lines.%
+                \MessageBreak Allowed are <= 7 lines.%
+                \MessageBreak Your 'institution` has \the\@TUD@logolines}%
+              \relax%
+            \fi%
+          \fi%
+          % final definition
+          \savebox{\TUD@instbox}{%
+            \parbox{\TUD@logoboxwidth-\TUD@logo@leftskip}{%
+              \institutionfont\normalcolor%
+              \@institution%
+            }%
+          }%
+          \par%
+          \vspace{5mm}%
+          \makebox[\textwidth][l]{%
+            \hfill\colorbox{white}{%
+             \parbox[l][\TUD@instboxheight][c]{\TUD@logoboxwidth}{%
+                \hspace*{\TUD@logo@leftskip}\usebox{\TUD@instbox}%
+              }%
+              \hspace*{10pt}%
+            }%
+            \hspace*{-10pt}%
+          }%
+        \fi\fi%
+      \fi%
+      \ifx\@sponsor\@empty%
+        \setlength{\TUD@sponsorheight}{0pt}%
+      \else%
+        \savebox{\TUD@sponsorbox}[\textwidth]{%
+          \parbox[b]{\textwidth}{%
+            \centering{\TUD@titleseprulecolor\tudrule}\par%
+            \vspace{-1pt}%
+            \vspace{\@TUD@largeruleheight}%
+            \parbox[b]{\textwidth - 2\@TUD@largeruleheight}{\@sponsor}%
+            \vspace{\@TUD@largeruleheight}%
+          }%
+        }%
+        \settoheight{\TUD@sponsorheight}{\usebox{\TUD@sponsorbox}}%
+        \addtolength{\TUD@sponsorheight}{-0.5\@TUD@ruleheight}%
+      \fi%
+      \setlength{\TUD@colorbacktitleheight}{\TUD@titleskip+\TUD@titleboxheight+\TUD@titleboxdepth+\TUD@subtitleboxheight+\TUD@subtitleboxdepth+\headsep}
+      \setlength{\TUD@colorbackheight}{\textheight-\TUD@colorbacktitleheight+\headsep+\footskip-\TUD@sponsorheight}
+      \ifTUD@colorbacktitle%
+        \AddToShipoutPicture*{%
+          \AtTextUpperLeft{\put(0,\LenToUnit{\headsep}){%
+            \TUD@accentcolor{\rule[-\TUD@colorbacktitleheight]{\textwidth}{\TUD@colorbacktitleheight}}%
+          }}%
+        }%
+      \fi%
+      \ifTUD@titlepicture%
+        \AddToShipoutPicture*{%
+          \AtTextLowerLeft{\put(0,\LenToUnit{-\footskip}){\put(0,\LenToUnit{\TUD@sponsorheight}){%
+            \resizebox*{\textwidth}{\TUD@colorbackheight}{\@TUD@includetitlepicture}%
+          }}}%
+        }%
+      \else\ifTUD@colorback%
+        \AddToShipoutPicture*{%
+          \AtTextLowerLeft{\put(0,\LenToUnit{-\footskip}){\put(0,\LenToUnit{\TUD@sponsorheight}){%
+            \TUD@accentcolor{\rule{\textwidth}{\TUD@colorbackheight}}%
+          }}}%
+        }%
+      \fi\fi%
+      \ifTUD@printsize%
+        \AddToShipoutPicture*{\AtTextLowerLeft{\put(10,10){\put(0,\LenToUnit{\TUD@sponsorheight}){
+          \fboxsep4pt\fcolorbox{black}{white}{width = \the\textwidth~~height = \the\TUD@colorbackheight}
+        }}}}%
+      \fi%
+      \ifx\@sponsor\@empty\else%
+        \AddToShipoutPicture*{%
+          \AtTextLowerLeft{\put(0,\LenToUnit{-\footskip}){%
+              \usebox{\TUD@sponsorbox}%
+          }}%
+        }%
+      \fi%
+      \vfill\null\clearpage
+      \if@twoside\thispagestyle{realempty}
+        \noindent%
+        \begin{minipage}[t]{\textwidth}
+          \sublinefont\@uppertitleback
+        \end{minipage}\par
+        \vfill
+        \noindent%
+        \begin{minipage}[b]{\textwidth}
+          \sublinefont\@lowertitleback
+        \end{minipage}
+        \clearpage
+      \fi
+      \setcounter{page}{#1}
+      \ifx\@dedication\@empty\else
+        \clearpage\thispagestyle{empty}\null\vfill
+        \begin{minipage}[t]{\textwidth}
+          \centering\sublinefont\@dedication
+        \end{minipage}\par
+        \vskip \z@ \@plus3fill
+        \clearpage%
+        \if@twoside\if@openright%
+          \thispagestyle{empty}\cleardoublepage%
+        \fi\fi%
+      \fi
+      \if@TUD@resttwocol\twocolumn\fi
+    \endgroup
+    \setlength{\baselineskip}{\@TUD@tmp@baselineskip}%
+  }
+
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty  \global\let\@subtitle\@empty
+  \global\let\@subsubtitle\@empty
+  \global\let\@extratitle\@empty
+  \global\let\@titlehead\@empty
+  \global\let\@subject\@empty
+  \global\let\@publishers\@empty
+  \global\let\@uppertitleback\@empty
+  \global\let\@lowertitleback\@empty
+  \global\let\@dedication\@empty
+  \global\let\author\relax
+  \global\let\title\relax
+  \global\let\subtitle\relax
+  \global\let\subsubtitle\relax
+  \global\let\extratitle\relax
+  \global\let\titlehead\relax
+  \global\let\subject\relax
+  \global\let\publishers\relax
+  \global\let\uppertitleback\relax
+  \global\let\lowertitleback\relax
+  \global\let\dedication\relax
+  \global\let\date\relax
+  \global\let\and\relax
+  %
+  \@ifundefined{chapter}{\clearpage}{}
+}

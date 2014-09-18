@@ -1,0 +1,302 @@
+% tud_rprt is the report-class as described in the TUD-Design-Manual
+% It is based on (makes heavy use of) the KOMA-Class scrreprt
+\def\fileversion{1.9}
+\def\filedate{2009/01/28}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tudpaper}
+ [\filedate\space\fileversion\space 
+   Clemens von Loewenich's and Joe Werner's TUD-Design package]
+
+\newif\if@TUD@cropmarks\@TUD@cropmarksfalse
+
+\RequirePackage{xkeyval}
+\RequirePackage{ifthen}
+\RequirePackage{calc}
+\RequirePackage{graphicx}
+\RequirePackage{eso-pic}
+
+\newlength{\TUD@logo@height}
+\newlength{\TUD@logo@leftskip}
+\newlength{\TUD@sep@top}
+\newlength{\TUD@sep@left}
+\newlength{\TUD@sep@right}
+\newlength{\TUD@sep@bottom}
+\newlength{\TUD@titlepos}
+\newlength{\TUD@titlebox@sep@left}
+\newlength{\TUD@titlebox@sep@right}
+\newlength{\TUD@titlebox@sep@bottom}
+\newlength{\TUD@subtitlebox@sep}
+\newlength{\TUD@textwidth}
+\newlength{\TUD@cols@width}
+\newlength{\TUD@cols@sep}
+\newcounter{TUD@cols@n}
+
+% Verarbeitung der Optionen
+  \DeclareOptionX[TUD]<\@currname>{paper}{%
+    \ifthenelse{\equal{#1}{a0b}}{%
+      \PassOptionsToPackage{paper=#1}{tudrules}
+      \PassOptionsToPackage{papersize={920mm,1268mm}}{geometry} 
+      % HP A0b : 920 mm x 1268 mm
+      % ArchE  : 914 mm x 1219 mm
+      % a0     : 841 mm x 1189 mm
+      \setlength{\TUD@logo@height}{80mm}
+      \setlength{\TUD@logo@leftskip}{51.6pt}
+      \setlength{\TUD@sep@top}{30mm}\addtolength{\TUD@sep@top}{39.5mm}
+      \setlength{\TUD@sep@left}{30mm}\addtolength{\TUD@sep@left}{39.5mm}
+      \setlength{\TUD@sep@right}{30mm}\addtolength{\TUD@sep@right}{39.5mm}
+      \setlength{\TUD@sep@bottom}{35mm}\addtolength{\TUD@sep@bottom}{39.5mm}
+      \setlength{\TUD@titlepos}{168mm}
+      \setlength{\TUD@titlebox@sep@left}{8.3mm}
+      \setlength{\TUD@titlebox@sep@right}{4.1mm}
+      \setlength{\TUD@titlebox@sep@bottom}{16.6mm}
+      \setlength{\TUD@subtitlebox@sep}{6.2mm}
+      \setlength{\TUD@cols@sep}{9.0mm}
+      \setcounter{TUD@cols@n}{10}
+      \@TUD@cropmarkstrue}{%
+    \ifthenelse{\equal{#1}{a0}}{%
+      \PassOptionsToPackage{paper=#1}{tudrules}
+      \PassOptionsToPackage{paper=#1paper}{geometry}
+      \setlength{\TUD@logo@height}{80mm}
+      \setlength{\TUD@logo@leftskip}{51.6pt}
+      \setlength{\TUD@sep@top}{30mm}
+      \setlength{\TUD@sep@left}{30mm}
+      \setlength{\TUD@sep@right}{30mm}
+      \setlength{\TUD@sep@bottom}{35mm}
+      \setlength{\TUD@titlepos}{168mm}
+      \setlength{\TUD@titlebox@sep@left}{8.3mm}
+      \setlength{\TUD@titlebox@sep@right}{4.1mm}
+      \setlength{\TUD@titlebox@sep@bottom}{16.6mm}
+      \setlength{\TUD@subtitlebox@sep}{6.2mm}
+      \setlength{\TUD@cols@sep}{9.0mm}
+      \setcounter{TUD@cols@n}{10}
+      \@TUD@cropmarksfalse}{%
+    \ifthenelse{\equal{#1}{a1}}{%
+      \PassOptionsToPackage{paper=#1}{tudrules}
+      \PassOptionsToPackage{paper=#1paper}{geometry}
+      \setlength{\TUD@logo@height}{55.5mm}
+      \setlength{\TUD@logo@leftskip}{35.8pt}
+      \setlength{\TUD@sep@top}{30mm}
+      \setlength{\TUD@sep@left}{30mm}
+      \setlength{\TUD@sep@right}{30mm}
+      \setlength{\TUD@sep@bottom}{35mm}
+      \setlength{\TUD@titlepos}{118.8mm}
+      \setlength{\TUD@titlebox@sep@left}{6.9mm}
+      \setlength{\TUD@titlebox@sep@right}{3.5mm}
+      \setlength{\TUD@titlebox@sep@bottom}{13.8mm}
+      \setlength{\TUD@subtitlebox@sep}{5.2mm}
+      \setlength{\TUD@cols@sep}{7.2mm}
+      \setcounter{TUD@cols@n}{10}
+      \@TUD@cropmarksfalse}{%
+    \ifthenelse{\equal{#1}{a2}}{%
+      \PassOptionsToPackage{paper=#1}{tudrules}
+      \PassOptionsToPackage{paper=#1paper}{geometry}
+      \setlength{\TUD@logo@height}{44.5mm}
+      \setlength{\TUD@logo@leftskip}{28.7pt}
+      \setlength{\TUD@sep@top}{30mm}
+      \setlength{\TUD@sep@left}{30mm}
+      \setlength{\TUD@sep@right}{30mm}
+      \setlength{\TUD@sep@bottom}{35mm}
+      \setlength{\TUD@titlepos}{84mm}
+      \setlength{\TUD@titlebox@sep@left}{5.8mm}
+      \setlength{\TUD@titlebox@sep@right}{2.9mm}
+      \setlength{\TUD@titlebox@sep@bottom}{11.5mm}
+      \setlength{\TUD@subtitlebox@sep}{4.3mm}
+      \setlength{\TUD@cols@sep}{6.0mm}
+      \setcounter{TUD@cols@n}{10}
+      \@TUD@cropmarksfalse}{%
+    \ifthenelse{\equal{#1}{a3}}{%
+      \PassOptionsToPackage{paper=#1}{tudrules}
+      \PassOptionsToPackage{paper=#1paper}{geometry}
+      \setlength{\TUD@logo@height}{24.5mm}
+      \setlength{\TUD@logo@leftskip}{15.8pt}
+      \setlength{\TUD@sep@top}{15mm}
+      \setlength{\TUD@sep@left}{15mm}
+      \setlength{\TUD@sep@right}{15mm}
+      \setlength{\TUD@sep@bottom}{20mm}
+      \setlength{\TUD@titlepos}{59.4mm}
+      \setlength{\TUD@titlebox@sep@left}{4.8mm}
+      \setlength{\TUD@titlebox@sep@right}{2.4mm}
+      \setlength{\TUD@titlebox@sep@bottom}{9.6mm}
+      \setlength{\TUD@subtitlebox@sep}{3.6mm}
+      \setlength{\TUD@cols@sep}{5.0mm}
+      \setcounter{TUD@cols@n}{10}
+      \@TUD@cropmarksfalse}{%
+    \ifthenelse{\equal{#1}{a4}}{%
+      \PassOptionsToPackage{paper=#1}{tudrules}
+      \PassOptionsToPackage{paper=#1paper}{geometry}
+      \setlength{\TUD@logo@height}{22mm}
+      \setlength{\TUD@logo@leftskip}{14.2pt}
+      \setlength{\TUD@sep@top}{15mm}
+      \setlength{\TUD@sep@left}{15mm}
+      \setlength{\TUD@sep@right}{15mm}
+      \setlength{\TUD@sep@bottom}{20mm}
+      \setlength{\TUD@titlepos}{42mm}
+      \setlength{\TUD@titlebox@sep@left}{4mm}
+      \setlength{\TUD@titlebox@sep@right}{2mm}
+      \setlength{\TUD@titlebox@sep@bottom}{8mm}
+      \setlength{\TUD@subtitlebox@sep}{3mm}
+      \setlength{\TUD@cols@sep}{4.2mm}
+      \setcounter{TUD@cols@n}{12}
+      \@TUD@cropmarksfalse}{%
+    \ifthenelse{\equal{#1}{a4report}}{%
+      \PassOptionsToPackage{paper=a4}{tudrules}
+      \PassOptionsToPackage{paper=a4paper}{geometry}
+      \setlength{\TUD@logo@height}{22mm}
+      \setlength{\TUD@logo@leftskip}{14.2pt}
+      \setlength{\TUD@sep@top}{15mm}
+      \setlength{\TUD@sep@left}{20mm}
+      \setlength{\TUD@sep@right}{15mm}
+      \setlength{\TUD@sep@bottom}{20mm}
+      \setlength{\TUD@titlepos}{42mm}
+      \setlength{\TUD@titlebox@sep@left}{4mm}
+      \setlength{\TUD@titlebox@sep@right}{2mm}
+      \setlength{\TUD@titlebox@sep@bottom}{8mm}
+      \setlength{\TUD@subtitlebox@sep}{3mm}
+      \setlength{\TUD@cols@sep}{4.2mm}
+      \setcounter{TUD@cols@n}{12}
+      \@TUD@cropmarksfalse}{%
+    \ifthenelse{\equal{#1}{a4letter}}{%
+      \PassOptionsToPackage{paper=a4}{tudrules}
+      \PassOptionsToPackage{paper=a4paper}{geometry}
+      \setlength{\TUD@logo@height}{22mm}
+      \setlength{\TUD@logo@leftskip}{14.2pt}
+      \setlength{\TUD@sep@top}{12.5mm}
+      \setlength{\TUD@sep@left}{24mm}
+      \setlength{\TUD@sep@right}{12.5mm}
+      \setlength{\TUD@sep@bottom}{17mm}
+      \setlength{\TUD@titlepos}{42mm}
+      \setlength{\TUD@titlebox@sep@left}{4mm}
+      \setlength{\TUD@titlebox@sep@right}{2mm}
+      \setlength{\TUD@titlebox@sep@bottom}{8mm}
+      \setlength{\TUD@subtitlebox@sep}{3mm}
+      \setlength{\TUD@cols@sep}{4.2mm}
+      \setcounter{TUD@cols@n}{12}
+      \@TUD@cropmarksfalse}{%
+    \ifthenelse{\equal{#1}{a5}}{%
+      \PassOptionsToPackage{paper=#1}{tudrules}
+      \PassOptionsToPackage{paper=#1paper}{geometry}
+      \setlength{\TUD@logo@height}{19mm}
+      \setlength{\TUD@logo@leftskip}{12.3pt}
+      \setlength{\TUD@sep@top}{12mm}
+      \setlength{\TUD@sep@left}{12mm}
+      \setlength{\TUD@sep@right}{12mm}
+      \setlength{\TUD@sep@bottom}{16mm}
+      \setlength{\TUD@titlepos}{29.7mm}
+      \setlength{\TUD@titlebox@sep@left}{3.3mm}
+      \setlength{\TUD@titlebox@sep@right}{1.7mm}
+      \setlength{\TUD@titlebox@sep@bottom}{6.7mm}
+      \setlength{\TUD@subtitlebox@sep}{2.5mm}
+      \setlength{\TUD@cols@sep}{4.2mm}
+      \setcounter{TUD@cols@n}{6}
+      \@TUD@cropmarksfalse}{%
+    \ifthenelse{\equal{#1}{a5report}}{%
+      \PassOptionsToPackage{paper=a5}{tudrules}
+      \PassOptionsToPackage{paper=a5paper}{geometry}
+      \setlength{\TUD@logo@height}{19mm}
+      \setlength{\TUD@logo@leftskip}{12.3pt}
+      \setlength{\TUD@sep@top}{12mm}
+      \setlength{\TUD@sep@left}{16mm}
+      \setlength{\TUD@sep@right}{12mm}
+      \setlength{\TUD@sep@bottom}{16mm}
+      \setlength{\TUD@titlepos}{29.7mm}
+      \setlength{\TUD@titlebox@sep@left}{3.3mm}
+      \setlength{\TUD@titlebox@sep@right}{1.7mm}
+      \setlength{\TUD@titlebox@sep@bottom}{6.7mm}
+      \setlength{\TUD@subtitlebox@sep}{2.5mm}
+      \setlength{\TUD@cols@sep}{4.2mm}
+      \setcounter{TUD@cols@n}{6}
+      \@TUD@cropmarksfalse}{%
+    \ifthenelse{\equal{#1}{a6}}{%
+      \PassOptionsToPackage{paper=#1}{tudrules}
+      \PassOptionsToPackage{paper=#1paper}{geometry}
+      \setlength{\TUD@logo@height}{16.5mm}
+      \setlength{\TUD@logo@leftskip}{10.7pt}
+      \setlength{\TUD@sep@top}{10mm}
+      \setlength{\TUD@sep@left}{10mm}
+      \setlength{\TUD@sep@right}{10mm}
+      \setlength{\TUD@sep@bottom}{15mm}
+      \setlength{\TUD@titlepos}{21mm}
+      \setlength{\TUD@titlebox@sep@left}{2.8mm}
+      \setlength{\TUD@titlebox@sep@right}{1.4mm}
+      \setlength{\TUD@titlebox@sep@bottom}{5.6mm}
+      \setlength{\TUD@subtitlebox@sep}{2.1mm}
+      \setlength{\TUD@cols@sep}{4.2mm}
+      \setcounter{TUD@cols@n}{4}
+      \@TUD@cropmarksfalse}{%
+    \ifthenelse{\equal{#1}{lang}}{%
+      \PassOptionsToPackage{paper=#1}{tudrules}
+      \PassOptionsToPackage{papersize={99mm,210mm}}{geometry}
+      \setlength{\TUD@logo@height}{17mm}
+      \setlength{\TUD@logo@leftskip}{11.0pt}
+      \setlength{\TUD@sep@top}{10mm}
+      \setlength{\TUD@sep@left}{10mm}
+      \setlength{\TUD@sep@right}{10mm}
+      \setlength{\TUD@sep@bottom}{14mm}
+      \setlength{\TUD@titlepos}{21mm}
+      \setlength{\TUD@titlebox@sep@left}{2.8mm}
+      \setlength{\TUD@titlebox@sep@right}{1.4mm}
+      \setlength{\TUD@titlebox@sep@bottom}{5.6mm}
+      \setlength{\TUD@subtitlebox@sep}{2.1mm}
+      \setlength{\TUD@cols@sep}{4.2mm}
+      \setcounter{TUD@cols@n}{4}
+      \@TUD@cropmarksfalse}{%
+    \PackageError{\@currname}{Unknown papersize. `paper=#1'}%
+    }}}}}}}}}}}}
+  }
+  \DeclareOptionX[TUD]<\@currname>{blackrule}{%
+    \PassOptionsToPackage{blackrule}{tudrules}}
+  \DeclareOptionX*{%
+    \PassOptionsToPackage{\CurrentOption}{geometry}}
+\ExecuteOptionsX[TUD]<\@currname>{paper=a4}
+\ProcessOptionsX[TUD]<\@currname>
+
+\newcommand{\TUD@includelogo}{\colorbox{white}{\includegraphics[viewport=0 0 135.79 63,height=\TUD@logo@height,clip]{tud_logo}\hspace*{10pt}}\hspace*{-10pt}}%
+
+\RequirePackage{tudrules}
+
+\@ifundefined{TUD@headfootsep}{\newskip\TUD@headfootsep\TUD@headfootsep\baselineskip}{}
+\newskip\TUD@indentbarheight
+  \TUD@indentbarheight \TUD@indentbar@totalheight
+
+\RequirePackage[dvips]{geometry}
+  \setlength{\TUD@textwidth}{\paperwidth - \TUD@sep@left - \TUD@sep@right}
+  \setlength{\TUD@cols@width}{\TUD@textwidth - \value{TUD@cols@n}\TUD@cols@sep + \TUD@cols@sep}
+    \divide\TUD@cols@width by \value{TUD@cols@n}
+  \geometry{includeall,nomarginpar,headheight=\TUD@indentbarheight}
+  \geometry{top=\TUD@sep@top,left=\TUD@sep@left,right=\TUD@sep@right,bottom=\TUD@sep@bottom}
+  \geometry{headsep=\TUD@headfootsep,footskip=\TUD@headfootsep}
+  \special{papersize=\the\paperwidth,\the\paperheight}
+  \columnsep\TUD@cols@sep
+  \columnseprule0pt
+
+\def\TUD@setmarginpar#1{%
+  \ifnum #1 < \value{TUD@cols@n}
+    \geometry{marginparsep=\TUD@cols@sep,marginparwidth=#1\TUD@cols@width + #1\TUD@cols@sep - \TUD@cols@sep}
+  \else
+    \PackageError{\@currname}{in command `\noexpand\TUD@setmarginpar':\MessageBreak argument value is to large (#1 >= \the\value{TUD@cols@n})}
+  \fi}
+
+\newcommand{\setcropmarks}{%
+  \if@TUD@cropmarks% Schnittmarken für a0b
+    \newlength{\TUD@paper@tempdima}\setlength{\TUD@paper@tempdima}{\paperwidth}\addtolength{\TUD@paper@tempdima}{-35mm}
+    \newlength{\TUD@paper@tempdimb}\setlength{\TUD@paper@tempdimb}{\paperwidth}\addtolength{\TUD@paper@tempdimb}{-39.5mm}
+    % Links Oben
+    \AddToShipoutPicture{\AtPageUpperLeft{\put(\LenToUnit{10mm},\LenToUnit{-39.5mm}){\rule{25mm}{1mm}}}}% waagrecht
+    \AddToShipoutPicture{\AtPageUpperLeft{\put(\LenToUnit{38.5mm},\LenToUnit{-35mm}){\rule{1mm}{25mm}}}}% senkrecht
+    % Rechts Oben
+    \AddToShipoutPicture{\AtPageUpperLeft{\put(\LenToUnit{\TUD@paper@tempdima},\LenToUnit{-39.5mm}){\rule{25mm}{1mm}}}}% waagrecht
+    \AddToShipoutPicture{\AtPageUpperLeft{\put(\LenToUnit{\TUD@paper@tempdimb},\LenToUnit{-35mm}){\rule{1mm}{25mm}}}}% senkrecht
+    % Links Unten 
+    \AddToShipoutPicture{\AtPageLowerLeft{\put(\LenToUnit{10mm},\LenToUnit{38.5mm}){\rule{25mm}{1mm}}}}% waagrecht
+    \AddToShipoutPicture{\AtPageLowerLeft{\put(\LenToUnit{38.5mm},\LenToUnit{10mm}){\rule{1mm}{25mm}}}}% senkrecht
+    % Rechts Unten
+    \AddToShipoutPicture{\AtPageLowerLeft{\put(\LenToUnit{\TUD@paper@tempdima},\LenToUnit{38.5mm}){\rule{25mm}{1mm}}}}% waagrecht
+    \AddToShipoutPicture{\AtPageLowerLeft{\put(\LenToUnit{\TUD@paper@tempdimb},\LenToUnit{10mm}){\rule{1mm}{25mm}}}}% senkrecht
+  \fi
+}
+
+\AtBeginDocument{\setcropmarks%
+  \@ifpackageloaded{a4}{%
+    \PackageError{\@currname}{Do not use package `a4' together with TUD classes!}%
+  }{}
+}

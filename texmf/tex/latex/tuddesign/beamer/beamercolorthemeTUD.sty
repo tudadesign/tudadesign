@@ -1,0 +1,172 @@
+% Copyright 2008 by J. Werner and C. v. Loewenich
+% based on beamerthemes by Till Tantau <tantau@users.sourceforge.net>
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+\def\fileversion{1.0}
+\def\filedate{2009/02/20}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeTUD}
+ [\filedate\space\fileversion\space
+   Joe Werner's and Clemens von Loewenich's TUD-Design package]
+
+\RequirePackage{xkeyval}
+\RequirePackage{tudcolours} % just to make sure....
+
+\mode<all>
+
+\newif\ifTUD@colorbacktitle\TUD@colorbacktitlefalse
+\newif\ifTUD@colorback\TUD@colorbackfalse
+\newif\ifTUD@inverttitle\TUD@inverttitlefalse
+\newif\ifTUD@inverttitlerule\TUD@inverttitlerulefalse
+
+\definecolor{largerulecolor}{named}{tudidentbar}
+\definecolor{smallrulecolor}{named}{black}
+
+\setbeamercolor*{frametitle}{fg=black,bg=white}
+\setbeamercolor*{title}{fg=black,bg=white}
+
+\DeclareOptionX<\@currname>{colorbacktitle}{%
+  \TUD@colorbacktitletrue
+  \ifTUD@blacktitle%
+    \setbeamercolor*{title}{fg=black,bg=tudaccent}
+  \else
+    \setbeamercolor*{title}{fg=white,bg=tudaccent}
+  \fi}
+
+\DeclareOptionX<\@currname>{colorback}{%
+  \TUD@colorbacktrue
+  \ifTUD@blacktitle%
+    \setbeamercolor*{frametitle}{fg=black,bg=tudaccent}
+  \else
+    \setbeamercolor*{frametitle}{fg=white,bg=tudaccent}
+  \fi}
+
+\DeclareOptionX<\@currname>{inverttitle}{%
+    \ifTUD@whitetitle%
+      \TUD@inverttitletrue%
+	\ifTUD@colorbacktitle%
+	  \setbeamercolor*{title}{fg=white,bg=tudaccent}
+	\else
+	  \PackageWarning{\@currname}{Option `inverttitle' ignored.}
+	\fi	
+  	\ifTUD@colorback%
+      	  \setbeamercolor*{frametitle}{fg=white,bg=tudaccent}
+	\else
+	  \PackageWarning{\@currname}{Option `inverttitle' ignored.}
+	\fi
+    \else
+      \PackageWarning{\@currname}{Option `inverttitle' ignored.}
+    \fi
+  }
+
+\DeclareOptionX<\@currname>{inverttitlerule}{%
+  \ifTUD@inverttitle
+%    \setbeamercolor*{smallrulecolor}{fg=white,bg=white}
+  \else
+    \PackageWarning{\@currname}{Option `inverttitlerule' ignored.}
+  \fi}
+\DeclareOptionX<\@currname>{blackrule}{%
+    \definecolor{largerulecolor}{named}{black}
+    \definecolor{smallrulecolor}{named}{black}}
+
+\ProcessOptionsX<\@currname>
+
+
+\setbeamercolor*{author in head/foot}{fg=black, bg=white}
+\setbeamercolor*{date in head/foot}{fg=black, bg=white}
+
+\setbeamercolor*{normal text}{bg=white,fg=black}
+\setbeamercolor*{background canvas}{bg=white}
+
+\setbeamercolor*{section in toc}{fg=black,bg=white}
+
+
+%\ifTUD@textaccent
+%  \definecolor{tudtextaccent}{named}{tudaccent}
+%\else
+%  \PackageWarning{\@currname}{This accentcolor cannot be used to print text}
+%  \definecolor{tudtextaccent}{named}{black}
+%\fi
+\setbeamercolor*{alerted text}{fg=tudtextaccent}
+
+\setbeamercolor{structure}{fg=tudtextaccent}
+
+\setbeamercolor*{palette primary}{fg=tudtextaccent}
+\setbeamercolor*{palette secondary}{fg=tudtextaccent}
+\setbeamercolor*{palette tertiary}{fg=tudtextaccent}
+\setbeamercolor*{palette quaternary}{fg=black}
+
+\setbeamercolor{bibliography item}{parent=item}
+\setbeamercolor{bibliography entry author}{use=structure,fg=structure.fg}
+\setbeamercolor{bibliography entry title}{use=normal text,fg=normal text.fg}
+\setbeamercolor{bibliography entry location}{use=structure,fg=structure.fg}
+\setbeamercolor{bibliography entry note}{use=structure,fg=normal text.fg}
+
+%\setbeamercolor*{itemize item}{fg=tudtextaccent}
+%\setbeamercolor*{itemize subitem}{fg=tudtextaccent}
+%\setbeamercolor*{itemize subsubitem}{fg=tudtextaccent}
+
+%\setbeamercolor*{enumerate item}{fg=tudtextaccent}
+%\setbeamercolor*{enumerate subitem}{fg=tudtextaccent}
+%\setbeamercolor*{enumerate subsubitem}{fg=tudtextaccent}
+
+%\setbeamercolor*{description item}{fg=tudtextaccent}
+%\setbeamercolor*{description subitem}{fg=tudtextaccent}
+%\setbeamercolor*{description subsubitem}{fg=tudtextaccent}
+
+%q.e.d. Symbol 
+%\setbeamertemplate{qed symbol}{\vrule width1.5ex height1.5ex depth0pt}
+%\setbeamercolor*{qed symbol}{bg=tudtextaccent, fg=tudtextaccent}
+
+\setbeamercolor{titlelike}{fg=tudtextaccent,bg=white}
+
+\ifTUD@blacktitle%
+  \ifTUD@inverttitle%
+   \setbeamercolor*{section number projected}{fg=white, bg=tudaccent}
+   \setbeamercolor*{subsection number projected}{fg=white, bg=tudaccent}
+   \setbeamercolor*{subsubsection number projected}{fg=white, bg=tudaccent}
+   \setbeamercolor*{item projected}{fg=white, bg=tudaccent}
+\else	
+   \setbeamercolor*{section number projected}{fg=black, bg=tudaccent}
+   \setbeamercolor*{subsection number projected}{fg=black, bg=tudaccent}
+   \setbeamercolor*{subsubsection number projected}{fg=black, bg=tudaccent}
+   \setbeamercolor*{item projected}{fg=black, bg=tudaccent}
+  \fi
+\else
+   \setbeamercolor*{section number projected}{fg=white, bg=tudaccent}
+   \setbeamercolor*{subsection number projected}{fg=white, bg=tudaccent}
+   \setbeamercolor*{subsubsection number projected}{fg=white, bg=tudaccent}
+   \setbeamercolor*{item projected}{fg=white, bg=tudaccent}
+\fi%
+
+%Blocks mit Hintergrund fallen aus wegen is nich.
+
+
+\pgfdeclareradialshading[bg,parent.bg]{tocsphere}{\pgfpoint{-0.5ex}{0.6ex}}%
+{%
+  color(0cm)=(bg!35);
+  color(0.44ex)=(bg!65);
+  color(0.88ex)=(bg!95);
+  color(1.2ex)=(bg!85!black);
+  color(1.3ex)=(parent.bg)}%
+
+\pgfdeclareradialshading[bg,parent.bg]{bigsphere}{\pgfpoint{-0.1849315ex}{.2260273ex}}%
+{%
+  color(0cm)=(bg!15);
+  color(0.1643835ex)=(bg!75);
+  color(0.3287671ex)=(bg);
+  color(0.4520547ex)=(bg!90!black);
+  color(0.53ex)=(parent.bg)}
+
+\pgfdeclareradialshading[bg,parent.bg]{smallsphere}{\pgfpoint{-0.1479452ex}{0.18287671ex}}%
+{%
+  color(0cm)=(bg!15); 
+  color(0.1315068ex)=(bg!75);
+  color(0.2630136ex)=(bg);
+  color(0.36164383ex)=(bg!90!black);
+  color(0.427ex)=(parent.bg)}
+
+
+\mode
+<all>
