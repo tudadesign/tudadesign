@@ -4,8 +4,8 @@
 %
 % This program can be redistributed and/or modified under the terms
 % of the GNU Public License, version 2.
-\def\fileversion{1.1}
-\def\filedate{2009/07/14}
+\def\fileversion{1.11}
+\def\filedate{2014/09/20}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerthemeTUD}
  [\filedate\space\fileversion\space
@@ -28,6 +28,9 @@
     \PassOptionsToPackage{inverttitlerule}{beamercolorthemeTUD}}
   \DeclareOptionX<\@currname>{blackrule}{%
     \PassOptionsToPackage{blackrule}{beamercolorthemeTUD}}
+  % tudmathserif patch
+  \DeclareOptionX<\@currname>{tudmathserif}{%
+    \PassOptionsToPackage{tudmathserif}{beamerfontthemeTUD}}
   \DeclareOptionX*{}
 \ProcessOptionsX<\@currname>
 

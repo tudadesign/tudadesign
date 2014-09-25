@@ -1,3 +1,10 @@
+latex-tuddesign (1.0.20140920) unstable; urgency=medium
+
+  * added serif option to beamer theme (contrib: Felix Guenther)
+  * small correction of colorback title page (contrib: David Kreitschmann)
+
+ -- Johannes Werner <johannes.werner@physik.tu-darmstadt.de>  Sat, 20 Sep 2014 15:57:50 +0200
+
 latex-tuddesign (0.0.20100410) unstable; urgency=high
 
   * environment abstract supports two abstracts on one page

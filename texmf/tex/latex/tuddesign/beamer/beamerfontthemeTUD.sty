@@ -4,8 +4,8 @@
 %
 % This program can be redistributed and/or modified under the terms
 % of the GNU Public License, version 2.
-\def\fileversion{1.1}
-\def\filedate{2009/07/14}
+\def\fileversion{1.11}
+\def\filedate{2014/09/20}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerfontthemeTUD}
  [\filedate\space\fileversion\space
@@ -19,6 +19,15 @@
 \RequirePackage[euro]{textcomp}
 \RequirePackage{xkeyval}
 
+% tudmathserif patch
+\newif\ifTUD@tudmathserif\TUD@tudmathseriffalse
+
+\DeclareOptionX<\@currname>{tudmathserif}{%
+  \TUD@tudmathseriftrue
+}
+
+\ProcessOptionsX<\@currname>
+
 \mode<presentation>{\beamer@suppressreplacementstrue}
 
 \setbeamerfont{title}{size=\large,series=\bfseries}
@@ -29,6 +38,10 @@
 
 \setbeamerfont{author in head/foot}{size=\tiny}
 
+% tudmathserif patch
+\ifTUD@tudmathserif%
+  % don't change the math font
+\else
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% declare math fonts as sans serife %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -188,3 +201,7 @@
 \DeclareMathAlphabet{\mathsl}{OT1}{\sfdefault}{m}{sl}
 \SetMathAlphabet{\mathsl}{bold}{OT1}{\sfdefault}{\mathit@bold@series}{sl}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% end of sans serife declaration    %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
