@@ -2,6 +2,10 @@
 # Copyright (C) 2014 Benjamin Brockhaus
 # You can modify and/or redistribute this under the terms of GPL v2 or later
 
+
+#Where to install the files:
+DEST = $(DESTDIR)/usr/local/share
+
 #List of documentation-files
 DOC = texmf/doc/latex/tuddesign/TUD_doc.pdf
 
@@ -27,10 +31,29 @@ clean:	$(DOC:.pdf=.clean) $(EXAMPLES:.pdf=.clean)
 #Remove the output files too
 clean-all:	clean $(DOC:.pdf=.realclean) $(EXAMPLES:.pdf=.realclean)
 
+install:
+	#create target directories and if necessary parent-directories
+	mkdir -p $(DEST)/texmf/doc/latex/tuddesign
+	mkdir -p $(DEST)/texmf/tex/latex/tuddesign
+	#copy files to target destination
+	cp -rf texmf/doc/latex/tuddesign/*** $(DEST)/texmf/doc/latex/tuddesign
+	cp -rf texmf/tex/latex/tuddesign/*** $(DEST)/texmf/tex/latex/tuddesign
+	#set permissions of copied files and folders
+	find $(DEST)/texmf/doc/latex/tuddesign/ -type d -exec chmod 755 {} +
+	find $(DEST)/texmf/doc/latex/tuddesign/ -type f -exec chmod 644 {} +
+	find $(DEST)/texmf/tex/latex/tuddesign/ -type d -exec chmod 755 {} +
+	find $(DEST)/texmf/tex/latex/tuddesign/ -type f -exec chmod 644 {} +
+	#link documentation
+	mkdir -p $(DEST)/doc/tuddesign
+	ln -s $(DEST)/texmf/doc/latex/tuddesign $(DEST)/doc/tuddesign/doc
+uninstall:
+	rm -rf $(DEST)/texmf/doc/latex/tuddesign
+	rm -rf $(DEST)/texmf/tex/latex/tuddesign
+	rm -rf $(DEST)/doc/tuddesign
 
 # --------------------------------------------------------------------------------
 
-.PHONY: doc clean clean-all %.clean %.realclean
+.PHONY: doc clean clean-all %.clean %.realclean install uninstall
 
 %.clean:
 	cd $(dir $@); rm -f $(basename $(notdir $@)).aux \
