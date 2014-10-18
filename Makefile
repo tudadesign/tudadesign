@@ -1,3 +1,4 @@
+#!/usr/bin/make -f
 # Makefile for the Latex-Classes for the corporate design of TU Darmstadt.
 # Copyright (C) 2014 Benjamin Brockhaus
 # You can modify and/or redistribute this under the terms of GPL v2 or later
