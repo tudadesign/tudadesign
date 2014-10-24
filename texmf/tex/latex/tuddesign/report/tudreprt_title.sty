@@ -26,6 +26,7 @@
   \newif\ifTUD@instlogo@height\TUD@instlogo@heightfalse
   \newif\ifTUD@instbox\TUD@instboxfalse
   \newif\ifTUD@printsize\TUD@printsizefalse
+  \newif\ifTUD@bindingoffset\TUD@bindingoffsetfalse
 
   \newcommand{\TUD@titlecolor}{\color{black}}%
   \newcommand{\TUD@titleseprulecolor}{\color{black}}%
@@ -76,6 +77,11 @@
     \else
       \PackageWarning{\@currname}{Option `inverttitlerule' ignored because title is not inverted and there is no picture.}
     \fi}
+  \DeclareOptionX<\@currname>{bindingoffset}{
+    \TUD@bindingoffsettrue%
+    \newlength{\TUD@bindingoffset}%
+    \setlength{\TUD@bindingoffset}{#1}%
+    }
 
 \ProcessOptionsX<\@currname>
 
@@ -140,7 +146,11 @@
       \addtolength{\textwidth}{\marginparwidth + \marginparsep}%
       \setlength{\linewidth}{\textwidth}%
       \newlength{\@TUD@tmp@parwidth}
-      \setlength{\@TUD@tmp@parwidth}{\marginparwidth + \marginparsep}
+      \ifTUD@bindingoffset%
+        \setlength{\@TUD@tmp@parwidth}{\marginparwidth + \marginparsep + \TUD@bindingoffset}%
+      \else%
+        \setlength{\@TUD@tmp@parwidth}{\marginparwidth + \marginparsep}%
+      \fi%
       \setlength{\marginparwidth}{0pt}\setlength{\marginparsep}{0pt}%
       %\@parskipfalse\@parskip@indent%
       \parskip=0pt%

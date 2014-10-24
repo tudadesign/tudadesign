@@ -84,6 +84,10 @@
   \DeclareOptionX<\@currname>{landscape}{%
       \PassOptionsToPackage{landscape}{tudpage}}
 
+  \DeclareOptionX<\@currname>{bindingoffset}{%
+    \PassOptionsToPackage{\CurrentOption}{tudpage}%
+    \PassOptionsToPackage{\CurrentOption}{tudreprt_title}}
+
   \DeclareOptionX<\@currname>{noresetcounter}{%
     \AtEndOfClass{%
       \@ifclassloaded{scrartcl}{}{%
