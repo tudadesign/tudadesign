@@ -32,7 +32,7 @@ clean:	$(DOC:.pdf=.clean) $(EXAMPLES:.pdf=.clean)
 #Remove the output files too
 clean-all:	clean $(DOC:.pdf=.realclean) $(EXAMPLES:.pdf=.realclean)
 
-install:
+install:	doc
 	#create target directories and if necessary parent-directories
 	mkdir -p $(DEST)/texmf/doc/latex/tuddesign
 	mkdir -p $(DEST)/texmf/tex/latex/tuddesign
