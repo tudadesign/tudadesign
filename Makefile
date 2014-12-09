@@ -78,5 +78,5 @@ uninstall:
 	dvips $(notdir $<);
 %.dvi:
 	cd $(dir $@); \
-	latex $(basename $(notdir $@)).tex; \
-	latex $(basename $(notdir $@)).tex;
+	TEXINPUTS=":$(CURDIR)/texmf/tex/latex/tuddesign//:" latex $(basename $(notdir $@)).tex; \
+	TEXINPUTS=":$(CURDIR)/texmf/tex/latex/tuddesign//:" latex $(basename $(notdir $@)).tex;
