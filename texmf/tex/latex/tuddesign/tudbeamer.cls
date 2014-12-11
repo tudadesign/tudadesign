@@ -16,7 +16,7 @@
  [\filedate\space\fileversion\space
    Joe Werner's and Clemens v. Loewenich's TUD-Design-Manual package]
 
-\PassOptionsToClass{t,hyperref={pdfpagelabels=false,plainpages=false}}{beamer}
+\PassOptionsToClass{t,hyperref={plainpages=false}}{beamer}
 \DeclareOption*{%
   \PassOptionsToClass{\CurrentOption}{beamer}
   \PassOptionsToPackage{\CurrentOption}{beamerthemeTUD}}
