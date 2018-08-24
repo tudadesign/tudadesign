@@ -1,0 +1,104 @@
+\documentclass[article,dr=phil,type=drfinal,colorback,accentcolor=tud9c]{tudthesis}
+\usepackage{ngerman}
+
+\newcommand{\getmydate}{%
+  \ifcase\month%
+    \or Januar\or Februar\or M\"arz%
+    \or April\or Mai\or Juni\or Juli%
+    \or August\or September\or Oktober%
+    \or November\or Dezember%
+  \fi\ \number\year%
+}
+
+\begin{document}
+  \thesistitle{Die fabelhaften Benner-Boys pr"asentieren stolz das TUD-\linebreak[1]Corporate-Design f"ur {\LaTeX}!}%
+    {The Fabulous Benner Boys present lordly the {\LaTeX} TUD corporate design!}
+  \author{Johnnie Walker}
+  \birthplace{Darmstadt}
+  \referee{Clemens v. Loewenich}{Johannes Werner}[another one]
+  \department{Fachbereich Physik}
+  \group{Institut f"ur Angewandte Festkernphysik\\Speerspitze der Elite}
+  \dateofexam{\today}{\today}
+  \tuprints{12345}{1234}
+  \makethesistitle
+  \affidavit{J. Walker}
+
+  \section{Generelle Informationen}
+    Die Klasse basiert auf der \textaccent{tudreport}-Klasse von C. v. Loewenich und
+    J. Werner. Alle "Anderungen dort wirken sich direkt auf die
+    \textaccent{tudthesis}-Klasse aus. Genauer: die \textaccent{tudthesis}-Klasse definiert nur einige
+    neue Befehle und legt die Formatierung der ersten zwei Seiten (Titelseite
+    und R"uckseite des Titleblattes) fest. \textbf{Alle Vordefinierten Texte sind, wie verbindlich vorgeschrieben, in der hessischen Amtssprache
+    gehalten\footnote{Deutschland hat (noch) keine Amtssprache.}.}
+
+  \section{Verwendung der Klasse}
+    Die Klasse wird verwendet, indem in der Dokumentenpr"aambel
+    \textaccent{\textbackslash documentclass\{tudthesis\}}
+    eingetragen wird.
+
+  \subsection{Klassenoptionen}
+    Die Klasse unterst"utzt alle Klassenoptionen der tudreport-Klasse.
+    \paragraph{Neue Optionen}
+    \begin{itemize}
+      \item \textbf{type=<dr|drfinal|diplom|msc|pp|bsc|sta>}\\
+        Hiermit wird die Art der Arbeit angegeben. Dies legt verschiedene
+        Formatierungen fest.\\
+        \begin{tabular}{ll}
+        \textaccent{dr} &f"ur eingereichte Dissertationen\\
+        \textaccent{drfinal} &f"ur genehmigte Dissertationen\\
+        \textaccent{diplom} &f"ur Diplomarbeiten\\
+        \textaccent{msc} &f"ur Master-Theses\\
+        \textaccent{pp} &f"ur Project-Proposals\\
+        \textaccent{bsc} &f"ur Bachelor-Theses\\
+        \textaccent{sta} &f"ur Studienarbeiten
+        \end{tabular}
+      \item \textbf{dr=<rernat|ing|phil>}\\
+        Hiermit wird die Art des Doktorgrads angegeben.\\
+        \begin{tabular}{ll}
+        \textaccent{rernat} &f"ur Dr. rer. nat.\\
+        \textaccent{ing} &f"ur Dr.-Ing.\\
+        \textaccent{phil} &f"ur Dr. phil.
+        \end{tabular}\\
+        F"ur den Fall, dass der gew"unschte Titel nicht vorhanden ist, gibt
+        es den Befehl \textbf{\textbackslash drtext\{\#1\}}, wobei \#1 z.B.
+        \glqq Zur Erlangung des Grades eines Doktors der
+        Technischen Wissenschaften (Dr.\ rer.\ tech.)\grqq\ ist.
+    \end{itemize}
+
+  \subsection{Befehle}
+    \begin{itemize}\itemsep-0.5\parsep
+      \item \textbf{\textbackslash thesistitle\{\#1\}\{\#2\}}\\
+        \#1: Titel der Arbeit in der Erstsprache (z.B. Deutsch)\\
+        \#2: Titel der Arbeit in der zweiten Sprache (z.B. Englisch)
+      \item \textbf{\textbackslash makethesistitle}\\
+        Erzeugt die korrekte Titelseite
+      \item \textbf{\textbackslash author\{\#1\}}\\
+        \#1: Name des Autors
+      \item \textbf{\textbackslash birthplace\{\#1\}}\\
+        \#1: Geburtsort des Autors (bei Dr.-Arbeit verbindlich)
+      \item \textbf{\textbackslash date\{\#1\}}\\
+        Standard ist der aktuelle Monat und das aktuelle Jahr (z.B. \getmydate)\\
+        \#1: individuelles Datum
+      \item \textbf{\textbackslash referee\{\#1\}\{\#2\}[\#3]}\\
+        Namen der Gutachter, (3. Gutachter optional)
+      \item \textbf{\textbackslash department\{\#1\}}\\
+        Fachbereich an dem die Arbeit durchgef"uhrt wurde. Standard ist
+        \glqq Fachbereich Physik\grqq.
+      \item \textbf{\textbackslash group\{\#1\}}\\
+        Arbeitsgruppe / Institut an dem die Arbeit durchgef"uhrt wurde
+      \item \textbf{\textbackslash dateofexam\{\#1\}\{\#2\}}\\
+        \#1: Tag der Einreichung der Arbeit\\
+        \#2: Tag der Pr"ufung / Tag des Abschlusses\\
+        \textaccentcolor{Wird nur bei \textaccent{type=drfinal} verwendet.
+        Ansonsten wird ein leeres Feld erzeugt, in das bei Abgabe der 
+        Arbeit ein Stempel gesetzt wird.}
+      \item \textbf{\textbackslash tuprints\{\#1\}\{\#2\}}\\
+        \#1: \textaccent{<URN-ID>} aus \textaccent{urn:nbn:de:tuda-tuprints-<URN-ID>}\\
+        \#2: \textaccent{<tuprints-ID>} aus \textaccent{http://tuprints.ulb.tu-darmstadt.de/<tuprints-ID>}\\
+        Entspricht der Empfehlung auf der tuprints FAQ-Seite: \textaccent{http://tuprints.ulb.tu-darmstadt.de/faq.html\#urlreservation}
+      \item \textbf{\textbackslash affidavit[\#1]\{\#2\}}\\
+        \#1: Datum der Eigenst"andigkeitserkl"arung (optional)\\
+        \#2: Signatur unter der Unterschrift
+    \end{itemize}
+
+\end{document}
