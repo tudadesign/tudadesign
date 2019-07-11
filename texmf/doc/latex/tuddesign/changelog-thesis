@@ -1,0 +1,96 @@
+latex-tuddesign-thesis (0.0.20100326) unstable; urgency=high
+
+  * fix typo in \affidavit
+  * add command \tuprints
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Fri, 26 Mar 2010 21:47:29 +0100
+
+latex-tuddesign-thesis (0.0.20091231) unstable; urgency=high
+
+  * fix typos (thanks to Thomas Hessling)
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 31 Dec 2009 15:29:31 +0100
+
+latex-tuddesign-thesis (0.0.20090714) unstable; urgency=high
+
+  * fix \affidavit with option article
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Tue, 14 Jul 2009 12:09:42 +0100
+
+latex-tuddesign-thesis (0.0.20090531) unstable; urgency=high
+
+  * add option dr
+  * add command \drtext
+  * add command \birthplace
+  * fix hyphenation in \affidavit
+  * fix typos
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Sun, 31 May 2009 17:39:36 +0100
+
+latex-tuddesign-thesis (0.0.20090215) unstable; urgency=high
+
+  * fix heading font in \affidavit
+  * don't load package `ngerman'
+  * replace all umlauts bei \char commands
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Sun, 15 Feb 2009 22:44:52 +0100
+
+latex-tuddesign-thesis (0.0.20090212) unstable; urgency=high
+
+  * fix some error handling
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 12 Feb 2009 12:37:32 +0100
+
+latex-tuddesign-thesis (0.0.20090211) unstable; urgency=high
+
+  * rename tudphysik by tudthesis
+  * add type=sta
+  * fix \affidavit
+  * add third referee
+  * add \department
+  * some code cleaning
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 11 Feb 2009 16:59:32 +0100
+
+latex-tuddesign-physik (0.0.20081224) unstable; urgency=high
+
+  * add \affidavit
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 24 Dec 2008 00:47:34 +0100
+
+latex-tuddesign-physik (0.0.20081216) unstable; urgency=high
+
+  * fix typo
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Tue, 16 Dec 2008 08:50:42 +0100
+
+latex-tuddesign-physik (0.0.20081201) unstable; urgency=high
+
+  * add project project proposals
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Mon, 01 Dec 2008 16:44:21 +0100
+
+latex-tuddesign-physik (0.0.20081120) unstable; urgency=high
+
+  * set \date default to "month year"
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Thu, 20 Nov 2008 16:26:02 +0100
+
+latex-tuddesign-physik (0.0.20081015) unstable; urgency=high
+
+  * fix PackageError in \gutachter
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Wed, 15 Aug 2008 09:07:24 +0100
+
+latex-tuddesign-physik (0.0.20081013) unstable; urgency=high
+
+  * Make class more user-friendly
+  * Remove tudreport option `longdoc' from class defaults
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Mon, 13 Aug 2008 16:02:11 +0100
+
+latex-tuddesign-physik (0.0.20080526) unstable; urgency=high
+
+  * Initial Release.
+
+ -- Clemens v. Loewenich <clemens.von.loewenich@physik.tu-darmstadt.de>  Fri, 30 May 2008 15:23:21 +0100
